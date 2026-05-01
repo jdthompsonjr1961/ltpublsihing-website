@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LT Publishing — The Literary Imprint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0c110e;
+      --surface:     #111a14;
+      --surface-2:   #172019;
+      --surface-3:   #1e2d22;
+      --green:       #2d6649;
+      --green-light: #4a9970;
+      --gold:        #c49a3c;
+      --gold-pale:   #e8d5a8;
+      --text:        #dde8e0;
+      --text-muted:  #c2d8c8;
+      --rule:        #1e3026;
+      --rule-light:  #2e4a38;
+      --cream:       #f7f4ee;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 19px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 5rem;
+      background: rgba(12,17,14,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    nav.scrolled { border-bottom-color: var(--rule-light); }
+
+    .nav-brand { display: flex; flex-direction: column; line-height: 1; text-decoration: none; }
+    .nav-brand-main { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; color: var(--text); }
+    .nav-brand-sub { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.72rem; letter-spacing: 0.3em; color: var(--text-muted); text-transform: uppercase; margin-top: 3px; }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { color: var(--bg) !important; background: var(--gold); padding: 0.55rem 1.4rem; transition: background 0.25s !important; }
+    .nav-cta:hover { background: var(--green-light) !important; color: var(--cream) !important; }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 8rem 2rem 5rem;
+      position: relative;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 60%, rgba(196,154,60,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 1px; height: 80px;
+      background: linear-gradient(to bottom, var(--rule-light), transparent);
+    }
+
+    .hero-ornament {
+      font-family: 'EB Garamond', serif; font-size: 1.1rem;
+      color: var(--gold); letter-spacing: 0.6em; margin-bottom: 2.5rem;
+      opacity: 0; animation: fadeUp 1s ease 0.2s forwards;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif; font-weight: 400;
+      font-size: clamp(3.5rem, 8vw, 7rem); line-height: 1;
+      color: var(--text); margin-bottom: 1.5rem;
+      opacity: 0; animation: fadeUp 1s ease 0.4s forwards;
+    }
+    .hero-title em { font-style: italic; color: var(--gold); display: block; font-size: 1.15em; }
+
+    .hero-rule { width: 50px; height: 1px; background: var(--gold); margin: 0 auto 2rem; opacity: 0; animation: fadeUp 1s ease 0.55s forwards; }
+
+    .hero-sub {
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: 0.82rem; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 2.5rem;
+      opacity: 0; animation: fadeUp 1s ease 0.65s forwards;
+    }
+
+    .hero-desc {
+      max-width: 580px; font-size: 1.15rem;
+      color: var(--text-muted); line-height: 1.85;
+      opacity: 0; animation: fadeUp 1s ease 0.8s forwards;
+    }
+
+    .hero-cta {
+      margin-top: 3rem;
+      opacity: 0; animation: fadeUp 1s ease 0.95s forwards;
+    }
+
+    .btn-gold {
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: 0.82rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--bg); background: var(--gold);
+      padding: 1rem 2.5rem; text-decoration: none; border: 1px solid var(--gold);
+      transition: background 0.25s, color 0.25s;
+      display: inline-block;
+    }
+    .btn-gold:hover { background: var(--green-light); border-color: var(--green-light); color: var(--cream); }
+
+    /* ─── DIVIDER ─── */
+    .divider { display: flex; align-items: center; gap: 1.5rem; padding: 0 5rem; margin: 1rem 0; }
+    .divider-line { flex: 1; height: 1px; background: var(--rule-light); }
+    .divider-mark { font-family: 'EB Garamond', serif; font-size: 1.2rem; color: var(--rule-light); }
+
+    /* ─── SHARED ─── */
+    .section { padding: 7rem 5rem; }
+
+    .label { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.82rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 1rem; margin-bottom: 1.2rem; }
+    .label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+
+    .section-h2 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: clamp(2rem,3.5vw,3rem); line-height: 1.2; color: var(--text); margin-bottom: 1.5rem; }
+    .section-h2 em { font-style: italic; font-weight: 400; color: var(--gold-pale); }
+
+    .section-intro { font-size: 1.05rem; color: var(--text-muted); max-width: 640px; margin-bottom: 4rem; line-height: 1.85; }
+
+    /* ─── WHAT WE PUBLISH ─── */
+    .what { background: var(--surface); }
+
+    .what-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+
+    .what-col h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 500; color: var(--text); margin-bottom: 1.2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--rule-light); }
+    .what-col h3 em { font-style: italic; color: var(--gold-pale); }
+    .what-col p { font-size: 1rem; color: var(--text-muted); line-height: 1.85; margin-bottom: 1rem; }
+
+    .what-list { list-style: none; margin-top: 1.5rem; }
+    .what-list li { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.9rem; letter-spacing: 0.05em; color: var(--text); padding: 0.65rem 0; border-bottom: 1px solid var(--rule); display: flex; gap: 0.75rem; }
+    .what-list li::before { content: '✦'; color: var(--gold); font-size: 0.65rem; flex-shrink: 0; margin-top: 0.2rem; }
+    .what-list li.no::before { content: '—'; color: var(--text-muted); }
+    .what-list li.no { color: var(--text-muted); }
+
+    /* ─── WHAT'S INCLUDED ─── */
+    .included-box {
+      background: var(--surface-3); border: 1px solid var(--rule-light);
+      border-top: 3px solid var(--gold);
+      padding: 3rem; margin-top: 4rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+    }
+
+    .included-box h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 500; color: var(--text); margin-bottom: 1.2rem; }
+    .included-box h3 em { font-style: italic; color: var(--gold-pale); }
+
+    .inc-list { list-style: none; }
+    .inc-list li { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.9rem; color: var(--text); padding: 0.6rem 0; border-bottom: 1px solid var(--rule); display: flex; gap: 0.75rem; }
+    .inc-list li::before { content: '✓'; color: var(--gold); font-size: 0.8rem; flex-shrink: 0; }
+    .inc-list li.note { color: var(--text-muted); font-style: italic; }
+    .inc-list li.note::before { content: '→'; color: var(--text-muted); }
+
+    /* ─── CATALOGUE STRIP ─── */
+    .catalogue-strip { background: var(--surface); padding: 7rem 5rem; }
+
+    .books-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 2rem; margin-top: 3rem; }
+
+    .book-card { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .book-card.visible { opacity: 1; transform: translateY(0); }
+    .book-card:nth-child(2) { transition-delay: 0.1s; }
+    .book-card:nth-child(3) { transition-delay: 0.2s; }
+    .book-card:nth-child(4) { transition-delay: 0.3s; }
+
+    .book-cover {
+      width: 100%; aspect-ratio: 2/3;
+      background: var(--surface-2); border: 1px solid var(--rule-light);
+      border-top: 3px solid var(--gold);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 1.5rem; text-align: center;
+      position: relative; transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .book-cover::before { content: ''; position: absolute; inset: 8px; border: 1px solid rgba(196,154,60,0.12); pointer-events: none; }
+    .book-card:hover .book-cover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+
+    .book-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+    .book-title-card { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 500; color: var(--text); line-height: 1.2; margin-bottom: 0.5rem; position: relative; z-index: 1; }
+    .book-title-card em { font-style: italic; }
+    .book-deco { color: var(--rule-light); font-size: 0.8rem; margin: 0.75rem 0; position: relative; z-index: 1; }
+    .book-author-card { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); position: relative; z-index: 1; }
+
+    .book-info { margin-top: 1rem; }
+    .status-pill { display: inline-block; font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.2rem 0.7rem; border: 1px solid; margin-bottom: 0.5rem; }
+    .pill-available { color: var(--green-light); border-color: var(--green); background: rgba(45,102,73,0.2); }
+    .pill-soon { color: var(--gold); border-color: rgba(196,154,60,0.4); background: rgba(196,154,60,0.1); }
+    .pill-progress { color: var(--text-muted); border-color: var(--rule-light); }
+    .book-blurb { font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; margin-top: 0.4rem; }
+
+    /* ─── FINE PRINT ─── */
+    .fine-print { padding: 5rem; border-top: 1px solid var(--rule-light); }
+    .fine-print-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .fine-h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 500; margin-bottom: 1.2rem; color: var(--text); }
+    .fine-h3 em { font-style: italic; color: var(--gold-pale); }
+    .fine-text { font-size: 1rem; color: var(--text-muted); line-height: 1.85; }
+    .fine-text p + p { margin-top: 1rem; }
+
+    /* ─── SUBMIT ─── */
+    .submit-section { background: var(--surface-3); border-top: 1px solid var(--green); padding: 7rem 5rem; }
+    .submit-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+    .submit-label { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.82rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1.5rem; }
+    .submit-label::before, .submit-label::after { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+    .submit-h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem,3.5vw,3rem); font-weight: 500; line-height: 1.15; margin-bottom: 1rem; color: var(--text); }
+    .submit-h2 em { font-style: italic; font-weight: 400; color: var(--gold-pale); }
+    .submit-body { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 3.5rem; line-height: 1.85; }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; text-align: left; }
+    .form-field { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-field.full { grid-column: 1 / -1; }
+
+    label { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.78rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); }
+
+    input, select, textarea {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--rule-light);
+      color: var(--text); font-family: 'EB Garamond', serif; font-size: 1rem;
+      padding: 0.8rem 1rem; outline: none; width: 100%; transition: border-color 0.2s;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--gold); }
+    select option { background: var(--surface); }
+    textarea { resize: vertical; min-height: 120px; }
+
+    .form-note { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.78rem; letter-spacing: 0.1em; color: var(--text-muted); opacity: 0.7; text-align: left; margin-bottom: 2rem; line-height: 1.6; }
+
+    .form-submit { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.88rem; letter-spacing: 0.25em; text-transform: uppercase; background: var(--gold); color: var(--bg); border: none; padding: 1.1rem 3rem; cursor: pointer; width: 100%; transition: background 0.25s, color 0.25s; }
+    .form-submit:hover { background: var(--green-light); color: var(--cream); }
+
+    #thank-you { display:none; margin-top:2.5rem; padding:2rem; border:1px solid var(--green); background:rgba(45,102,73,0.15); }
+    #thank-you p:first-child { font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:500; color:var(--text); margin-bottom:0.75rem; }
+    #thank-you p:last-child { font-family:'Jost',sans-serif; font-weight:300; font-size:0.88rem; letter-spacing:0.1em; color:var(--text-muted); line-height:1.8; }
+
+    /* ─── FOOTER ─── */
+    footer { padding: 3.5rem 5rem; border-top: 1px solid var(--rule-light); display: flex; justify-content: space-between; align-items: center; background: var(--bg); }
+    .footer-brand-main { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 500; color: var(--text); display: block; }
+    .footer-brand-sub { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); margin-top: 3px; display: block; }
+    .footer-center { font-family: 'EB Garamond', serif; font-style: italic; font-size: 1rem; color: var(--text-muted); }
+    .footer-right { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-align: right; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .section, .what, .catalogue-strip, .fine-print, .submit-section { padding: 5rem 1.5rem; }
+      .what-grid, .fine-print-grid, .included-box { grid-template-columns: 1fr; }
+      .books-row { grid-template-columns: repeat(2, 1fr); }
+      .form-grid { grid-template-columns: 1fr; }
+      footer { padding: 2.5rem 1.5rem; flex-direction: column; gap: 1.5rem; text-align: center; }
+      .footer-right { text-align: center; }
+      .divider { padding: 0 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="main-nav">
+    <a href="index.html" class="nav-brand">
+      <span class="nav-brand-main">LT Publishing</span>
+      <span class="nav-brand-sub">The Literary Imprint · Lisbon</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#what">What We Publish</a></li>
+      <li><a href="#catalogue">Catalogue</a></li>
+      <li><a href="select.html">LT Select</a></li>
+      <li><a href="services.html">LT Media</a></li>
+      <li><a href="#submit" class="nav-cta">Submit Your Manuscript</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-ornament">❧ &nbsp; ❧ &nbsp; ❧</div>
+    <h1 class="hero-title">The<br><em>Imprint.</em></h1>
+    <div class="hero-rule"></div>
+    <p class="hero-sub">Literary Fiction &nbsp;·&nbsp; Lisbon, Portugal &nbsp;·&nbsp; Est. 2025</p>
+    <p class="hero-desc">LT Publishing is the literary imprint — work we believe in enough to publish under our name. No upfront fee. No packages. We read everything submitted, respond honestly, and only say yes when we mean it.</p>
+    <div class="hero-cta">
+      <a href="#submit" class="btn-gold">Submit Your Manuscript</a>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-mark">❧</div><div class="divider-line"></div></div>
+
+  <!-- WHAT WE PUBLISH -->
+  <section class="section what" id="what">
+    <div class="label">What We Publish</div>
+    <h2 class="section-h2">Literary fiction<br><em>that earns its ending.</em></h2>
+    <p class="section-intro">LT Publishing is not a genre imprint and not a commercial press. We publish work that is formally ambitious, emotionally honest, and written with the conviction that readers can do interpretive work without being guided through it.</p>
+
+    <div class="what-grid">
+      <div class="what-col">
+        <h3>What we <em>look for</em></h3>
+        <p>We don't have a formula. But there are qualities we return to — and a submission that carries most of them gets our full attention.</p>
+        <ul class="what-list">
+          <li>Literary fiction with a strong, original voice</li>
+          <li>Work that trusts the reader</li>
+          <li>Stories grounded in specific place and time</li>
+          <li>Emotional honesty without sentimentality</li>
+          <li>Prose that rewards close reading</li>
+          <li>Endings that are earned, not resolved</li>
+        </ul>
+      </div>
+      <div class="what-col">
+        <h3>What we <em>don't publish</em></h3>
+        <p>Being clear about this saves everyone time. These aren't judgments on quality — they're simply outside the scope of this imprint.</p>
+        <ul class="what-list">
+          <li class="no">Genre fiction (thriller, romance, fantasy, sci-fi)</li>
+          <li class="no">Self-help or prescriptive nonfiction</li>
+          <li class="no">Children's or middle-grade fiction</li>
+          <li class="no">Poetry collections</li>
+          <li class="no">Work that requires significant developmental revision</li>
+          <li class="no">Previously self-published titles</li>
+        </ul>
+        <p style="margin-top:1.5rem; font-size:0.95rem;">Genre fiction may be a strong fit for <a href="select.html" style="color:var(--gold);">LT Select</a>. Production services without imprint consideration are available through <a href="services.html" style="color:var(--gold);">LT Media</a>.</p>
+      </div>
+    </div>
+
+    <!-- What's included box -->
+    <div class="included-box">
+      <div>
+        <h3>If selected, <em>everything is included.</em></h3>
+        <ul class="inc-list">
+          <li>Full editorial partnership — developmental and line</li>
+          <li>Signature LT cover design</li>
+          <li>Interior formatting to KDP spec</li>
+          <li>ISBN registered under LT Publishing</li>
+          <li>KDP softback and hardback upload</li>
+          <li>Listed in the LT Publishing catalogue</li>
+          <li class="note">No upfront fee of any kind</li>
+          <li class="note">Royalties shared — terms stated clearly before you sign</li>
+        </ul>
+      </div>
+      <div style="display:flex; flex-direction:column; justify-content:center;">
+        <div style="font-family:'Playfair Display',serif; font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:1rem;">The honest version</div>
+        <p style="font-size:1rem; color:var(--text-muted); line-height:1.85;">We are a small imprint. We take on very few manuscripts each year. Selection is not a service we sell and cannot be purchased through LT Media or LT Select. It happens when a manuscript arrives that we cannot stop thinking about.</p>
+        <p style="font-size:1rem; color:var(--text-muted); line-height:1.85; margin-top:1rem;">If that's not your manuscript this time, we'll tell you clearly — and tell you why, if we can.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-mark">✦</div><div class="divider-line"></div></div>
+
+  <!-- CATALOGUE -->
+  <section class="catalogue-strip" id="catalogue">
+    <div class="label">The Catalogue</div>
+    <h2 class="section-h2">Works Published<br><em>&amp; Forthcoming</em></h2>
+    <p class="section-intro">Every book bearing the LT Publishing name is edited, designed, and produced in-house — by the same people who would publish your work.</p>
+
+    <div class="books-row">
+      <div class="book-card">
+        <div class="book-cover">
+          <div class="book-title-card">Everything's<br><em>Jake</em></div>
+          <div class="book-deco">✦</div>
+          <div class="book-author-card">J LemeThompson</div>
+        </div>
+        <div class="book-info">
+          <span class="status-pill pill-available">Available Now</span>
+          <p class="book-blurb">A story of child abuse, institutional silence, and the long, imperfect work of survival.</p>
+        </div>
+      </div>
+
+      <div class="book-card">
+        <div class="book-cover">
+          <div class="book-title-card">The Cotton<br><em>Boll Queen</em></div>
+          <div class="book-deco">✦</div>
+          <div class="book-author-card">J LemeThompson</div>
+        </div>
+        <div class="book-info">
+          <span class="status-pill pill-soon">Coming June 1, 2026</span>
+          <p class="book-blurb">Deep in the Delta, a woman holds a world together with sheer will — and watches it come undone anyway.</p>
+        </div>
+      </div>
+
+      <div class="book-card">
+        <div class="book-cover">
+          <div class="book-title-card">The Durable<br><em>Physique</em></div>
+          <div class="book-deco">✦</div>
+          <div class="book-author-card">J LemeThompson</div>
+        </div>
+        <div class="book-info">
+          <span class="status-pill pill-available">Available Now</span>
+          <p class="book-blurb">Not a fitness book. A reckoning with the body. Also published as <em>O Físico Durável</em>.</p>
+        </div>
+      </div>
+
+      <div class="book-card">
+        <div class="book-cover">
+          <div class="book-title-card"><em>Billy</em> and<br>the Kid</div>
+          <div class="book-deco">✦</div>
+          <div class="book-author-card">J LemeThompson</div>
+        </div>
+        <div class="book-info">
+          <span class="status-pill pill-progress">Forthcoming</span>
+          <p class="book-blurb">A 312-year-old leprechaun. A nine-year-old boy in suburban Alabama. A friendship that ends the only way impossible things can.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-mark">❧</div><div class="divider-line"></div></div>
+
+  <!-- FINE PRINT -->
+  <section class="fine-print">
+    <div class="fine-print-grid">
+      <div>
+        <h3 class="fine-h3">On <em>Rights</em></h3>
+        <div class="fine-text">
+          <p>You retain copyright. LT Publishing holds a limited license to produce, distribute, and sell the book through agreed channels. That license can be ended by either party with reasonable notice.</p>
+          <p>Royalty terms are stated plainly before you sign anything: what percentage you receive, how it's calculated, when it's paid. No vague language, no complex formulas designed to obscure what you actually earn.</p>
+          <p>If the book goes out of print or sales fall below a defined threshold, rights revert to you automatically. No buyback clauses, no exit fees.</p>
+        </div>
+      </div>
+      <div>
+        <h3 class="fine-h3">On <em>Process</em></h3>
+        <div class="fine-text">
+          <p>We respond to every submission. If your manuscript isn't right for LT Publishing, you'll hear that clearly and, where possible, why. We don't leave submissions unanswered.</p>
+          <p>If selected, the editorial process is collaborative. You see every suggested change. The cover is designed in partnership — you'll have meaningful input, not just approval of a finished file.</p>
+          <p>We are a small operation in Lisbon. We work carefully and don't rush books. If you need a book produced on a tight timeline, LT Media is the better fit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBMIT -->
+  <section class="submit-section" id="submit">
+    <div class="submit-inner">
+      <div class="submit-label">Submit Your Manuscript</div>
+      <h2 class="submit-h2">Send us<br><em>what you've written.</em></h2>
+      <p class="submit-body">No query letter required. No agent. Just your manuscript and a brief description. We read everything and respond to everyone — usually within four weeks.</p>
+
+      <div class="form-grid">
+        <div class="form-field"><label>Your Name</label><input type="text" id="f-name" placeholder="Full name" /></div>
+        <div class="form-field"><label>Email Address</label><input type="email" id="f-email" placeholder="your@email.com" /></div>
+        <div class="form-field"><label>Book Title</label><input type="text" id="f-title" placeholder="Working title is fine" /></div>
+        <div class="form-field">
+          <label>Genre / Category</label>
+          <select id="f-genre">
+            <option value="" disabled selected>Select one</option>
+            <option>Literary Fiction</option>
+            <option>Southern Gothic</option>
+            <option>Historical Literary Fiction</option>
+            <option>Nonfiction / Memoir (literary)</option>
+            <option>Other Literary Work</option>
+          </select>
+        </div>
+        <div class="form-field"><label>Word Count (approximate)</label><input type="text" id="f-wc" placeholder="e.g. 72,000" /></div>
+        <div class="form-field">
+          <label>Manuscript Status</label>
+          <select id="f-status">
+            <option value="" disabled selected>Select one</option>
+            <option>Complete and polished</option>
+            <option>Complete, needs light revision</option>
+            <option>Near complete (90%+)</option>
+          </select>
+        </div>
+        <div class="form-field full"><label>Tell Us About Your Book</label><textarea id="f-blurb" placeholder="What it's about, what animates it, why you wrote it. A paragraph or two is enough."></textarea></div>
+        <div class="form-field full"><label>Comparable Titles (optional)</label><input type="text" id="f-comp" placeholder="Books yours resembles in spirit, tone, or subject — not necessarily in plot" /></div>
+      </div>
+
+      <p class="form-note">Submitting this form is not a guarantee of publication or even a full read of the manuscript — but we do read every description submitted and follow up on everything that interests us. We do not share your information with third parties.</p>
+
+      <button class="form-submit" id="submit-btn">Send Submission →</button>
+
+      <div id="thank-you">
+        <p><em>Thank you.</em></p>
+        <p>Your submission has been received. We read every description personally and will follow up within four weeks — whether that's a request to see more, a pass, or questions. We appreciate you considering LT Publishing for your work.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <span class="footer-brand-main">LT Publishing</span>
+      <span class="footer-brand-sub">Lisbon, Portugal</span>
+    </div>
+    <div class="footer-center"><em>The literary imprint — est. 2025</em></div>
+    <div class="footer-right">© 2026 LT Publishing<br>All rights reserved</div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
+
+    const cards = document.querySelectorAll('.book-card');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    cards.forEach(c => obs.observe(c));
+
+    const btn = document.getElementById('submit-btn');
+    btn.addEventListener('click', async () => {
+      const name  = document.getElementById('f-name').value.trim();
+      const email = document.getElementById('f-email').value.trim();
+      if (!name || !email) { alert('Please enter your name and email address.'); return; }
+
+      const formData = new FormData();
+      formData.append('Name', name);
+      formData.append('Email', email);
+      formData.append('Title', document.getElementById('f-title').value);
+      formData.append('Genre', document.getElementById('f-genre').value);
+      formData.append('Word Count', document.getElementById('f-wc').value);
+      formData.append('Status', document.getElementById('f-status').value);
+      formData.append('Description', document.getElementById('f-blurb').value);
+      formData.append('Comparable Titles', document.getElementById('f-comp').value);
+      formData.append('Submission Type', 'LT Publishing Imprint');
+
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch('https://formspree.io/f/mkoyndwz', {
+          method: 'POST', body: formData, headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          btn.style.display = 'none';
+          document.getElementById('thank-you').style.display = 'block';
+        } else {
+          btn.textContent = 'Something went wrong — please try again';
+          btn.disabled = false;
+        }
+      } catch(e) {
+        btn.textContent = 'Something went wrong — please try again';
+        btn.disabled = false;
+      }
+    });
+  </script>
+
+</body>
+</html>

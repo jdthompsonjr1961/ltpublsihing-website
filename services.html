@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LT Media — Publishing Services for Independent Authors</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@200;300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #0c110e;
+      --surface:      #111a14;
+      --surface-2:    #172019;
+      --surface-3:    #1e2d22;
+      --green:        #2d6649;
+      --green-light:  #4a9970;
+      --gold:         #c49a3c;
+      --gold-pale:    #e8d5a8;
+      --text:         #dde8e0;
+      --text-muted:   #c2d8c8;
+      --rule:         #1e3026;
+      --rule-light:   #2e4a38;
+      --cream:        #f7f4ee;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 19px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 5rem;
+      background: rgba(12,17,14,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    nav.scrolled { border-bottom-color: var(--rule-light); }
+    .nav-brand { display: flex; flex-direction: column; line-height: 1; }
+    .nav-brand-main { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; color: var(--text); text-decoration: none; }
+    .nav-brand-sub { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.6rem; letter-spacing: 0.3em; color: var(--text-muted); text-transform: uppercase; margin-top: 3px; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+    .nav-links a { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 1rem; letter-spacing: 0.18em; text-transform: uppercase; color: #c2d8c8; text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { color: var(--bg) !important; background: var(--gold); padding: 0.55rem 1.4rem; transition: background 0.25s !important; }
+    .nav-cta:hover { background: var(--green-light) !important; color: var(--cream) !important; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; padding: 0 5rem; gap: 4rem;
+      position: relative;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: 0; right: 0;
+      width: 45%; height: 100%;
+      background: var(--surface); z-index: -1;
+    }
+    .hero-left { padding-top: 5rem; }
+    .hero-eyebrow {
+      font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.8rem;
+      letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold);
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;
+      opacity: 0; animation: fadeUp 0.9s ease 0.2s forwards;
+    }
+    .hero-eyebrow::before { content: ''; display: block; width: 30px; height: 1px; background: var(--gold); }
+    .hero-h1 {
+      font-family: 'Playfair Display', serif; font-weight: 700;
+      font-size: clamp(3rem, 5.5vw, 5.2rem); line-height: 1.05; color: var(--text);
+      margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 0.9s ease 0.4s forwards;
+    }
+    .hero-h1 em { font-style: italic; font-weight: 400; color: var(--gold); }
+    .hero-body { font-size: 1.1rem; color: #d4e8db; max-width: 480px; margin-bottom: 3rem; opacity: 0; animation: fadeUp 0.9s ease 0.6s forwards; }
+    .hero-actions { display: flex; gap: 1.2rem; align-items: center; opacity: 0; animation: fadeUp 0.9s ease 0.75s forwards; }
+    .btn-primary {
+      font-family: 'Jost', sans-serif; font-weight: 300; font-size: 1rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--bg); background: var(--gold);
+      padding: 1rem 2.2rem; text-decoration: none; border: 1px solid var(--gold);
+      transition: background 0.25s, border-color 0.25s, color 0.25s;
+    }
+    .btn-primary:hover { background: var(--green-light); border-color: var(--green-light); color: var(--cream); }
+    .btn-secondary {
+      font-family: 'Jost', sans-serif; font-weight: 300; font-size: 1rem;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted);
+      text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: color 0.2s;
+    }
+    .btn-secondary::after { content: '→'; transition: transform 0.2s; }
+    .btn-secondary:hover { color: var(--gold); }
+    .btn-secondary:hover::after { transform: translateX(4px); }
+    .hero-right { display: flex; flex-direction: column; gap: 1rem; padding-top: 7rem; opacity: 0; animation: fadeUp 0.9s ease 0.9s forwards; }
+    .hero-stat { border-left: 2px solid var(--green); padding: 1rem 1.5rem; background: var(--surface-2); transition: border-color 0.3s; }
+    .hero-stat:hover { border-color: var(--gold); }
+    .hero-stat-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 500; color: var(--text); line-height: 1; display: block; }
+    .hero-stat-label { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.8rem; letter-spacing: 0.22em; text-transform: uppercase; color: #c2d8c8; margin-top: 0.3rem; display: block; }
+
+    /* DIVIDER */
+    .divider { display: flex; align-items: center; gap: 1.5rem; padding: 0 5rem; margin: 1rem 0; }
+    .divider-line { flex: 1; height: 1px; background: var(--rule-light); }
+    .divider-mark { font-family: 'EB Garamond', serif; font-size: 1.2rem; color: var(--rule-light); }
+
+    /* SHARED */
+    .section { padding: 7rem 5rem; }
+    .label { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 1rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 1rem; margin-bottom: 1.2rem; }
+    .label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+    .section-h2 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: clamp(2rem,3.5vw,3rem); line-height: 1.2; color: var(--text); margin-bottom: 1.5rem; }
+    .section-h2 em { font-style: italic; font-weight: 400; color: var(--gold-pale); }
+    .section-intro { font-size: 1.1rem; color: #d4e8db; max-width: 600px; margin-bottom: 4rem; }
+
+    /* PATHS */
+    .paths { background: var(--surface); padding: 7rem 5rem; }
+    .paths-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 4rem; }
+    .path-card { padding: 3.5rem; position: relative; opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .path-card.visible { opacity: 1; transform: translateY(0); }
+    .path-card:nth-child(2) { transition-delay: 0.15s; }
+    .path-media { background: var(--surface-2); border-top: 3px solid var(--gold); }
+    .path-imprint { background: var(--green); border-top: 3px solid var(--green-light); }
+    .path-tag { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 1rem; letter-spacing: 0.35em; text-transform: uppercase; margin-bottom: 1.5rem; display: block; }
+    .path-media .path-tag { color: var(--gold); }
+    .path-imprint .path-tag { color: var(--gold-pale); }
+    .path-name { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 500; line-height: 1.1; margin-bottom: 1.2rem; }
+    .path-media .path-name { color: var(--text); }
+    .path-imprint .path-name { color: var(--cream); }
+    .path-desc { font-size: 1.05rem; line-height: 1.75; margin-bottom: 2rem; }
+    .path-media .path-desc { color: #d4e8db; }
+    .path-imprint .path-desc { color: rgba(247,244,238,0.78); }
+    .path-includes { list-style: none; margin-bottom: 2.5rem; }
+    .path-includes li { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.8rem; letter-spacing: 0.08em; padding: 0.6rem 0; display: flex; align-items: center; gap: 0.75rem; }
+    .path-media .path-includes li { color: #d0e0d5; border-bottom: 1px solid var(--rule-light); }
+    .path-imprint .path-includes li { color: rgba(247,244,238,0.88); border-bottom: 1px solid rgba(255,255,255,0.12); }
+    .path-includes li::before { content: ''; display: block; width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+    .path-media .path-includes li::before { background: var(--gold); }
+    .path-imprint .path-includes li::before { background: var(--gold-pale); }
+    .path-royalty { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.8rem; letter-spacing: 0.15em; padding: 0.8rem 1.2rem; display: inline-block; margin-bottom: 2rem; }
+    .path-media .path-royalty { background: var(--surface-3); color: var(--text-muted); }
+    .path-imprint .path-royalty { background: rgba(0,0,0,0.2); color: var(--gold-pale); }
+    .path-btn { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; padding: 0.9rem 2rem; display: inline-block; border: 1px solid; transition: background 0.25s, color 0.25s; }
+    .path-media .path-btn { color: var(--gold); border-color: var(--gold); }
+    .path-media .path-btn:hover { background: var(--gold); color: var(--bg); }
+    .path-imprint .path-btn { color: var(--cream); border-color: rgba(247,244,238,0.4); }
+    .path-imprint .path-btn:hover { background: rgba(247,244,238,0.15); }
+
+    /* PACKAGES */
+    .launch-banner { background: var(--surface-3); border: 1px solid var(--green); padding: 1rem 2rem; display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; font-family: 'Jost', sans-serif; font-weight: 300; font-size: 1rem; letter-spacing: 0.1em; color: #d4e8db; }
+    .launch-badge { background: var(--green); color: var(--cream); padding: 0.3rem 0.9rem; font-size: 0.8rem; letter-spacing: 0.25em; text-transform: uppercase; flex-shrink: 0; }
+    .packages-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 1rem; }
+    .pkg { border: 1px solid var(--rule-light); padding: 2.5rem 2rem; position: relative; background: var(--surface); opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .pkg.visible { opacity: 1; transform: translateY(0); }
+    .pkg:nth-child(2) { transition-delay: 0.12s; }
+    .pkg:nth-child(3) { transition-delay: 0.24s; }
+    .pkg-featured { border-color: var(--gold); background: var(--surface-2); }
+    .pkg-badge { position: absolute; top: -1px; right: 2rem; font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; background: var(--gold); color: var(--bg); padding: 0.3rem 0.8rem; }
+    .pkg-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 500; margin-bottom: 0.4rem; color: var(--text); }
+    .pkg-tagline { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 1rem; letter-spacing: 0.15em; color: #c2d8c8; text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--rule-light); }
+    .pkg-price { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 400; color: var(--text); line-height: 1; margin-bottom: 0.3rem; }
+    .pkg-price-note { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 1rem; letter-spacing: 0.15em; color: var(--gold); margin-bottom: 2rem; }
+    .pkg-list { list-style: none; margin-bottom: 2rem; }
+    .pkg-list li { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 1rem; letter-spacing: 0.05em; color: var(--text); padding: 0.55rem 0; border-bottom: 1px solid var(--rule); display: flex; gap: 0.7rem; align-items: flex-start; }
+    .pkg-list li::before { content: '✓'; color: var(--gold); font-size: 1rem; flex-shrink: 0; }
+    .pkg-list li.dim { color: var(--text-muted); opacity: 0.45; }
+    .pkg-list li.dim::before { content: '—'; color: var(--text-muted); }
+    .pkg-cta { display: block; text-align: center; font-family: 'Jost', sans-serif; font-weight: 300; font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; padding: 0.9rem; border: 1px solid var(--rule-light); color: var(--text-muted); transition: background 0.25s, color 0.25s, border-color 0.25s; }
+    .pkg-cta:hover { background: var(--surface-3); color: var(--text); border-color: var(--text-muted); }
+    .pkg-featured .pkg-cta { border-color: var(--gold); color: var(--gold); }
+    .pkg-featured .pkg-cta:hover { background: var(--gold); color: var(--bg); }
+
+    /* PROCESS */
+    .process { background: var(--surface); }
+    .process-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 3rem; margin-top: 4rem; }
+    .step { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .step.visible { opacity: 1; transform: translateY(0); }
+    .step:nth-child(2) { transition-delay: 0.1s; }
+    .step:nth-child(3) { transition-delay: 0.2s; }
+    .step:nth-child(4) { transition-delay: 0.3s; }
+    .step-num { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 400; color: var(--rule-light); line-height: 1; margin-bottom: 1rem; }
+    .step-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 500; color: var(--text); margin-bottom: 0.7rem; }
+    .step-desc { font-size: 1rem; color: #d4e8db; line-height: 1.7; }
+
+    /* FINE PRINT */
+    .fine-print { padding: 5rem; border-top: 1px solid var(--rule-light); }
+    .fine-print-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .fine-h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 500; margin-bottom: 1.2rem; color: var(--text); }
+    .fine-h3 em { font-style: italic; color: var(--gold-pale); }
+    .fine-text { font-size: 1rem; color: #d4e8db; line-height: 1.8; }
+    .fine-text p + p { margin-top: 1rem; }
+
+    /* SUBMIT */
+    .submit-section { background: var(--surface-3); border-top: 1px solid var(--green); padding: 7rem 5rem; }
+    .submit-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+    .submit-label { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 1rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1.5rem; }
+    .submit-label::before, .submit-label::after { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+    .submit-h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem,3.5vw,3rem); font-weight: 500; line-height: 1.15; margin-bottom: 1rem; color: var(--text); }
+    .submit-h2 em { font-style: italic; font-weight: 400; color: var(--gold-pale); }
+    .submit-body { font-size: 1.05rem; color: #d4e8db; margin-bottom: 3.5rem; line-height: 1.8; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; text-align: left; }
+    .form-field { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-field.full { grid-column: 1 / -1; }
+    label { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 1rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); }
+    input, select, textarea { background: rgba(255,255,255,0.04); border: 1px solid var(--rule-light); color: var(--text); font-family: 'EB Garamond', serif; font-size: 1rem; padding: 0.8rem 1rem; outline: none; width: 100%; transition: border-color 0.2s; }
+    input:focus, select:focus, textarea:focus { border-color: var(--gold); }
+    select option { background: var(--surface); }
+    textarea { resize: vertical; min-height: 120px; }
+    .form-note { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 1rem; letter-spacing: 0.1em; color: var(--text-muted); opacity: 0.6; text-align: left; margin-bottom: 2rem; line-height: 1.6; }
+    .form-submit { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.8rem; letter-spacing: 0.25em; text-transform: uppercase; background: var(--gold); color: var(--bg); border: none; padding: 1.1rem 3rem; cursor: pointer; width: 100%; transition: background 0.25s, color 0.25s; }
+    .form-submit:hover { background: var(--green-light); color: var(--cream); }
+
+    /* FOOTER */
+    footer { padding: 3.5rem 5rem; border-top: 1px solid var(--rule-light); display: flex; justify-content: space-between; align-items: center; background: var(--bg); }
+    .footer-brand-main { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 500; color: var(--text); display: block; }
+    .footer-brand-sub { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); margin-top: 3px; display: block; }
+    .footer-center { font-family: 'EB Garamond', serif; font-style: italic; font-size: 1rem; color: #c2d8c8; }
+    .footer-right { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase; color: #c2d8c8; text-align: right; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 8rem 1.5rem 4rem; }
+      .hero::before { display: none; }
+      .hero-right { padding-top: 2rem; }
+      .section, .paths, .fine-print, .submit-section { padding: 5rem 1.5rem; }
+      .paths-grid, .fine-print-grid { grid-template-columns: 1fr; }
+      .packages-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      footer { padding: 2.5rem 1.5rem; flex-direction: column; gap: 1.5rem; text-align: center; }
+      .footer-right { text-align: center; }
+      .divider { padding: 0 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="main-nav">
+    <a href="#" class="nav-brand">
+      <span class="nav-brand-main">LT Media</span>
+      <span class="nav-brand-sub">An LT Publishing Company · Lisbon</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="ltpublishing.html">LT Publishing</a></li>
+      <li><a href="select.html">LT Select</a></li>
+      <li><a href="#packages">Packages</a></li>
+      <li><a href="#submit" class="nav-cta">Submit Your Manuscript</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Publishing Services for Independent Authors</div>
+      <h1 class="hero-h1">Your book,<br><em>properly</em><br>made.</h1>
+      <p class="hero-body">LT Media handles everything between a finished manuscript and a book on Amazon — editing, cover design, ISBN assignment, and KDP upload — at a flat fee, with no agents, no gatekeepers, and no royalty cuts.</p>
+      <div class="hero-actions">
+        <a href="#submit" class="btn-primary">Submit Your Manuscript</a>
+        <a href="#paths" class="btn-secondary">See how it works</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stat"><span class="hero-stat-num">Flat Fee</span><span class="hero-stat-label">No royalty share — ever</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">ISBN Included</span><span class="hero-stat-label">Registered to you, the author</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">Full Service</span><span class="hero-stat-label">Edit · Design · Upload · Done</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">LT Publishing</span><span class="hero-stat-label">Exceptional manuscripts considered for the imprint</span></div>
+    </div>
+  </section>
+
+
+
+  <section class="section" id="packages">
+    <div class="label">LT Media Packages</div>
+    <h2 class="section-h2">What's Included,<br><em>What It Costs</em></h2>
+    <p class="section-intro">Three flat-fee tiers at launch pricing — grandfathered for three years for every client who comes on board now. No surprise invoices, no royalty cuts, no confusion about who owns the book. You do.</p>
+    <div class="launch-banner">
+      <span class="launch-badge">Launch Pricing</span>
+      These are year-one introductory rates. If demand warrants it, rates will increase after that — but every client who books during the launch period is grandfathered at these prices for three years.
+    </div>
+    <div class="packages-grid">
+      <div class="pkg">
+        <div class="pkg-name">Essential</div>
+        <div class="pkg-tagline">Production-ready from manuscript</div>
+        <div class="pkg-price">$399</div>
+        <div class="pkg-price-note">Year-one launch price · grandfathered 3 years</div>
+        <ul class="pkg-list">
+          <li>Line editing (up to 80,000 words)</li>
+          <li>Cover design — front only</li>
+          <li>Interior formatting</li>
+          <li>ISBN assigned to author</li>
+          <li>KDP softback upload</li>
+          <li class="dim">Hardback production</li>
+          <li class="dim">Developmental editing</li>
+          <li class="dim">Back cover copywriting</li>
+        </ul>
+        <a href="#submit" class="pkg-cta">Get Started</a>
+      </div>
+      <div class="pkg pkg-featured">
+        <div class="pkg-badge">Most Popular</div>
+        <div class="pkg-name">Standard</div>
+        <div class="pkg-tagline">The complete package</div>
+        <div class="pkg-price">$699</div>
+        <div class="pkg-price-note">Year-one launch price · grandfathered 3 years</div>
+        <ul class="pkg-list">
+          <li>Developmental + line editing (up to 100,000 words)</li>
+          <li>Full cover design (front, spine, back)</li>
+          <li>Back cover copywriting</li>
+          <li>Interior formatting</li>
+          <li>ISBN assigned to author</li>
+          <li>KDP softback upload</li>
+          <li>KDP hardback upload</li>
+          <li class="dim">IngramSpark distribution</li>
+        </ul>
+        <a href="#submit" class="pkg-cta">Get Started</a>
+      </div>
+      <div class="pkg">
+        <div class="pkg-name">Premium</div>
+        <div class="pkg-tagline">Maximum reach &amp; polish</div>
+        <div class="pkg-price">$999</div>
+        <div class="pkg-price-note">Year-one launch price · grandfathered 3 years</div>
+        <ul class="pkg-list">
+          <li>Developmental + line editing (up to 120,000 words)</li>
+          <li>Full cover design (front, spine, back)</li>
+          <li>Back cover copywriting</li>
+          <li>Interior formatting with custom ornaments</li>
+          <li>2 ISBNs assigned to author (soft + hard)</li>
+          <li>KDP softback + hardback upload</li>
+          <li>IngramSpark setup &amp; distribution</li>
+          <li>Author page setup</li>
+        </ul>
+        <a href="#submit" class="pkg-cta">Get Started</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section process" id="process">
+    <div class="label">How It Works</div>
+    <h2 class="section-h2">From Manuscript<br><em>to Bookshelf</em></h2>
+    <p class="section-intro">A straightforward process with no guesswork. You'll know exactly where your book is at every stage.</p>
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title">Submit</div>
+        <p class="step-desc">Send us your manuscript and a brief description. We read everything. You'll hear back within two weeks with either a package quote or, for exceptional work, an imprint conversation.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title">Edit</div>
+        <p class="step-desc">Your editor works through the manuscript — developmental concerns first, then line by line. You see every suggested change. Nothing is final without your approval.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title">Design</div>
+        <p class="step-desc">Cover and interior design presented for your approval. The interior is formatted to KDP spec and proofed before upload.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-title">Publish</div>
+        <p class="step-desc">Your ISBN is assigned and registered in your name. We upload to KDP, verify the proof copy, and hand you a live book — and complete ownership of everything we produced.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="fine-print">
+    <div class="fine-print-grid">
+      <div>
+        <h3 class="fine-h3">On <em>Ownership</em></h3>
+        <div class="fine-text">
+          <p>When you engage LT Media as a production client, you own everything: the edited manuscript, the cover files, the ISBN, and all royalties. Our fee is for services rendered, not a stake in your book.</p>
+          <p>The ISBN is purchased in your name and registered to you. If you ever move to a different distributor, your ISBN moves with you.</p>
+          <p>KDP login credentials remain yours. We are granted temporary upload access only, and that access ends when your project is complete.</p>
+        </div>
+      </div>
+      <div>
+        <h3 class="fine-h3">On <em>the Imprint</em></h3>
+        <div class="fine-text">
+          <p>Occasionally a manuscript arrives through LT Media that we want to publish under the LT Publishing imprint rather than simply produce. When that happens, we'll reach out directly.</p>
+          <p>If you're specifically interested in imprint consideration, visit the <a href="ltpublishing.html" style="color:var(--gold);">LT Publishing page</a> to learn more and submit your work there.</p>
+          <p>LT Media is a production service. Everything we produce here is made to the same standard as anything bearing our name.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="submit-section" id="submit">
+    <div class="submit-inner">
+      <div class="submit-label">Submit Your Manuscript</div>
+      <h2 class="submit-h2">Ready when<br><em>you are.</em></h2>
+      <p class="submit-body">Tell us about your book. We read every submission personally — no automated screening. First-time authors are welcome. No agent required.</p>
+      <div class="form-grid">
+        <div class="form-field"><label>Your Name</label><input type="text" placeholder="Full name" /></div>
+        <div class="form-field"><label>Email Address</label><input type="email" placeholder="your@email.com" /></div>
+        <div class="form-field"><label>Book Title</label><input type="text" placeholder="Working title is fine" /></div>
+        <div class="form-field">
+          <label>Genre</label>
+          <select>
+            <option value="" disabled selected>Select genre</option>
+            <option>Literary Fiction</option>
+            <option>Southern Gothic</option>
+            <option>General Fiction</option>
+            <option>Mystery / Thriller</option>
+            <option>Romance</option>
+            <option>Science Fiction / Fantasy</option>
+            <option>Nonfiction / Memoir</option>
+            <option>Self-Help / Wellness</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-field"><label>Word Count (approximate)</label><input type="text" placeholder="e.g. 78,000" /></div>
+        <div class="form-field">
+          <label>Package Interest</label>
+          <select>
+            <option value="" disabled selected>Select a package</option>
+            <option>Essential — $399 (launch price)</option>
+            <option>Standard — $699 (launch price)</option>
+            <option>Premium — $999 (launch price)</option>
+            <option>Not sure yet</option>
+            <option>Interested in LT imprint consideration</option>
+          </select>
+        </div>
+        <div class="form-field full"><label>Tell Us About Your Book</label><textarea placeholder="A short description — what it's about, who it's for, where you are in the process."></textarea></div>
+      </div>
+      <p class="form-note">Submitting this form does not obligate you to purchase a package. We'll respond within two weeks with either a quote, questions, or — in rare cases — an imprint conversation. We do not share your information with third parties.</p>
+      <button class="form-submit" id="submit-btn">Send Submission →</button>
+      <div id="thank-you" style="display:none; margin-top:2.5rem; padding:2rem; border:1px solid var(--green); background:rgba(45,102,73,0.15);">
+        <p style="font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:500; color:var(--text); margin-bottom:0.75rem;"><em>Thank you.</em></p>
+        <p style="font-family:'Jost',sans-serif; font-weight:300; font-size:0.85rem; letter-spacing:0.1em; color:var(--text-muted); line-height:1.8;">Your manuscript submission has been received. We read everything personally and will be in touch within two weeks — whether that's a package quote, a few questions, or something more. We appreciate you trusting us with your work.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      <span class="footer-brand-main">LT Media</span>
+      <span class="footer-brand-sub">An LT Publishing Company</span>
+    </div>
+    <div class="footer-center"><em>Lisbon, Portugal · Publishing with care since 2025</em></div>
+    <div class="footer-right">© 2026 LT Media / LT Publishing<br>All rights reserved</div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
+    const reveals = document.querySelectorAll('.pkg, .step, .path-card');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => obs.observe(el));
+
+    // Formspree submission
+    const btn = document.getElementById('submit-btn');
+    btn.addEventListener('click', async () => {
+      const inputs = document.querySelectorAll('#submit input, #submit select, #submit textarea');
+      const data = {};
+      inputs.forEach(el => { if (el.name || el.placeholder) data[el.placeholder || el.name] = el.value; });
+
+      // Collect named fields properly
+      const formData = new FormData();
+      inputs.forEach(el => {
+        const key = el.previousElementSibling ? el.previousElementSibling.textContent : el.placeholder;
+        formData.append(key, el.value);
+      });
+
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch('https://formspree.io/f/mkoyndwz', {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          btn.style.display = 'none';
+          document.getElementById('thank-you').style.display = 'block';
+        } else {
+          btn.textContent = 'Something went wrong — please try again';
+          btn.disabled = false;
+        }
+      } catch(e) {
+        btn.textContent = 'Something went wrong — please try again';
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
