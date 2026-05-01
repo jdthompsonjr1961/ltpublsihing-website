@@ -1,0 +1,49 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "publishing"
+    label: "LT Publishing Books"
+    folder: "_books/publishing"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Author", name: "author", widget: "string", default: "J LemeThompson" }
+      - { label: "Genre", name: "genre", widget: "string" }
+      - label: "Status"
+        name: "status"
+        widget: "select"
+        options:
+          - { label: "Available Now", value: "available" }
+          - { label: "Coming Soon", value: "soon" }
+          - { label: "Forthcoming", value: "progress" }
+      - { label: "Status Label (optional, e.g. Coming June 1, 2026)", name: "status_label", widget: "string", required: false }
+      - { label: "Blurb", name: "blurb", widget: "text" }
+      - { label: "Cover Image", name: "cover", widget: "image", required: false }
+      - { label: "Buy Link (optional)", name: "link", widget: "string", required: false }
+
+  - name: "select"
+    label: "LT Select Books"
+    folder: "_books/select"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Author", name: "author", widget: "string" }
+      - { label: "Genre", name: "genre", widget: "string" }
+      - label: "Status"
+        name: "status"
+        widget: "select"
+        options:
+          - { label: "Available Now", value: "available" }
+          - { label: "Coming Soon", value: "soon" }
+          - { label: "In Production", value: "progress" }
+      - { label: "Status Label (optional)", name: "status_label", widget: "string", required: false }
+      - { label: "Blurb", name: "blurb", widget: "text" }
+      - { label: "Cover Image", name: "cover", widget: "image", required: false }
+      - { label: "Buy Link (optional)", name: "link", widget: "string", required: false }
