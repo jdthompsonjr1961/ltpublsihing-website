@@ -1,0 +1,73 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "publishing"
+    label: "LT Publishing — Literary Imprint"
+    label_singular: "LT Publishing Book"
+    folder: "_books/publishing"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Author", name: "author", widget: "string", default: "J LemeThompson" }
+      - label: "Genre"
+        name: "genre"
+        widget: "select"
+        options:
+          - Literary Fiction
+          - Southern Gothic
+          - Historical Literary Fiction
+          - Nonfiction / Memoir
+          - Wellness / Nonfiction
+          - Other Literary Work
+      - label: "Status"
+        name: "status"
+        widget: "select"
+        options:
+          - { label: "Available Now", value: "available" }
+          - { label: "Coming Soon", value: "soon" }
+          - { label: "Forthcoming", value: "progress" }
+      - { label: "Status Label (optional, e.g. Coming June 1, 2026)", name: "status_label", widget: "string", required: false }
+      - { label: "Blurb", name: "blurb", widget: "text" }
+      - { label: "Cover Image", name: "cover", widget: "image", required: false }
+      - { label: "Buy / Amazon Link (optional)", name: "link", widget: "string", required: false }
+
+  - name: "select"
+    label: "LT Select — Commercial Fiction"
+    label_singular: "LT Select Book"
+    folder: "_books/select"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Author", name: "author", widget: "string" }
+      - label: "Genre"
+        name: "genre"
+        widget: "select"
+        options:
+          - Thriller / Suspense
+          - Mystery
+          - Crime Fiction
+          - Romance
+          - Science Fiction
+          - Fantasy
+          - Horror
+          - Historical Fiction
+          - Action / Adventure
+          - Other Commercial Fiction
+      - label: "Status"
+        name: "status"
+        widget: "select"
+        options:
+          - { label: "Available Now", value: "available" }
+          - { label: "Coming Soon", value: "soon" }
+          - { label: "In Production", value: "progress" }
+      - { label: "Status Label (optional)", name: "status_label", widget: "string", required: false }
+      - { label: "Blurb", name: "blurb", widget: "text" }
+      - { label: "Cover Image", name: "cover", widget: "image", required: false }
+      - { label: "Buy / Amazon Link (optional)", name: "link", widget: "string", required: false }
