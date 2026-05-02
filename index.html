@@ -277,9 +277,11 @@
 
   async function fetchGitHubDir(path) {
     const url = 'https://api.github.com/repos/' + GITHUB_USER + '/' + GITHUB_REPO + '/contents/' + path + '?ref=' + GITHUB_BRANCH;
-    const res = await fetch(url);
-    if (!res.ok) return [];
-    return res.json();
+    try {
+      const res = await fetch(url);
+      if (!res.ok) return [];
+      return res.json();
+    } catch(e) { return []; }
   }
 
   async function fetchFileContent(downloadUrl) {
@@ -288,32 +290,62 @@
   }
 
   function parseFrontmatter(text) {
-    const match = text.match(/^---\n([\s\S]*?)\n---/);
+    // Extract content between --- delimiters
+    const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---/);
     if (!match) return {};
+    const yaml = match[1];
     const fm = {};
-    const lines = match[1].split('\n');
-    let blurbLines = [];
-    let inBlurb = false;
-    lines.forEach(line => {
-      if (inBlurb) {
-        if (line.match(/^\w+:/)) { inBlurb = false; }
-        else { blurbLines.push(line.trim()); return; }
+    const lines = yaml.split(/\r?\n/);
+    let currentKey = null;
+    let blockLines = [];
+    let inBlock = false;
+
+    lines.forEach((line, i) => {
+      if (inBlock) {
+        // Block scalar line - indented or continuation
+        if (line.match(/^  /) || line.match(/^\t/)) {
+          blockLines.push(line.trim());
+          return;
+        } else {
+          // End of block
+          fm[currentKey] = blockLines.join(' ').trim();
+          blockLines = [];
+          inBlock = false;
+        }
       }
+
       const colonIdx = line.indexOf(':');
       if (colonIdx === -1) return;
       const key = line.slice(0, colonIdx).trim();
-      const val = line.slice(colonIdx + 1).trim().replace(/^["\'"]|["\'"]$/g, '');
-      if (key === 'blurb' && val === '') { inBlurb = true; return; }
-      fm[key] = val;
+      const rest = line.slice(colonIdx + 1).trim();
+
+      if (rest === '>-' || rest === '>' || rest === '|' || rest === '|-') {
+        // Block scalar - content follows on next lines
+        currentKey = key;
+        blockLines = [];
+        inBlock = true;
+      } else {
+        // Regular key: value
+        fm[key] = rest.replace(/^["']|["']$/g, '');
+      }
     });
-    if (blurbLines.length) fm.blurb = blurbLines.join(' ');
+
+    // Flush any remaining block
+    if (inBlock && blockLines.length) {
+      fm[currentKey] = blockLines.join(' ').trim();
+    }
+
     return fm;
   }
 
-  function fixCoverUrl(url) {
+    function fixCoverUrl(url) {
     if (!url) return '';
+    // Convert GitHub blob URL to raw
     if (url.includes('github.com') && url.includes('/blob/')) {
-      return url.replace('github.com', 'raw.githubusercontent.com').replace('/blob/', '/').replace('?raw=true', '');
+      return url
+        .replace('github.com', 'raw.githubusercontent.com')
+        .replace('/blob/', '/')
+        .replace('?raw=true', '');
     }
     return url;
   }
