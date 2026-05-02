@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <head>
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LT Publishing — The Literary Imprint</title>
@@ -278,6 +277,15 @@
       .footer-right { text-align: center; }
       .divider { padding: 0 1.5rem; }
     }
+
+    .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:.5rem}
+    .nav-hamburger span{display:block;width:24px;height:2px;background:var(--text-muted)}
+    .mobile-menu{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(12,17,14,.98);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule-light);padding:1.5rem;z-index:499;flex-direction:column}
+    .mobile-menu.open{display:flex}
+    .mobile-menu a{font-family:"Jost",sans-serif;font-weight:300;font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;padding:1rem 0;border-bottom:1px solid var(--rule);transition:color .2s}
+    .mobile-menu a:hover{color:var(--text)}
+    .mobile-menu a:last-child{border-bottom:none}
+    .mobile-menu .mob-cta{color:var(--gold)!important}
   </style>
 </head>
 <body>
@@ -483,6 +491,7 @@
             <option>Near complete (90%+)</option>
           </select>
         </div>
+        <div class="form-field full"><label>Manuscript Link (optional)</label><input type="text" id="f-manuscript" placeholder="Google Drive, Dropbox, OneDrive, WeTransfer — any sharing link works" /><div style="font-family:'Jost',sans-serif;font-weight:300;font-size:0.75rem;color:var(--text-muted);margin-top:0.4rem;letter-spacing:0.05em;">Set sharing to &quot;anyone with the link.&quot; No account required on our end.</div></div>
         <div class="form-field full"><label>Tell Us About Your Book</label><textarea id="f-blurb" placeholder="What it's about, what animates it, why you wrote it. A paragraph or two is enough."></textarea></div>
         <div class="form-field full"><label>Comparable Titles (optional)</label><input type="text" id="f-comp" placeholder="Books yours resembles in spirit, tone, or subject — not necessarily in plot" /></div>
       </div>

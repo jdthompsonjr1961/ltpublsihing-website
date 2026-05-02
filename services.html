@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <head>
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LT Media — Publishing Services for Independent Authors</title>
@@ -253,6 +252,15 @@
       .footer-right { text-align: center; }
       .divider { padding: 0 1.5rem; }
     }
+
+    .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:.5rem}
+    .nav-hamburger span{display:block;width:24px;height:2px;background:var(--text-muted)}
+    .mobile-menu{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(12,17,14,.98);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule-light);padding:1.5rem;z-index:499;flex-direction:column}
+    .mobile-menu.open{display:flex}
+    .mobile-menu a{font-family:"Jost",sans-serif;font-weight:300;font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;padding:1rem 0;border-bottom:1px solid var(--rule);transition:color .2s}
+    .mobile-menu a:hover{color:var(--text)}
+    .mobile-menu a:last-child{border-bottom:none}
+    .mobile-menu .mob-cta{color:var(--gold)!important}
   </style>
 </head>
 <body>
@@ -282,7 +290,7 @@
     </div>
     <div class="hero-right">
       <div class="hero-stat"><span class="hero-stat-num">Flat Fee</span><span class="hero-stat-label">No royalty share — ever</span></div>
-      <div class="hero-stat"><span class="hero-stat-num">ISBN Included</span><span class="hero-stat-label">Registered to you, the author</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">Your ISBN</span><span class="hero-stat-label">Free KDP or your own Bowker registration</span></div>
       <div class="hero-stat"><span class="hero-stat-num">Full Service</span><span class="hero-stat-label">Edit · Design · Upload · Done</span></div>
       <div class="hero-stat"><span class="hero-stat-num">LT Publishing</span><span class="hero-stat-label">Exceptional manuscripts considered for the imprint</span></div>
     </div>
@@ -308,7 +316,7 @@
           <li>Line editing (up to 80,000 words)</li>
           <li>Cover design — front only</li>
           <li>Interior formatting</li>
-          <li>ISBN assigned to author</li>
+          <li>ISBN guidance — free KDP ISBN or your own Bowker registration</li>
           <li>KDP softback upload</li>
           <li class="dim">Hardback production</li>
           <li class="dim">Developmental editing</li>
@@ -327,7 +335,7 @@
           <li>Full cover design (front, spine, back)</li>
           <li>Back cover copywriting</li>
           <li>Interior formatting</li>
-          <li>ISBN assigned to author</li>
+          <li>ISBN guidance — free KDP ISBN or your own Bowker registration</li>
           <li>KDP softback upload</li>
           <li>KDP hardback upload</li>
           <li class="dim">IngramSpark distribution</li>
@@ -344,7 +352,7 @@
           <li>Full cover design (front, spine, back)</li>
           <li>Back cover copywriting</li>
           <li>Interior formatting with custom ornaments</li>
-          <li>2 ISBNs assigned to author (soft + hard)</li>
+          <li>ISBN guidance for both softback and hardback editions</li>
           <li>KDP softback + hardback upload</li>
           <li>IngramSpark setup &amp; distribution</li>
           <li>Author page setup</li>
@@ -372,7 +380,7 @@
       <div class="step">
         <div class="step-num">03</div>
         <div class="step-title">Design</div>
-        <p class="step-desc">Cover and interior design presented for your approval. The interior is formatted to KDP spec and proofed before upload.</p>
+        <p class="step-desc">Cover and interior design by a professional with a graduate background in art history. We present options; you choose. The interior is formatted to KDP spec and proofed before upload.</p>
       </div>
       <div class="step">
         <div class="step-num">04</div>
@@ -388,7 +396,7 @@
         <h3 class="fine-h3">On <em>Ownership</em></h3>
         <div class="fine-text">
           <p>When you engage LT Media as a production client, you own everything: the edited manuscript, the cover files, the ISBN, and all royalties. Our fee is for services rendered, not a stake in your book.</p>
-          <p>The ISBN is purchased in your name and registered to you. If you ever move to a different distributor, your ISBN moves with you.</p>
+          <p>You choose how to handle your ISBN. Option one: use KDP's free ISBN — costs nothing, your book is yours, but distribution is limited to Amazon/KDP. Option two: register your own ISBN through Bowker (~$125) — your name as publisher of record, full portability, distribute anywhere including IngramSpark. We guide you through whichever path you choose. Either way, we never put our name on your book.</p>
           <p>KDP login credentials remain yours. We are granted temporary upload access only, and that access ends when your project is complete.</p>
         </div>
       </div>
@@ -439,6 +447,7 @@
             <option>Interested in LT imprint consideration</option>
           </select>
         </div>
+        <div class="form-field full"><label>Manuscript Link (optional)</label><input type="text" id="f-manuscript" placeholder="Google Drive, Dropbox, OneDrive, WeTransfer — any sharing link works" /><div style="font-family:'Jost',sans-serif;font-weight:300;font-size:0.75rem;color:var(--text-muted);margin-top:0.4rem;letter-spacing:0.05em;">Set sharing to &quot;anyone with the link.&quot; No account required on our end.</div></div>
         <div class="form-field full"><label>Tell Us About Your Book</label><textarea placeholder="A short description — what it's about, who it's for, where you are in the process."></textarea></div>
       </div>
       <p class="form-note">Submitting this form does not obligate you to purchase a package. We'll respond within two weeks with either a quote, questions, or — in rare cases — an imprint conversation. We do not share your information with third parties.</p>
