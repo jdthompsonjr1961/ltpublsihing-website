@@ -19,7 +19,6 @@
     html{scroll-behavior:smooth}
     body{background:var(--bg);color:var(--text);font-family:"EB Garamond",Georgia,serif;font-size:19px;line-height:1.7;overflow-x:hidden}
     body::after{content:"";position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
-
     nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1.4rem 5rem;background:rgba(12,17,14,.96);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .3s}
     nav.scrolled{border-bottom-color:var(--rule-light)}
     .nav-brand{display:flex;flex-direction:column;line-height:1;text-decoration:none}
@@ -30,16 +29,14 @@
     .nav-links a:hover{color:var(--text)}
     .nav-cta{color:var(--bg)!important;background:var(--gold);padding:.55rem 1.4rem;transition:background .25s!important}
     .nav-cta:hover{background:var(--green-light)!important;color:var(--cream)!important}
-
     .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:.5rem}
     .nav-hamburger span{display:block;width:24px;height:2px;background:var(--text-muted)}
-    .mobile-menu{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(12,17,14,.98);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule-light);padding:1.5rem;z-index:499;flex-direction:column;gap:0}
+    .mobile-menu{display:none;position:fixed;top:61px;left:0;right:0;background:rgba(12,17,14,.98);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule-light);padding:1.5rem;z-index:499;flex-direction:column}
     .mobile-menu.open{display:flex}
     .mobile-menu a{font-family:"Jost",sans-serif;font-weight:300;font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;padding:1rem 0;border-bottom:1px solid var(--rule);transition:color .2s}
     .mobile-menu a:hover{color:var(--text)}
     .mobile-menu a:last-child{border-bottom:none}
-    .mobile-menu .mob-cta{color:var(--gold)!important;margin-top:.5rem}
-
+    .mobile-menu .mob-cta{color:var(--gold)!important}
     .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 5rem;position:relative}
     .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,rgba(45,102,73,.12) 0%,transparent 70%);pointer-events:none}
     .hero::after{content:"";position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:1px;height:80px;background:linear-gradient(to bottom,var(--rule-light),transparent)}
@@ -54,11 +51,9 @@
     .arm-media{color:var(--gold);border-color:var(--gold)}.arm-media:hover{background:var(--gold);color:var(--bg)}
     .arm-select{color:var(--select-acc);border-color:var(--select-acc)}.arm-select:hover{background:var(--select-acc);color:var(--cream)}
     .arm-publishing{color:var(--gold-pale);border-color:var(--gold-pale)}.arm-publishing:hover{background:var(--gold-pale);color:var(--bg)}
-
     .divider{display:flex;align-items:center;gap:1.5rem;padding:0 5rem;margin:1rem 0}
     .divider-line{flex:1;height:1px;background:var(--rule-light)}
     .divider-mark{font-family:"EB Garamond",serif;font-size:1.2rem;color:var(--rule-light)}
-
     .catalogue{padding:6rem 5rem}
     .cat-header{margin-bottom:3.5rem}
     .cat-label{font-family:"Jost",sans-serif;font-weight:300;font-size:.78rem;letter-spacing:.4em;text-transform:uppercase;display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
@@ -68,7 +63,6 @@
     .cat-title{font-family:"Playfair Display",serif;font-weight:500;font-size:clamp(1.8rem,3vw,2.5rem);color:var(--text);line-height:1.2;margin-bottom:.75rem}
     .cat-title em{font-style:italic;font-weight:400}
     .cat-desc{font-size:1rem;color:var(--text-muted);max-width:600px}
-
     .books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:2rem}
     .book-card{position:relative;opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
     .book-card.visible{opacity:1;transform:translateY(0)}
@@ -95,8 +89,6 @@
     .book-buy-link{display:inline-block;margin-top:.75rem;font-family:"Jost",sans-serif;font-weight:300;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);text-decoration:none;border:1px solid rgba(196,154,60,.4);padding:.3rem .8rem;transition:background .2s,color .2s}
     .book-buy-link:hover{background:var(--gold);color:var(--bg)}
     .book-buy-link.select-buy{color:var(--select-acc);border-color:rgba(58,122,156,.4)}.book-buy-link.select-buy:hover{background:var(--select-acc);color:var(--cream)}
-    .loading-state{grid-column:1/-1;text-align:center;padding:3rem;font-family:"Jost",sans-serif;font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted);opacity:.6}
-
     .about-strip{background:var(--surface);border-top:1px solid var(--rule-light);border-bottom:1px solid var(--rule-light);padding:6rem 5rem}
     .about-inner{max-width:700px;margin:0 auto}
     .about-label{font-family:"Jost",sans-serif;font-weight:300;font-size:.78rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem}
@@ -106,7 +98,6 @@
     .about-text{font-size:1.05rem;color:var(--text-muted);line-height:1.85}
     .about-text p+p{margin-top:1.2rem}
     .about-sig{margin-top:2rem;font-family:"Playfair Display",serif;font-style:italic;font-size:1.2rem;color:var(--gold);text-align:right}
-
     .arms-strip{padding:5rem;background:var(--bg)}
     .arms-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;margin-top:3rem}
     .arm-card{padding:3rem;position:relative}
@@ -119,15 +110,12 @@
     .arm-card-btn{font-family:"Jost",sans-serif;font-weight:300;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding:.85rem 1.8rem;display:inline-block;border:1px solid;transition:background .25s,color .25s}
     .arm-card-media .arm-card-btn{color:var(--gold);border-color:var(--gold)}.arm-card-media .arm-card-btn:hover{background:var(--gold);color:var(--bg)}
     .arm-card-select .arm-card-btn{color:var(--select-acc);border-color:var(--select-acc)}.arm-card-select .arm-card-btn:hover{background:var(--select-acc);color:var(--cream)}
-
     footer{padding:3.5rem 5rem;border-top:1px solid var(--rule-light);display:flex;justify-content:space-between;align-items:center;background:var(--bg)}
     .footer-brand-main{font-family:"Playfair Display",serif;font-size:1rem;font-weight:500;color:var(--text);display:block}
     .footer-brand-sub{font-family:"Jost",sans-serif;font-weight:300;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--text-muted);margin-top:3px;display:block}
     .footer-center{font-family:"EB Garamond",serif;font-style:italic;font-size:1rem;color:var(--text-muted)}
     .footer-right{font-family:"Jost",sans-serif;font-weight:300;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted);text-align:right}
-
     @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-
     @media(max-width:900px){
       nav{padding:1rem 1.5rem}.nav-links{display:none}.nav-hamburger{display:flex}
       .hero{padding:6rem 1.5rem 4rem}
@@ -171,7 +159,7 @@
 <div class="mobile-menu" id="mobile-menu">
   <a href="ltpublishing.html">LT Publishing</a>
   <a href="select.html">LT Select</a>
-  <a href="#about" id="mob-about">About</a>
+  <a href="#about">About</a>
   <a href="services.html" class="mob-cta">LT Media Services →</a>
 </div>
 
@@ -190,27 +178,115 @@
 
 <div class="divider"><div class="divider-line"></div><div class="divider-mark">❧</div><div class="divider-line"></div></div>
 
+<!-- LT PUBLISHING CATALOGUE -->
 <section class="catalogue" id="lt-publishing">
   <div class="cat-header">
     <div class="cat-label label-publishing">LT Publishing</div>
     <h2 class="cat-title">The Literary <em>Imprint</em></h2>
     <p class="cat-desc">Original literary fiction published under the LT name. Work we believe in enough to put our reputation behind.</p>
   </div>
-  <div class="books-grid" id="publishing-grid">
-    <div class="loading-state">Loading catalogue…</div>
+  <div class="books-grid">
+
+    <div class="book-card">
+      <div class="book-cover cover-publishing">
+        <img src="https://raw.githubusercontent.com/jdthompsonjr1961/ltpublsihing-website/main/EJ.jpg" alt="Everything's Jake" onerror="this.style.display='none'" />
+        <div class="book-imprint-tag">LT Publishing</div>
+        <div class="book-title-display">Everything's Jake</div>
+        <div class="book-deco">❖</div>
+        <div class="book-author-display">J LemeThompson</div>
+      </div>
+      <div class="book-meta">
+        <span class="book-status-badge status-available">Available Now</span>
+        <span class="book-genre-tag">Literary Fiction</span>
+        <p class="book-blurb">A story of child abuse, institutional silence, and the long, imperfect work of survival. The book that had to be written.</p>
+        <a href="https://www.amazon.es/-/en/J-LemeThompson/dp/B0GTZLWNFX/ref=sr_1_1?s=books" target="_blank" rel="noopener" class="book-buy-link">Buy →</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover cover-publishing">
+        <div class="book-imprint-tag">LT Publishing</div>
+        <div class="book-title-display">The Cotton Boll Queen</div>
+        <div class="book-deco">❖</div>
+        <div class="book-author-display">J LemeThompson</div>
+      </div>
+      <div class="book-meta">
+        <span class="book-status-badge status-soon">Coming June 1, 2026</span>
+        <span class="book-genre-tag">Southern Gothic</span>
+        <p class="book-blurb">Deep in the Delta, a woman holds a world together with sheer will — and watches it come undone anyway.</p>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover cover-publishing">
+        <div class="book-imprint-tag">LT Publishing</div>
+        <div class="book-title-display"><em>Billy</em> and the Kid</div>
+        <div class="book-deco">❖</div>
+        <div class="book-author-display">J LemeThompson</div>
+      </div>
+      <div class="book-meta">
+        <span class="book-status-badge status-progress">Forthcoming</span>
+        <span class="book-genre-tag">Literary Fiction</span>
+        <p class="book-blurb">A 312-year-old leprechaun. A nine-year-old boy in suburban Alabama. A friendship that ends the only way impossible things can.</p>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <div class="divider"><div class="divider-line"></div><div class="divider-mark">❖</div><div class="divider-line"></div></div>
 
+<!-- LT SELECT CATALOGUE -->
 <section class="catalogue" id="lt-select">
   <div class="cat-header">
     <div class="cat-label label-select">LT Select</div>
-    <h2 class="cat-title">Selected <em>Commercial Works</em></h2>
-    <p class="cat-desc">Professionally produced commercial fiction chosen for quality and craft. Hybrid published — edited, designed, and distributed to the same standard as everything we do.</p>
+    <h2 class="cat-title">Selected <em>Works</em></h2>
+    <p class="cat-desc">Professionally produced commercial and nonfiction titles chosen for quality and craft. Hybrid published — edited, designed, and distributed to the same standard as everything we do.</p>
   </div>
-  <div class="books-grid" id="select-grid">
-    <div class="loading-state">Loading catalogue…</div>
+  <div class="books-grid">
+
+    <div class="book-card">
+      <div class="book-cover cover-select">
+        <div class="book-imprint-tag">LT Select</div>
+        <div class="book-title-display">The Durable Physique</div>
+        <div class="book-deco">❖</div>
+        <div class="book-author-display">J LemeThompson</div>
+      </div>
+      <div class="book-meta">
+        <span class="book-status-badge status-available">Available Now</span>
+        <span class="book-genre-tag">Nonfiction / Wellness</span>
+        <p class="book-blurb">Not a fitness book. A reckoning with the body — what it takes to build one that lasts. Also published as <em>O Físico Durável</em>.</p>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover cover-select">
+        <div class="book-imprint-tag">LT Select</div>
+        <div class="book-title-display">Under Scrutiny</div>
+        <div class="book-deco">❖</div>
+        <div class="book-author-display">August Rowan</div>
+      </div>
+      <div class="book-meta">
+        <span class="book-status-badge status-progress">In Production</span>
+        <span class="book-genre-tag">Thriller</span>
+        <p class="book-blurb">When the Capitol's digital security is breached by someone who knows the system from the inside, Ethan Hayes has minutes to stop what he built from being used against him.</p>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover cover-select">
+        <div class="book-imprint-tag">LT Select</div>
+        <div class="book-title-display">The Sentinel Protocol</div>
+        <div class="book-deco">❖</div>
+        <div class="book-author-display">August Rowan</div>
+      </div>
+      <div class="book-meta">
+        <span class="book-status-badge status-progress">In Production</span>
+        <span class="book-genre-tag">Thriller · An Ethan Hayes Novel</span>
+        <p class="book-blurb">A retired intelligence officer. A list that shouldn't exist. A message arriving through a channel that was supposed to be dead.</p>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -222,7 +298,7 @@
     <h2 class="about-title">A small house,<br><em>built carefully.</em></h2>
     <div class="about-text">
       <p>LT Publishing is an independent imprint based in Lisbon, Portugal. Every book we publish — under any of our imprints — is made with the same attention given to the stories themselves. Cover, type, interior — all of it considered.</p>
-      <p>LT Select extends that standard to commercial fiction we believe is worth producing well.</p>
+      <p>LT Select extends that standard to commercial fiction and nonfiction we believe is worth producing well.</p>
       <p>We believe in the kind of story that earns its ending.</p>
     </div>
     <div class="about-sig">— J LemeThompson, Lisbon</div>
@@ -263,140 +339,16 @@
 </footer>
 
 <script>
-  const GITHUB_USER = 'jdthompsonjr1961';
-  const GITHUB_REPO = 'ltpublsihing-website';
-  const GITHUB_BRANCH = 'main';
-
   const nav = document.getElementById('main-nav');
   window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
-
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
   hamburger.addEventListener('click', () => { mobileMenu.classList.toggle('open'); });
-  document.getElementById('mob-about').addEventListener('click', () => { mobileMenu.classList.remove('open'); });
-
-  async function fetchGitHubDir(path) {
-    const url = 'https://api.github.com/repos/' + GITHUB_USER + '/' + GITHUB_REPO + '/contents/' + path + '?ref=' + GITHUB_BRANCH;
-    try {
-      const res = await fetch(url);
-      if (!res.ok) return [];
-      return res.json();
-    } catch(e) { return []; }
-  }
-
-  async function fetchFileContent(downloadUrl) {
-    const res = await fetch(downloadUrl);
-    return res.text();
-  }
-
-  function parseFrontmatter(text) {
-    // Extract content between --- delimiters
-    const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-    if (!match) return {};
-    const yaml = match[1];
-    const fm = {};
-    const lines = yaml.split(/\r?\n/);
-    let currentKey = null;
-    let blockLines = [];
-    let inBlock = false;
-
-    lines.forEach((line, i) => {
-      if (inBlock) {
-        // Block scalar line - indented or continuation
-        if (line.match(/^  /) || line.match(/^\t/)) {
-          blockLines.push(line.trim());
-          return;
-        } else {
-          // End of block
-          fm[currentKey] = blockLines.join(' ').trim();
-          blockLines = [];
-          inBlock = false;
-        }
-      }
-
-      const colonIdx = line.indexOf(':');
-      if (colonIdx === -1) return;
-      const key = line.slice(0, colonIdx).trim();
-      const rest = line.slice(colonIdx + 1).trim();
-
-      if (rest === '>-' || rest === '>' || rest === '|' || rest === '|-') {
-        // Block scalar - content follows on next lines
-        currentKey = key;
-        blockLines = [];
-        inBlock = true;
-      } else {
-        // Regular key: value
-        fm[key] = rest.replace(/^["']|["']$/g, '');
-      }
-    });
-
-    // Flush any remaining block
-    if (inBlock && blockLines.length) {
-      fm[currentKey] = blockLines.join(' ').trim();
-    }
-
-    return fm;
-  }
-
-    function fixCoverUrl(url) {
-    if (!url) return '';
-    // Convert GitHub blob URL to raw
-    if (url.includes('github.com') && url.includes('/blob/')) {
-      return url
-        .replace('github.com', 'raw.githubusercontent.com')
-        .replace('/blob/', '/')
-        .replace('?raw=true', '');
-    }
-    return url;
-  }
-
-  function buildCard(book, imprint) {
-    const isSelect = imprint === 'select';
-    const coverClass = isSelect ? 'cover-select' : 'cover-publishing';
-    const imprintLabel = isSelect ? 'LT Select' : 'LT Publishing';
-    const statusClass = book.status === 'available' ? 'status-available' : book.status === 'soon' ? 'status-soon' : 'status-progress';
-    const statusLabel = book.status_label || (book.status === 'available' ? 'Available Now' : book.status === 'soon' ? 'Coming Soon' : 'Forthcoming');
-    const coverUrl = fixCoverUrl(book.cover || '');
-    const buyLinkClass = isSelect ? 'select-buy' : '';
-    return '<div class="book-card">' +
-      '<div class="book-cover ' + coverClass + '">' +
-      (coverUrl ? '<img src="' + coverUrl + '" alt="' + book.title + '" onerror="this.style.display='none'" />' : '') +
-      '<div class="book-imprint-tag">' + imprintLabel + '</div>' +
-      '<div class="book-title-display">' + (book.title || '') + '</div>' +
-      '<div class="book-deco">❖</div>' +
-      '<div class="book-author-display">' + (book.author || '') + '</div>' +
-      '</div>' +
-      '<div class="book-meta">' +
-      '<span class="book-status-badge ' + statusClass + '">' + statusLabel + '</span>' +
-      '<span class="book-genre-tag">' + (book.genre || '') + '</span>' +
-      '<p class="book-blurb">' + (book.blurb || '') + '</p>' +
-      (book.link ? '<a href="' + book.link + '" target="_blank" rel="noopener" class="book-buy-link ' + buyLinkClass + '">Buy →</a>' : '') +
-      '</div></div>';
-  }
-
-  async function loadCatalogue(folder, gridId, imprint) {
-    const grid = document.getElementById(gridId);
-    try {
-      const files = await fetchGitHubDir('_books/' + folder);
-      const mdFiles = files.filter(f => f.name.endsWith('.md'));
-      if (mdFiles.length === 0) { grid.innerHTML = '<div class="loading-state">No books listed yet.</div>'; return; }
-      const books = await Promise.all(mdFiles.map(async f => {
-        const text = await fetchFileContent(f.download_url);
-        return parseFrontmatter(text);
-      }));
-      grid.innerHTML = books.map(b => buildCard(b, imprint)).join('');
-      const cards = grid.querySelectorAll('.book-card');
-      const obs = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-      }, { threshold: 0.1 });
-      cards.forEach(c => obs.observe(c));
-    } catch(e) {
-      grid.innerHTML = '<div class="loading-state">Unable to load catalogue.</div>';
-    }
-  }
-
-  loadCatalogue('publishing', 'publishing-grid', 'publishing');
-  loadCatalogue('select', 'select-grid', 'select');
+  const cards = document.querySelectorAll('.book-card');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  cards.forEach(c => obs.observe(c));
 <\/script>
 </body>
 </html>
