@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LT Publishing — Admin</title>
+  <title>LT Publishing — Literary Fiction & Selected Works</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -26,8 +27,6 @@
       --cream:       #f7f4ee;
       --select:      #1a2f3a;
       --select-acc:  #3a7a9c;
-      --danger:      #8c3a3a;
-      --danger-light:#c45c5c;
     }
 
     html { scroll-behavior: smooth; }
@@ -35,734 +34,536 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Jost', sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 19px;
+      line-height: 1.7;
       overflow-x: hidden;
-      min-height: 100vh;
     }
 
-    /* ─── LOGIN SCREEN ─── */
-    #login-screen {
-      min-height: 100vh;
-      display: flex; align-items: center; justify-content: center;
-      background: var(--bg);
-      padding: 2rem;
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999;
     }
 
-    .login-box {
-      background: var(--surface);
-      border: 1px solid var(--rule-light);
-      border-top: 3px solid var(--gold);
-      padding: 3rem;
-      width: 100%; max-width: 400px;
-      text-align: center;
-    }
-
-    .login-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem; font-weight: 700;
-      color: var(--text); margin-bottom: 0.4rem;
-    }
-
-    .login-sub {
-      font-size: 0.75rem; letter-spacing: 0.3em;
-      text-transform: uppercase; color: var(--text-muted);
-      margin-bottom: 2.5rem;
-    }
-
-    .login-field { margin-bottom: 1rem; text-align: left; }
-    .login-field label { display: block; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.4rem; }
-    .login-field input {
-      width: 100%; background: var(--surface-2);
-      border: 1px solid var(--rule-light); color: var(--text);
-      font-family: 'Jost', sans-serif; font-size: 1rem;
-      padding: 0.75rem 1rem; outline: none;
-      transition: border-color 0.2s;
-    }
-    .login-field input:focus { border-color: var(--gold); }
-
-    .login-btn {
-      width: 100%; margin-top: 1.5rem;
-      background: var(--gold); color: var(--bg);
-      border: none; font-family: 'Jost', sans-serif;
-      font-weight: 400; font-size: 0.82rem;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      padding: 0.9rem; cursor: pointer;
-      transition: background 0.25s;
-    }
-    .login-btn:hover { background: var(--green-light); color: var(--cream); }
-
-    .login-error {
-      margin-top: 1rem; font-size: 0.82rem;
-      color: var(--danger-light); display: none;
-    }
-
-    /* ─── ADMIN SCREEN ─── */
-    #admin-screen { display: none; min-height: 100vh; }
-
-    /* Topbar */
-    .topbar {
-      background: rgba(12,17,14,0.97);
-      border-bottom: 1px solid var(--rule-light);
-      padding: 1rem 3rem;
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
       display: flex; align-items: center; justify-content: space-between;
-      position: sticky; top: 0; z-index: 100;
+      padding: 1.4rem 5rem;
+      background: rgba(12,17,14,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
     }
+    nav.scrolled { border-bottom-color: var(--rule-light); }
 
-    .topbar-brand {
-      display: flex; flex-direction: column; line-height: 1;
-    }
-    .topbar-brand-main { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--text); }
-    .topbar-brand-sub { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-top: 2px; }
+    .nav-brand { display: flex; flex-direction: column; line-height: 1; text-decoration: none; }
+    .nav-brand-main { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; color: var(--text); }
+    .nav-brand-sub { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.72rem; letter-spacing: 0.3em; color: var(--text-muted); text-transform: uppercase; margin-top: 3px; }
 
-    .topbar-right { display: flex; gap: 1rem; align-items: center; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { color: var(--bg) !important; background: var(--gold); padding: 0.55rem 1.4rem; transition: background 0.25s !important; }
+    .nav-cta:hover { background: var(--green-light) !important; color: var(--cream) !important; }
 
-    .topbar-btn {
-      font-family: 'Jost', sans-serif; font-weight: 300;
-      font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
-      padding: 0.5rem 1.2rem; border: 1px solid; cursor: pointer;
-      background: none; transition: background 0.2s, color 0.2s;
-      text-decoration: none; display: inline-block;
-    }
-    .btn-gold { color: var(--gold); border-color: var(--gold); }
-    .btn-gold:hover { background: var(--gold); color: var(--bg); }
-    .btn-muted { color: var(--text-muted); border-color: var(--rule-light); }
-    .btn-muted:hover { background: var(--surface-2); color: var(--text); }
-    .btn-danger { color: var(--danger-light); border-color: var(--danger); }
-    .btn-danger:hover { background: var(--danger); color: var(--cream); }
-
-    /* Main layout */
-    .admin-body { display: grid; grid-template-columns: 260px 1fr; min-height: calc(100vh - 61px); }
-
-    /* Sidebar */
-    .sidebar {
-      background: var(--surface);
-      border-right: 1px solid var(--rule-light);
-      padding: 2rem 0;
-    }
-
-    .sidebar-section {
-      padding: 0 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .sidebar-label {
-      font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--text-muted); margin-bottom: 0.75rem;
-      padding-bottom: 0.5rem; border-bottom: 1px solid var(--rule);
-    }
-
-    .sidebar-btn {
-      display: block; width: 100%; text-align: left;
-      background: none; border: none; cursor: pointer;
-      font-family: 'Jost', sans-serif; font-weight: 300;
-      font-size: 0.88rem; color: var(--text-muted);
-      padding: 0.6rem 0.75rem; margin-bottom: 0.25rem;
-      border-radius: 2px; transition: background 0.2s, color 0.2s;
-    }
-    .sidebar-btn:hover { background: var(--surface-2); color: var(--text); }
-    .sidebar-btn.active { background: var(--surface-3); color: var(--text); }
-    .sidebar-btn .dot {
-      display: inline-block; width: 7px; height: 7px;
-      border-radius: 50%; margin-right: 0.6rem; vertical-align: middle;
-    }
-    .dot-publishing { background: var(--gold); }
-    .dot-select { background: var(--select-acc); }
-
-    .sidebar-stats {
-      padding: 1rem 1.5rem;
-      border-top: 1px solid var(--rule);
-      margin-top: 1rem;
-    }
-    .stat-row { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
-    .stat-label { font-size: 0.78rem; color: var(--text-muted); }
-    .stat-val { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--text); }
-
-    /* Main content */
-    .main-content { padding: 2.5rem 3rem; }
-
-    .content-header {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 2rem; padding-bottom: 1.5rem;
-      border-bottom: 1px solid var(--rule-light);
-    }
-
-    .content-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem; font-weight: 500; color: var(--text);
-    }
-    .content-title em { font-style: italic; color: var(--gold); }
-
-    /* Book table */
-    .book-table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; }
-
-    .book-table th {
-      font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--text-muted); text-align: left;
-      padding: 0.6rem 1rem; border-bottom: 1px solid var(--rule-light);
-      font-weight: 300;
-    }
-
-    .book-table td {
-      padding: 1rem; border-bottom: 1px solid var(--rule);
-      font-size: 0.9rem; vertical-align: top;
-    }
-
-    .book-table tr:hover td { background: var(--surface-2); }
-
-    .book-table .book-title-cell {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem; color: var(--text);
-    }
-    .book-table .book-author-cell { color: var(--text-muted); font-size: 0.85rem; }
-    .book-table .book-genre-cell { color: var(--text-muted); font-size: 0.82rem; }
-
-    .status-pill {
-      display: inline-block; font-size: 0.68rem;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      padding: 0.2rem 0.6rem; border: 1px solid;
-    }
-    .pill-available { color: var(--green-light); border-color: var(--green); background: rgba(45,102,73,0.2); }
-    .pill-soon { color: var(--gold); border-color: rgba(196,154,60,0.4); background: rgba(196,154,60,0.1); }
-    .pill-progress { color: var(--text-muted); border-color: var(--rule-light); }
-
-    .imprint-pill {
-      display: inline-block; font-size: 0.65rem;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      padding: 0.2rem 0.6rem;
-    }
-    .pill-lt { background: rgba(196,154,60,0.15); color: var(--gold); }
-    .pill-select { background: rgba(58,122,156,0.15); color: var(--select-acc); }
-
-    .row-actions { display: flex; gap: 0.5rem; }
-    .action-btn {
-      font-family: 'Jost', sans-serif; font-size: 0.7rem;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      padding: 0.3rem 0.7rem; border: 1px solid; cursor: pointer;
-      background: none; transition: background 0.2s, color 0.2s;
-    }
-    .action-edit { color: var(--text-muted); border-color: var(--rule-light); }
-    .action-edit:hover { background: var(--surface-3); color: var(--text); border-color: var(--text-muted); }
-    .action-delete { color: var(--danger-light); border-color: var(--danger); }
-    .action-delete:hover { background: var(--danger); color: var(--cream); }
-
-    /* ─── MODAL / FORM ─── */
-    .modal-overlay {
-      display: none; position: fixed; inset: 0;
-      background: rgba(0,0,0,0.7); z-index: 1000;
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      padding: 2rem;
+      text-align: center; padding: 8rem 2rem 5rem;
+      position: relative;
     }
-    .modal-overlay.open { display: flex; }
 
-    .modal {
-      background: var(--surface);
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 60%, rgba(45,102,73,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 1px; height: 80px;
+      background: linear-gradient(to bottom, var(--rule-light), transparent);
+    }
+
+    .hero-ornament {
+      font-family: 'EB Garamond', serif; font-size: 1.1rem;
+      color: var(--gold); letter-spacing: 0.6em;
+      margin-bottom: 2.5rem;
+      opacity: 0; animation: fadeUp 1s ease 0.2s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif; font-weight: 400;
+      font-size: clamp(4rem, 9vw, 8rem);
+      line-height: 0.95; color: var(--text);
+      margin-bottom: 1.5rem;
+      opacity: 0; animation: fadeUp 1s ease 0.4s forwards;
+    }
+    .hero-title em { font-style: italic; color: var(--gold); }
+
+    .hero-rule {
+      width: 50px; height: 1px; background: var(--gold);
+      margin: 0 auto 2rem;
+      opacity: 0; animation: fadeUp 1s ease 0.55s forwards;
+    }
+
+    .hero-sub {
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: 0.82rem; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 2.5rem;
+      opacity: 0; animation: fadeUp 1s ease 0.65s forwards;
+    }
+
+    .hero-desc {
+      max-width: 560px; font-size: 1.1rem;
+      color: var(--text-muted); line-height: 1.8;
+      opacity: 0; animation: fadeUp 1s ease 0.8s forwards;
+    }
+
+    .hero-arms {
+      display: flex; gap: 1.5rem; margin-top: 3rem; justify-content: center;
+      opacity: 0; animation: fadeUp 1s ease 0.95s forwards;
+    }
+
+    .arm-link {
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: 0.82rem; letter-spacing: 0.2em; text-transform: uppercase;
+      text-decoration: none; padding: 0.85rem 1.8rem; border: 1px solid;
+      transition: background 0.25s, color 0.25s;
+    }
+    .arm-media { color: var(--gold); border-color: var(--gold); }
+    .arm-media:hover { background: var(--gold); color: var(--bg); }
+    .arm-select { color: var(--select-acc); border-color: var(--select-acc); }
+    .arm-select:hover { background: var(--select-acc); color: var(--cream); }
+    .arm-publishing { color: var(--gold-pale); border-color: var(--gold-pale); }
+    .arm-publishing:hover { background: var(--gold-pale); color: var(--bg); }
+
+    /* ─── DIVIDER ─── */
+    .divider { display: flex; align-items: center; gap: 1.5rem; padding: 0 5rem; margin: 1rem 0; }
+    .divider-line { flex: 1; height: 1px; background: var(--rule-light); }
+    .divider-mark { font-family: 'EB Garamond', serif; font-size: 1.2rem; color: var(--rule-light); }
+
+    /* ─── CATALOGUE SECTIONS ─── */
+    .catalogue { padding: 6rem 5rem; }
+
+    .cat-header { margin-bottom: 3.5rem; }
+
+    .cat-label {
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: 0.78rem; letter-spacing: 0.4em; text-transform: uppercase;
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;
+    }
+    .cat-label::before { content: ''; display: block; width: 24px; height: 1px; }
+    .label-publishing { color: var(--gold); }
+    .label-publishing::before { background: var(--gold); }
+    .label-select { color: var(--select-acc); }
+    .label-select::before { background: var(--select-acc); }
+
+    .cat-title {
+      font-family: 'Playfair Display', serif; font-weight: 500;
+      font-size: clamp(1.8rem, 3vw, 2.5rem); color: var(--text);
+      line-height: 1.2; margin-bottom: 0.75rem;
+    }
+    .cat-title em { font-style: italic; font-weight: 400; }
+
+    .cat-desc { font-size: 1rem; color: var(--text-muted); max-width: 600px; }
+
+    /* ─── BOOK CARDS ─── */
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 2rem;
+    }
+
+    .book-card {
+      position: relative;
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .book-card.visible { opacity: 1; transform: translateY(0); }
+    .book-card:nth-child(2) { transition-delay: 0.1s; }
+    .book-card:nth-child(3) { transition-delay: 0.2s; }
+    .book-card:nth-child(4) { transition-delay: 0.3s; }
+
+    .book-cover {
+      width: 100%; aspect-ratio: 2/3;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 2rem 1.5rem; text-align: center;
+      position: relative; overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: default;
+    }
+
+    .book-card:hover .book-cover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 48px rgba(0,0,0,0.4);
+    }
+
+    /* LT Publishing card style */
+    .cover-publishing {
+      background: var(--surface-2);
       border: 1px solid var(--rule-light);
       border-top: 3px solid var(--gold);
-      width: 100%; max-width: 580px;
-      max-height: 90vh; overflow-y: auto;
-      padding: 2.5rem;
+    }
+    .cover-publishing::before {
+      content: ''; position: absolute; inset: 10px;
+      border: 1px solid rgba(196,154,60,0.15); pointer-events: none;
     }
 
-    .modal-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem; font-weight: 500; color: var(--text);
-      margin-bottom: 2rem; padding-bottom: 1rem;
-      border-bottom: 1px solid var(--rule-light);
+    /* LT Select card style */
+    .cover-select {
+      background: var(--select);
+      border: 1px solid rgba(58,122,156,0.3);
+      border-top: 3px solid var(--select-acc);
+    }
+    .cover-select::before {
+      content: ''; position: absolute; inset: 10px;
+      border: 1px solid rgba(58,122,156,0.15); pointer-events: none;
     }
 
-    .form-row { margin-bottom: 1.25rem; }
-    .form-row label {
-      display: block; font-size: 0.72rem; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.4rem;
+    /* Cover image (when added) */
+    .book-cover img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
     }
-    .form-row input,
-    .form-row select,
-    .form-row textarea {
-      width: 100%; background: var(--surface-2);
-      border: 1px solid var(--rule-light); color: var(--text);
-      font-family: 'Jost', sans-serif; font-size: 0.95rem;
-      padding: 0.75rem 1rem; outline: none;
-      transition: border-color 0.2s;
+
+    .book-imprint-tag {
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+      margin-bottom: 1.5rem; position: relative; z-index: 1;
     }
-    .form-row input:focus,
-    .form-row select:focus,
-    .form-row textarea:focus { border-color: var(--gold); }
-    .form-row select option { background: var(--surface); }
-    .form-row textarea { resize: vertical; min-height: 90px; }
+    .cover-publishing .book-imprint-tag { color: var(--gold); }
+    .cover-select .book-imprint-tag { color: var(--select-acc); }
 
-    .form-row-half { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .book-title-display {
+      font-family: 'Playfair Display', serif; font-weight: 500;
+      font-size: 1.4rem; line-height: 1.15; color: var(--text);
+      position: relative; z-index: 1; margin-bottom: 0.5rem;
+    }
+    .book-title-display em { font-style: italic; font-weight: 400; }
 
-    .form-actions {
-      display: flex; gap: 1rem; justify-content: flex-end;
-      margin-top: 2rem; padding-top: 1.5rem;
+    .book-deco {
+      font-size: 1rem; margin: 1rem 0;
+      position: relative; z-index: 1;
+    }
+    .cover-publishing .book-deco { color: var(--rule-light); }
+    .cover-select .book-deco { color: rgba(58,122,156,0.4); }
+
+    .book-author-display {
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--text-muted); position: relative; z-index: 1;
+    }
+
+    .book-meta { margin-top: 1.2rem; }
+
+    .book-status-badge {
+      display: inline-block;
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 0.25rem 0.8rem; margin-bottom: 0.6rem;
+    }
+    .status-available { background: rgba(45,102,73,0.3); color: var(--green-light); border: 1px solid var(--green); }
+    .status-soon { background: rgba(196,154,60,0.15); color: var(--gold); border: 1px solid rgba(196,154,60,0.4); }
+    .status-progress { background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid var(--rule-light); }
+
+    .book-genre-tag {
+      display: block;
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: 0.75rem; letter-spacing: 0.1em;
+      color: var(--text-muted); margin-bottom: 0.5rem;
+    }
+
+    .book-blurb {
+      font-size: 0.95rem; color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ─── ABOUT STRIP ─── */
+    .about-strip {
+      background: var(--surface);
       border-top: 1px solid var(--rule-light);
+      border-bottom: 1px solid var(--rule-light);
+      padding: 6rem 5rem;
+    }
+    .about-inner { max-width: 700px; margin: 0 auto; }
+    .about-label { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.78rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+    .about-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+    .about-title { font-family: 'Playfair Display', serif; font-weight: 500; font-size: 2.2rem; color: var(--text); margin-bottom: 2rem; line-height: 1.2; }
+    .about-title em { font-style: italic; font-weight: 400; color: var(--gold-pale); }
+    .about-text { font-size: 1.05rem; color: var(--text-muted); line-height: 1.85; }
+    .about-text p + p { margin-top: 1.2rem; }
+    .about-sig { margin-top: 2rem; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: var(--gold); text-align: right; }
+
+    /* ─── ARMS STRIP ─── */
+    .arms-strip { padding: 5rem; background: var(--bg); }
+    .arms-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; margin-top: 3rem; }
+
+    .arm-card { padding: 3rem; position: relative; }
+    .arm-card-media { background: var(--surface-2); border-top: 3px solid var(--gold); }
+    .arm-card-select { background: var(--select); border-top: 3px solid var(--select-acc); }
+
+    .arm-card-tag { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.78rem; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 1rem; display: block; }
+    .arm-card-media .arm-card-tag { color: var(--gold); }
+    .arm-card-select .arm-card-tag { color: var(--select-acc); }
+
+    .arm-card-title { font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 500; color: var(--text); margin-bottom: 1rem; line-height: 1.1; }
+    .arm-card-desc { font-size: 1rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 2rem; }
+
+    .arm-card-btn { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; padding: 0.85rem 1.8rem; display: inline-block; border: 1px solid; transition: background 0.25s, color 0.25s; }
+    .arm-card-media .arm-card-btn { color: var(--gold); border-color: var(--gold); }
+    .arm-card-media .arm-card-btn:hover { background: var(--gold); color: var(--bg); }
+    .arm-card-select .arm-card-btn { color: var(--select-acc); border-color: var(--select-acc); }
+    .arm-card-select .arm-card-btn:hover { background: var(--select-acc); color: var(--cream); }
+
+    /* ─── FOOTER ─── */
+    footer { padding: 3.5rem 5rem; border-top: 1px solid var(--rule-light); display: flex; justify-content: space-between; align-items: center; background: var(--bg); }
+    .footer-brand-main { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 500; color: var(--text); display: block; }
+    .footer-brand-sub { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); margin-top: 3px; display: block; }
+    .footer-center { font-family: 'EB Garamond', serif; font-style: italic; font-size: 1rem; color: var(--text-muted); }
+    .footer-right { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-align: right; }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* Cover image section */
-    .cover-preview {
-      width: 100px; aspect-ratio: 2/3;
-      background: var(--surface-3); border: 1px solid var(--rule-light);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.7rem; color: var(--text-muted); text-align: center;
-      margin-bottom: 0.75rem;
-    }
-    .cover-preview img { width: 100%; height: 100%; object-fit: cover; }
-
-    /* Toast notification */
-    .toast {
-      position: fixed; bottom: 2rem; right: 2rem;
-      background: var(--surface-3); border: 1px solid var(--green);
-      color: var(--text); padding: 1rem 1.5rem;
-      font-size: 0.88rem; z-index: 9999;
-      transform: translateY(100px); opacity: 0;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-    .toast.show { transform: translateY(0); opacity: 1; }
-
-    /* Empty state */
-    .empty-state {
-      text-align: center; padding: 4rem 2rem;
-      color: var(--text-muted); font-size: 0.95rem;
-    }
-    .empty-state .empty-icon { font-size: 2rem; margin-bottom: 1rem; opacity: 0.4; }
-
-    @media (max-width: 768px) {
-      .admin-body { grid-template-columns: 1fr; }
-      .sidebar { display: none; }
-      .main-content { padding: 1.5rem; }
-      .topbar { padding: 1rem 1.5rem; }
-      .form-row-half { grid-template-columns: 1fr; }
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .catalogue, .about-strip, .arms-strip { padding: 4rem 1.5rem; }
+      .books-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1.5rem; }
+      .arms-grid { grid-template-columns: 1fr; }
+      .divider { padding: 0 1.5rem; }
+      footer { padding: 2.5rem 1.5rem; flex-direction: column; gap: 1.5rem; text-align: center; }
+      .footer-right { text-align: center; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ─── LOGIN ─── -->
-  <div id="login-screen">
-    <div class="login-box">
-      <div class="login-logo">LT Publishing</div>
-      <div class="login-sub">Admin Panel</div>
-      <div class="login-field">
-        <label>Password</label>
-        <input type="password" id="password-input" placeholder="Enter admin password" />
-      </div>
-      <button class="login-btn" onclick="attemptLogin()">Sign In →</button>
-      <p class="login-error" id="login-error">Incorrect password. Please try again.</p>
+  <!-- NAV -->
+  <nav id="main-nav">
+    <a href="#" class="nav-brand">
+      <span class="nav-brand-main">LT Publishing</span>
+      <span class="nav-brand-sub">Lisbon, Portugal</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="ltpublishing.html">LT Publishing</a></li>
+      <li><a href="select.html">LT Select</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="services.html" class="nav-cta">LT Media Services</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-ornament">❧ &nbsp; ❧ &nbsp; ❧</div>
+    <h1 class="hero-title">LT<br><em>Publishing</em></h1>
+    <div class="hero-rule"></div>
+    <p class="hero-sub">Literary Fiction &nbsp;·&nbsp; Selected Works &nbsp;·&nbsp; Lisbon</p>
+    <p class="hero-desc">Books written with care, designed with intention. One standard.</p>
+    <div class="hero-arms">
+      <a href="ltpublishing.html" class="arm-link arm-publishing">LT Publishing — The Imprint</a>
+      <a href="select.html" class="arm-link arm-select">LT Select — Hybrid Publishing</a>
+      <a href="services.html" class="arm-link arm-media">LT Media — Production Services</a>
     </div>
-  </div>
+  </section>
 
-  <!-- ─── ADMIN ─── -->
-  <div id="admin-screen">
+  <div class="divider"><div class="divider-line"></div><div class="divider-mark">❧</div><div class="divider-line"></div></div>
 
-    <div class="topbar">
-      <div class="topbar-brand">
-        <span class="topbar-brand-main">LT Publishing</span>
-        <span class="topbar-brand-sub">Admin Panel</span>
-      </div>
-      <div class="topbar-right">
-        <a href="lt-publishing-home.html" class="topbar-btn btn-muted" target="_blank">View Site</a>
-        <button class="topbar-btn btn-gold" onclick="openAddModal()">+ Add Book</button>
-        <button class="topbar-btn btn-danger" onclick="logout()">Sign Out</button>
-      </div>
+  <!-- LT PUBLISHING CATALOGUE -->
+  <section class="catalogue" id="lt-publishing">
+    <div class="cat-header">
+      <div class="cat-label label-publishing">LT Publishing</div>
+      <h2 class="cat-title">The Literary <em>Imprint</em></h2>
+      <p class="cat-desc">Original literary fiction published under the LT name. Work we believe in enough to put our reputation behind.</p>
     </div>
 
-    <div class="admin-body">
+    <div class="books-grid" id="publishing-grid">
 
-      <!-- Sidebar -->
-      <div class="sidebar">
-        <div class="sidebar-section">
-          <div class="sidebar-label">Catalogue</div>
-          <button class="sidebar-btn active" onclick="filterBooks('all', this)">
-            <span class="dot" style="background:var(--text-muted)"></span> All Books
-          </button>
-          <button class="sidebar-btn" onclick="filterBooks('lt-publishing', this)">
-            <span class="dot dot-publishing"></span> LT Publishing
-          </button>
-          <button class="sidebar-btn" onclick="filterBooks('lt-select', this)">
-            <span class="dot dot-select"></span> LT Select
-          </button>
+      <!-- Everything's Jake -->
+      <div class="book-card">
+        <div class="book-cover cover-publishing">
+          <div class="book-imprint-tag">LT Publishing</div>
+          <div class="book-title-display">Everything's<br><em>Jake</em></div>
+          <div class="book-deco">✦</div>
+          <div class="book-author-display">J LemeThompson</div>
         </div>
-
-        <div class="sidebar-section">
-          <div class="sidebar-label">Status</div>
-          <button class="sidebar-btn" onclick="filterBooks('available', this)">Available Now</button>
-          <button class="sidebar-btn" onclick="filterBooks('soon', this)">Coming Soon</button>
-          <button class="sidebar-btn" onclick="filterBooks('progress', this)">In Progress</button>
-        </div>
-
-        <div class="sidebar-stats">
-          <div class="stat-row">
-            <span class="stat-label">Total Books</span>
-            <span class="stat-val" id="stat-total">0</span>
-          </div>
-          <div class="stat-row">
-            <span class="stat-label">LT Publishing</span>
-            <span class="stat-val" id="stat-publishing">0</span>
-          </div>
-          <div class="stat-row">
-            <span class="stat-label">LT Select</span>
-            <span class="stat-val" id="stat-select">0</span>
-          </div>
+        <div class="book-meta">
+          <span class="book-status-badge status-available">Available Now</span>
+          <span class="book-genre-tag">Literary Fiction</span>
+          <p class="book-blurb">A story of child abuse, institutional silence, and the long, imperfect work of survival. The book that had to be written.</p>
         </div>
       </div>
 
-      <!-- Main -->
-      <div class="main-content">
-        <div class="content-header">
-          <h1 class="content-title" id="content-title">All <em>Books</em></h1>
-          <button class="topbar-btn btn-gold" onclick="openAddModal()">+ Add Book</button>
+      <!-- The Cotton Boll Queen -->
+      <div class="book-card">
+        <div class="book-cover cover-publishing">
+          <div class="book-imprint-tag">LT Publishing</div>
+          <div class="book-title-display">The Cotton<br><em>Boll Queen</em></div>
+          <div class="book-deco">✦</div>
+          <div class="book-author-display">J LemeThompson</div>
         </div>
-
-        <table class="book-table" id="book-table">
-          <thead>
-            <tr>
-              <th>Title / Author</th>
-              <th>Imprint</th>
-              <th>Genre</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="book-tbody"></tbody>
-        </table>
-
-        <div class="empty-state" id="empty-state" style="display:none;">
-          <div class="empty-icon">📚</div>
-          <p>No books in this view.<br>Click <strong>+ Add Book</strong> to get started.</p>
+        <div class="book-meta">
+          <span class="book-status-badge status-soon">Coming June 1, 2026</span>
+          <span class="book-genre-tag">Southern Gothic</span>
+          <p class="book-blurb">Deep in the Delta, a woman holds a world together with sheer will — and watches it come undone anyway.</p>
         </div>
+      </div>
+
+      <!-- The Durable Physique -->
+      <div class="book-card">
+        <div class="book-cover cover-publishing">
+          <div class="book-imprint-tag">LT Publishing</div>
+          <div class="book-title-display">The Durable<br><em>Physique</em></div>
+          <div class="book-deco">✦</div>
+          <div class="book-author-display">J LemeThompson</div>
+        </div>
+        <div class="book-meta">
+          <span class="book-status-badge status-available">Available Now</span>
+          <span class="book-genre-tag">Nonfiction / Wellness</span>
+          <p class="book-blurb">Not a fitness book. A reckoning with the body — what it takes to build one that lasts. Also published as <em>O Físico Durável</em>.</p>
+        </div>
+      </div>
+
+      <!-- Billy and the Kid -->
+      <div class="book-card">
+        <div class="book-cover cover-publishing">
+          <div class="book-imprint-tag">LT Publishing</div>
+          <div class="book-title-display"><em>Billy</em> and<br>the Kid</div>
+          <div class="book-deco">✦</div>
+          <div class="book-author-display">J LemeThompson</div>
+        </div>
+        <div class="book-meta">
+          <span class="book-status-badge status-progress">Forthcoming</span>
+          <span class="book-genre-tag">Literary Fiction</span>
+          <p class="book-blurb">A 312-year-old leprechaun. A nine-year-old boy in suburban Alabama. A friendship that ends the only way impossible things can.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-mark">✦</div><div class="divider-line"></div></div>
+
+  <!-- LT SELECT CATALOGUE -->
+  <section class="catalogue" id="lt-select">
+    <div class="cat-header">
+      <div class="cat-label label-select">LT Select</div>
+      <h2 class="cat-title">Selected <em>Commercial Works</em></h2>
+      <p class="cat-desc">Professionally produced commercial fiction chosen for quality and craft. Hybrid published — edited, designed, and distributed to the same standard as everything we do.</p>
+    </div>
+
+    <div class="books-grid" id="select-grid">
+
+      <!-- Under Scrutiny -->
+      <div class="book-card">
+        <div class="book-cover cover-select">
+          <div class="book-imprint-tag">LT Select</div>
+          <div class="book-title-display">Under<br><em>Scrutiny</em></div>
+          <div class="book-deco">✦</div>
+          <div class="book-author-display">August Rowan</div>
+        </div>
+        <div class="book-meta">
+          <span class="book-status-badge status-progress">In Production</span>
+          <span class="book-genre-tag">Thriller</span>
+          <p class="book-blurb">When the Capitol's digital security is breached by someone who knows the system from the inside, Ethan Hayes has minutes to stop what he built from being used against him.</p>
+        </div>
+      </div>
+
+      <!-- The Sentinel Protocol -->
+      <div class="book-card">
+        <div class="book-cover cover-select">
+          <div class="book-imprint-tag">LT Select</div>
+          <div class="book-title-display">The Sentinel<br><em>Protocol</em></div>
+          <div class="book-deco">✦</div>
+          <div class="book-author-display">August Rowan</div>
+        </div>
+        <div class="book-meta">
+          <span class="book-status-badge status-progress">In Production</span>
+          <span class="book-genre-tag">Thriller · An Ethan Hayes Novel</span>
+          <p class="book-blurb">A retired intelligence officer. A list that shouldn't exist. A message arriving through a channel that was supposed to be dead.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"><div class="divider-line"></div><div class="divider-mark">❧</div><div class="divider-line"></div></div>
+
+  <!-- ABOUT -->
+  <section class="about-strip" id="about">
+    <div class="about-inner">
+      <div class="about-label">The Imprint</div>
+      <h2 class="about-title">A small house,<br><em>built carefully.</em></h2>
+      <div class="about-text">
+        <p>LT Publishing is an independent imprint based in Lisbon, Portugal. Every book we publish — under any of our imprints — is made with the same attention given to the stories themselves. Cover, type, interior — all of it considered.</p>
+        <p>LT Select extends that standard to commercial fiction we believe is worth producing well.</p>
+        <p>We believe in the kind of story that earns its ending.</p>
+      </div>
+      <div class="about-sig">— J LemeThompson, Lisbon</div>
+    </div>
+  </section>
+
+  <!-- ARMS STRIP -->
+  <section class="arms-strip">
+    <div class="divider" style="padding:0; margin-bottom:3rem;"><div class="divider-line"></div><div class="divider-mark">✦</div><div class="divider-line"></div></div>
+    <div class="arms-grid">
+      <div class="arm-card arm-card-media" style="border-top: 3px solid var(--gold-pale);">
+        <span class="arm-card-tag" style="color:var(--gold-pale);">LT Publishing</span>
+        <div class="arm-card-title">The literary imprint.</div>
+        <p class="arm-card-desc">Manuscripts we believe in enough to publish under our name. No upfront fee. Editing, cover, ISBN, and KDP upload included. Royalties shared. Selective — we read everything and respond honestly.</p>
+        <a href="ltpublishing.html" class="arm-card-btn" style="color:var(--gold-pale); border-color:var(--gold-pale);">Submit for Consideration</a>
+      </div>
+      <div class="arm-card arm-card-select">
+        <span class="arm-card-tag">LT Select</span>
+        <div class="arm-card-title">Hybrid publishing<br>for commercial fiction.</div>
+        <p class="arm-card-desc">Selected manuscripts get full production — edit, cover, ISBN, upload — for a reduced upfront fee with a 15% royalty share. No agent required. First-time authors welcome.</p>
+        <a href="select.html" class="arm-card-btn">Learn About LT Select</a>
+      </div>
+      <div class="arm-card arm-card-media">
+        <span class="arm-card-tag">LT Media</span>
+        <div class="arm-card-title">Publish your book.<br>Keep everything.</div>
+        <p class="arm-card-desc">Full production services — editing, cover design, ISBN, KDP upload — at a flat fee. You own the book, you keep 100% of royalties. Year-one launch pricing from $399.</p>
+        <a href="services.html" class="arm-card-btn">View Services &amp; Packages</a>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- ─── ADD / EDIT MODAL ─── -->
-  <div class="modal-overlay" id="book-modal">
-    <div class="modal">
-      <div class="modal-title" id="modal-title">Add New Book</div>
-
-      <input type="hidden" id="edit-id" />
-
-      <div class="form-row">
-        <label>Book Title</label>
-        <input type="text" id="f-title" placeholder="e.g. The Cotton Boll Queen" />
-      </div>
-
-      <div class="form-row-half">
-        <div class="form-row">
-          <label>Author</label>
-          <input type="text" id="f-author" placeholder="e.g. J LemeThompson" />
-        </div>
-        <div class="form-row">
-          <label>Imprint</label>
-          <select id="f-imprint">
-            <option value="lt-publishing">LT Publishing</option>
-            <option value="lt-select">LT Select</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-row-half">
-        <div class="form-row">
-          <label>Genre</label>
-          <input type="text" id="f-genre" placeholder="e.g. Literary Fiction" />
-        </div>
-        <div class="form-row">
-          <label>Status</label>
-          <select id="f-status">
-            <option value="available">Available Now</option>
-            <option value="soon">Coming Soon</option>
-            <option value="progress">In Progress / Forthcoming</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <label>Status Label (optional — overrides default)</label>
-        <input type="text" id="f-status-label" placeholder="e.g. Coming June 1, 2026" />
-      </div>
-
-      <div class="form-row">
-        <label>Blurb / Description</label>
-        <textarea id="f-blurb" placeholder="Short description shown on the catalogue card..."></textarea>
-      </div>
-
-      <div class="form-row">
-        <label>Cover Image URL (leave blank to use text card)</label>
-        <input type="text" id="f-cover" placeholder="https://... or leave blank" />
-        <div class="cover-preview" id="cover-preview-box" style="margin-top:0.75rem;">
-          <span>No cover<br>image</span>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <label>Buy / Amazon Link (optional)</label>
-        <input type="text" id="f-link" placeholder="https://amazon.com/..." />
-      </div>
-
-      <div class="form-actions">
-        <button class="topbar-btn btn-muted" onclick="closeModal()">Cancel</button>
-        <button class="topbar-btn btn-gold" onclick="saveBook()">Save Book</button>
-      </div>
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <span class="footer-brand-main">LT Publishing</span>
+      <span class="footer-brand-sub">Lisbon, Portugal</span>
     </div>
-  </div>
-
-  <!-- Toast -->
-  <div class="toast" id="toast"></div>
+    <div class="footer-center"><em>Literary fiction &amp; selected works since 2025</em></div>
+    <div class="footer-right">© 2026 LT Publishing<br>All rights reserved</div>
+  </footer>
 
   <script>
-    // ─── CONFIG ───
-    const ADMIN_PASSWORD = '1Piedpiper22!';
+    // Nav border on scroll
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
 
-    // ─── DEFAULT BOOKS ───
-    const DEFAULT_BOOKS = [
-      { id: 1, title: "Everything's Jake", author: 'J LemeThompson', imprint: 'lt-publishing', genre: 'Literary Fiction', status: 'available', statusLabel: '', blurb: "A story of child abuse, institutional silence, and the long, imperfect work of survival. The book that had to be written.", cover: '', link: '' },
-      { id: 2, title: 'The Cotton Boll Queen', author: 'J LemeThompson', imprint: 'lt-publishing', genre: 'Southern Gothic', status: 'soon', statusLabel: 'Coming June 1, 2026', blurb: "Deep in the Delta, a woman holds a world together with sheer will — and watches it come undone anyway.", cover: '', link: '' },
-      { id: 3, title: 'The Durable Physique', author: 'J LemeThompson', imprint: 'lt-publishing', genre: 'Nonfiction / Wellness', status: 'available', statusLabel: '', blurb: "Not a fitness book. A reckoning with the body — what it takes to build one that lasts. Also published as O Físico Durável.", cover: '', link: '' },
-      { id: 4, title: 'Billy and the Kid', author: 'J LemeThompson', imprint: 'lt-publishing', genre: 'Literary Fiction', status: 'progress', statusLabel: 'Forthcoming', blurb: "A 312-year-old leprechaun. A nine-year-old boy in suburban Alabama. A friendship that ends the only way impossible things can.", cover: '', link: '' },
-      { id: 5, title: 'Under Scrutiny', author: 'August Rowan', imprint: 'lt-select', genre: 'Thriller', status: 'progress', statusLabel: 'In Production', blurb: "When the Capitol's digital security is breached by someone who knows the system from the inside, Ethan Hayes has minutes to stop what he built from being used against him.", cover: '', link: '' },
-      { id: 6, title: 'The Sentinel Protocol', author: 'August Rowan', imprint: 'lt-select', genre: 'Thriller · An Ethan Hayes Novel', status: 'progress', statusLabel: 'In Production', blurb: "A retired intelligence officer. A list that shouldn't exist. A message arriving through a channel that was supposed to be dead.", cover: '', link: '' },
-    ];
-
-    // ─── STATE ───
-    let books = [];
-    let currentFilter = 'all';
-    let editingId = null;
-    let nextId = 7;
-
-    // ─── STORAGE ───
-    function saveToStorage() {
-      try { localStorage.setItem('lt_books', JSON.stringify(books)); } catch(e) {}
-    }
-
-    function loadFromStorage() {
-      try {
-        const stored = localStorage.getItem('lt_books');
-        if (stored) {
-          books = JSON.parse(stored);
-          nextId = Math.max(...books.map(b => b.id), 0) + 1;
-        } else {
-          books = JSON.parse(JSON.stringify(DEFAULT_BOOKS));
-          nextId = 7;
-          saveToStorage();
-        }
-      } catch(e) {
-        books = JSON.parse(JSON.stringify(DEFAULT_BOOKS));
-      }
-    }
-
-    // ─── AUTH ───
-    function attemptLogin() {
-      const val = document.getElementById('password-input').value;
-      if (val === ADMIN_PASSWORD) {
-        document.getElementById('login-screen').style.display = 'none';
-        document.getElementById('admin-screen').style.display = 'block';
-        loadFromStorage();
-        renderTable();
-        updateStats();
-      } else {
-        document.getElementById('login-error').style.display = 'block';
-        document.getElementById('password-input').value = '';
-        document.getElementById('password-input').focus();
-      }
-    }
-
-    function logout() {
-      document.getElementById('admin-screen').style.display = 'none';
-      document.getElementById('login-screen').style.display = 'flex';
-      document.getElementById('password-input').value = '';
-    }
-
-    // Enter key on password
-    document.getElementById('password-input').addEventListener('keydown', e => {
-      if (e.key === 'Enter') attemptLogin();
-    });
-
-    // ─── RENDER TABLE ───
-    function renderTable() {
-      const tbody = document.getElementById('book-tbody');
-      const empty = document.getElementById('empty-state');
-
-      let filtered = books;
-      if (currentFilter === 'lt-publishing') filtered = books.filter(b => b.imprint === 'lt-publishing');
-      else if (currentFilter === 'lt-select') filtered = books.filter(b => b.imprint === 'lt-select');
-      else if (currentFilter === 'available') filtered = books.filter(b => b.status === 'available');
-      else if (currentFilter === 'soon') filtered = books.filter(b => b.status === 'soon');
-      else if (currentFilter === 'progress') filtered = books.filter(b => b.status === 'progress');
-
-      if (filtered.length === 0) {
-        tbody.innerHTML = '';
-        empty.style.display = 'block';
-        return;
-      }
-      empty.style.display = 'none';
-
-      tbody.innerHTML = filtered.map(b => `
-        <tr>
-          <td>
-            <div class="book-title-cell">${b.title}</div>
-            <div class="book-author-cell">${b.author}</div>
-          </td>
-          <td>
-            <span class="imprint-pill ${b.imprint === 'lt-publishing' ? 'pill-lt' : 'pill-select'}">
-              ${b.imprint === 'lt-publishing' ? 'LT Publishing' : 'LT Select'}
-            </span>
-          </td>
-          <td class="book-genre-cell">${b.genre}</td>
-          <td>
-            <span class="status-pill ${b.status === 'available' ? 'pill-available' : b.status === 'soon' ? 'pill-soon' : 'pill-progress'}">
-              ${b.statusLabel || (b.status === 'available' ? 'Available' : b.status === 'soon' ? 'Coming Soon' : 'In Progress')}
-            </span>
-          </td>
-          <td>
-            <div class="row-actions">
-              <button class="action-btn action-edit" onclick="openEditModal(${b.id})">Edit</button>
-              <button class="action-btn action-delete" onclick="deleteBook(${b.id})">Delete</button>
-            </div>
-          </td>
-        </tr>
-      `).join('');
-    }
-
-    function updateStats() {
-      document.getElementById('stat-total').textContent = books.length;
-      document.getElementById('stat-publishing').textContent = books.filter(b => b.imprint === 'lt-publishing').length;
-      document.getElementById('stat-select').textContent = books.filter(b => b.imprint === 'lt-select').length;
-    }
-
-    // ─── FILTER ───
-    function filterBooks(filter, btn) {
-      currentFilter = filter;
-      document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
-      if (btn) btn.classList.add('active');
-
-      const titles = {
-        'all': 'All <em>Books</em>',
-        'lt-publishing': 'LT <em>Publishing</em>',
-        'lt-select': 'LT <em>Select</em>',
-        'available': 'Available <em>Now</em>',
-        'soon': 'Coming <em>Soon</em>',
-        'progress': 'In <em>Progress</em>',
-      };
-      document.getElementById('content-title').innerHTML = titles[filter] || 'All <em>Books</em>';
-      renderTable();
-    }
-
-    // ─── MODAL ───
-    function openAddModal() {
-      editingId = null;
-      document.getElementById('modal-title').textContent = 'Add New Book';
-      document.getElementById('edit-id').value = '';
-      document.getElementById('f-title').value = '';
-      document.getElementById('f-author').value = '';
-      document.getElementById('f-imprint').value = 'lt-publishing';
-      document.getElementById('f-genre').value = '';
-      document.getElementById('f-status').value = 'available';
-      document.getElementById('f-status-label').value = '';
-      document.getElementById('f-blurb').value = '';
-      document.getElementById('f-cover').value = '';
-      document.getElementById('f-link').value = '';
-      updateCoverPreview('');
-      document.getElementById('book-modal').classList.add('open');
-    }
-
-    function openEditModal(id) {
-      const book = books.find(b => b.id === id);
-      if (!book) return;
-      editingId = id;
-      document.getElementById('modal-title').textContent = 'Edit Book';
-      document.getElementById('edit-id').value = id;
-      document.getElementById('f-title').value = book.title;
-      document.getElementById('f-author').value = book.author;
-      document.getElementById('f-imprint').value = book.imprint;
-      document.getElementById('f-genre').value = book.genre;
-      document.getElementById('f-status').value = book.status;
-      document.getElementById('f-status-label').value = book.statusLabel || '';
-      document.getElementById('f-blurb').value = book.blurb;
-      document.getElementById('f-cover').value = book.cover || '';
-      document.getElementById('f-link').value = book.link || '';
-      updateCoverPreview(book.cover || '');
-      document.getElementById('book-modal').classList.add('open');
-    }
-
-    function closeModal() {
-      document.getElementById('book-modal').classList.remove('open');
-    }
-
-    // Close modal on overlay click
-    document.getElementById('book-modal').addEventListener('click', function(e) {
-      if (e.target === this) closeModal();
-    });
-
-    // Cover preview
-    document.getElementById('f-cover').addEventListener('input', function() {
-      updateCoverPreview(this.value);
-    });
-
-    function updateCoverPreview(url) {
-      const box = document.getElementById('cover-preview-box');
-      if (url && url.startsWith('http')) {
-        box.innerHTML = `<img src="${url}" alt="Cover preview" onerror="this.parentElement.innerHTML='<span>Image<br>not found</span>'" />`;
-      } else {
-        box.innerHTML = '<span>No cover<br>image</span>';
-      }
-    }
-
-    // ─── SAVE ───
-    function saveBook() {
-      const title = document.getElementById('f-title').value.trim();
-      const author = document.getElementById('f-author').value.trim();
-      if (!title || !author) {
-        showToast('Please enter a title and author.');
-        return;
-      }
-
-      const bookData = {
-        title,
-        author,
-        imprint: document.getElementById('f-imprint').value,
-        genre: document.getElementById('f-genre').value.trim(),
-        status: document.getElementById('f-status').value,
-        statusLabel: document.getElementById('f-status-label').value.trim(),
-        blurb: document.getElementById('f-blurb').value.trim(),
-        cover: document.getElementById('f-cover').value.trim(),
-        link: document.getElementById('f-link').value.trim(),
-      };
-
-      if (editingId) {
-        const idx = books.findIndex(b => b.id === editingId);
-        if (idx !== -1) books[idx] = { ...books[idx], ...bookData };
-        showToast('Book updated successfully.');
-      } else {
-        books.push({ id: nextId++, ...bookData });
-        showToast('Book added to catalogue.');
-      }
-
-      saveToStorage();
-      renderTable();
-      updateStats();
-      closeModal();
-    }
-
-    // ─── DELETE ───
-    function deleteBook(id) {
-      const book = books.find(b => b.id === id);
-      if (!book) return;
-      if (!confirm(`Delete "${book.title}" from the catalogue? This cannot be undone.`)) return;
-      books = books.filter(b => b.id !== id);
-      saveToStorage();
-      renderTable();
-      updateStats();
-      showToast(`"${book.title}" removed from catalogue.`);
-    }
-
-    // ─── TOAST ───
-    function showToast(msg) {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 3000);
-    }
+    // Scroll reveal
+    const cards = document.querySelectorAll('.book-card');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    cards.forEach(c => obs.observe(c));
   </script>
 
 </body>
