@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Bonus Chapters — LT Publishing</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --cream: #f8f4ee;
+      --dark: #1a1612;
+      --mid: #4a3f35;
+      --light: #c8b89a;
+      --accent: #7a5c3a;
+    }
+
+    body {
+      background-color: var(--cream);
+      color: var(--dark);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.5rem;
+    }
+
+    .container {
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .ornament {
+      font-size: 1.4rem;
+      color: var(--light);
+      margin-bottom: 2rem;
+      letter-spacing: 0.3em;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: 2rem;
+      letter-spacing: 0.06em;
+      line-height: 1.3;
+      margin-bottom: 1.5rem;
+      color: var(--dark);
+    }
+
+    .divider {
+      width: 60px;
+      height: 1px;
+      background-color: var(--light);
+      margin: 0 auto 2rem;
+    }
+
+    .message {
+      font-size: 1.05rem;
+      color: var(--mid);
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+
+    .download-btn {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background-color: var(--dark);
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+      margin-bottom: 1rem;
+    }
+
+    .download-btn:hover {
+      background-color: var(--accent);
+    }
+
+    .file-note {
+      font-size: 0.82rem;
+      color: var(--light);
+      font-style: italic;
+      margin-bottom: 3rem;
+    }
+
+    .review-section {
+      border-top: 1px solid var(--light);
+      padding-top: 2rem;
+      margin-top: 1rem;
+    }
+
+    .review-text {
+      font-size: 0.95rem;
+      color: var(--mid);
+      font-style: italic;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .review-links {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .review-link {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--light);
+      padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .review-link:hover {
+      color: var(--dark);
+      border-color: var(--dark);
+    }
+
+    .footer-ornament {
+      margin-top: 3rem;
+      font-size: 1.2rem;
+      color: var(--light);
+      letter-spacing: 0.3em;
+    }
+
+    .publisher {
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--light);
+    }
+
+    .publisher a {
+      color: var(--light);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .publisher a:hover {
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="ornament">❧</div>
+
+    <h1>Your chapters are ready.</h1>
+
+    <div class="divider"></div>
+
+    <p class="message">
+      Thank you for reading Belle's story. Both bonus chapters are in the document below.
+    </p>
+
+    <a class="download-btn" href="/downloads/for_belles_fans.pdf" download>
+      Download For Belle's Fans
+    </a>
+
+    <p class="file-note">PDF — opens in your browser or saves to your device</p>
+
+    <div class="review-section">
+      <p class="review-text">
+        If <em>The Cotton Boll Queen</em> moved you, a review on Amazon or Goodreads makes an enormous difference for an independent press. Even a sentence or two is more help than you know.
+      </p>
+      <div class="review-links">
+        <a class="review-link" href="https://www.amazon.com" target="_blank">Review on Amazon</a>
+        <a class="review-link" href="https://www.goodreads.com" target="_blank">Review on Goodreads</a>
+      </div>
+    </div>
+
+    <div class="footer-ornament">❧</div>
+    <p class="publisher"><a href="https://ltpublishing.com">LT Publishing</a></p>
+
+  </div>
+</body>
+</html>
