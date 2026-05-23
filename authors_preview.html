@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Authors — LT Publishing</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0f1410;
+  --gold: #c49f4a;
+  --cream: #e8e4dc;
+  --muted: #8a9e8c;
+  --rule: rgba(196,159,74,0.18);
+  --text: #d4d0c8;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "EB Garamond", serif;
+  font-size: 16px;
+  line-height: 1.8;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.6rem 0;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 5rem;
+}
+
+.nav-brand {
+  font-family: "EB Garamond", serif;
+  font-size: 1rem;
+  color: var(--cream);
+  text-decoration: none;
+}
+
+.nav-brand small {
+  display: block;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  font-family: "Inter", sans-serif;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--gold); }
+
+.ornament {
+  text-align: center;
+  color: var(--gold);
+  font-size: 1rem;
+  letter-spacing: 0.4em;
+  margin-bottom: 4rem;
+  opacity: 0.6;
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  margin-bottom: 2rem;
+}
+
+.section-label::before {
+  content: "";
+  display: block;
+  width: 2rem;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.5;
+}
+
+hr.rule {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 3rem 0;
+}
+
+footer {
+  border-top: 1px solid var(--rule);
+  padding: 2rem 0;
+  margin-top: 5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.68rem;
+  color: var(--muted);
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+}
+
+footer em { font-family: "EB Garamond", serif; font-style: italic; }
+
+.preview-banner {
+  background: var(--gold);
+  color: var(--bg);
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-family: "Inter", sans-serif;
+  margin: 0 -2.5rem;
+  width: calc(100% + 5rem);
+}
+
+
+.hero { margin-bottom: 4rem; }
+
+.hero h1 {
+  font-size: 3.5rem;
+  font-weight: 400;
+  color: var(--cream);
+  line-height: 1.1;
+  margin-bottom: 0.8rem;
+}
+
+.hero h1 em { font-style: italic; color: var(--gold); }
+
+.hero-sub {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-family: "Inter", sans-serif;
+}
+
+.ornament-small {
+  color: var(--gold);
+  opacity: 0.6;
+  font-size: 0.9rem;
+  margin: 2rem 0;
+}
+
+.author-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+  gap: 2rem;
+  transition: opacity 0.2s;
+}
+
+.author-card:hover { opacity: 0.8; }
+
+.author-card:first-of-type { border-top: 1px solid var(--rule); }
+
+.card-imprint {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-family: "Inter", sans-serif;
+  margin-bottom: 0.5rem;
+  opacity: 0.8;
+}
+
+.card-name {
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--cream);
+  line-height: 1.1;
+  margin-bottom: 0.6rem;
+}
+
+.card-name em { font-style: italic; color: var(--gold); }
+
+.card-bio {
+  font-size: 0.95rem;
+  color: var(--muted);
+  max-width: 580px;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.card-link {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-family: "Inter", sans-serif;
+  border-bottom: 1px solid rgba(196,159,74,0.3);
+  padding-bottom: 1px;
+}
+
+.card-arrow {
+  font-size: 1.5rem;
+  color: var(--gold);
+  opacity: 0.4;
+  align-self: center;
+}
+</style>
+</head>
+<body>
+
+<div class="preview-banner">PREVIEW — Authors Page with Ophelia Brew Added</div>
+
+<nav>
+  <a href="#" class="nav-brand">
+    LT Publishing
+    <small>Lisbon, Portugal</small>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#">LT Publishing</a></li>
+    <li><a href="#">LT Select</a></li>
+    <li><a href="#">Authors</a></li>
+    <li><a href="#">LT Media Services</a></li>
+  </ul>
+</nav>
+
+<div class="ornament">❧ ❧ ❧</div>
+
+<section class="hero">
+  <h1>The <em>Authors</em></h1>
+  <p class="hero-sub">LT Publishing &nbsp;·&nbsp; LT Select</p>
+  <p class="ornament-small">❧</p>
+</section>
+
+<a href="j-lemethompson.html" class="author-card">
+  <div>
+    <p class="card-imprint">LT Publishing</p>
+    <h2 class="card-name">J <em>LemeThompson</em></h2>
+    <p class="card-bio">Literary novelist and nonfiction author. Arkansas upbringing, Lisbon life. Power dynamics, institutional complicity, and the slow erosion of trust in richly evoked Southern landscapes.</p>
+    <span class="card-link">View Author Page</span>
+  </div>
+  <span class="card-arrow">→</span>
+</a>
+
+<a href="august-rowan.html" class="author-card">
+  <div>
+    <p class="card-imprint">LT Select</p>
+    <h2 class="card-name">August <em>Rowan</em></h2>
+    <p class="card-bio">Character-driven thrillers where loyalty is unstable, power hides in plain sight, and every answer exposes a deeper question. Author of the Ethan Hayes series.</p>
+    <span class="card-link">View Author Page</span>
+  </div>
+  <span class="card-arrow">→</span>
+</a>
+
+<a href="ophelia-brew.html" class="author-card">
+  <div>
+    <p class="card-imprint">LT Publishing</p>
+    <h2 class="card-name">Ophelia <em>Brew</em></h2>
+    <p class="card-bio">Poet and first-generation Ghanaian American raised in the Bronx. Howard University graduate whose debut collection explores displacement, womanhood, faith, and the quiet courage of becoming.</p>
+    <span class="card-link">View Author Page</span>
+  </div>
+  <span class="card-arrow">→</span>
+</a>
+
+<footer>
+  <span>LT Publishing &nbsp;·&nbsp; Lisbon, Portugal<br><em>Literary fiction &amp; selected works since 2025</em></span>
+  <span>© 2026 LT Publishing. All rights reserved.</span>
+</footer>
+
+</body>
+</html>
