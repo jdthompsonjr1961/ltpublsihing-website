@@ -294,6 +294,91 @@
     .mobile-menu a:hover{color:var(--text)}
     .mobile-menu a:last-child{border-bottom:none}
     .mobile-menu .mob-cta{color:var(--gold)!important}
+
+    /* ── PROTECT BUTTON ── */
+    .btn-protect {
+      font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.82rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--text-muted); background: none;
+      border: 1px solid var(--rule-light);
+      padding: 0.75rem 2.2rem; cursor: pointer; display: inline-block;
+      transition: border-color 0.2s, color 0.2s; margin-top: 1rem;
+      text-align: center;
+    }
+    .btn-protect:hover { border-color: var(--gold); color: var(--text); }
+
+    /* ── MODAL OVERLAY ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 800;
+      background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+      align-items: center; justify-content: center; padding: 2rem;
+    }
+    .modal-overlay.open { display: flex; }
+
+    /* ── MODAL PANEL ── */
+    .modal-panel {
+      background: #f7f4ee; color: #1a1612;
+      max-width: 660px; width: 100%; max-height: 90vh;
+      overflow-y: auto; position: relative;
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .modal-overlay.open .modal-panel { opacity: 1; transform: translateY(0); }
+    .modal-header {
+      padding: 2.5rem 3rem 1.5rem;
+      border-bottom: 1px solid #d9d0c4;
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem;
+    }
+    .modal-eyebrow {
+      font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.7rem;
+      letter-spacing: 0.35em; text-transform: uppercase;
+      color: #c49a3c; margin-bottom: 0.6rem;
+    }
+    .modal-title {
+      font-family: 'Playfair Display', serif; font-weight: 500;
+      font-size: 1.7rem; line-height: 1.15; color: #1a1612;
+    }
+    .modal-title em { font-style: italic; font-weight: 400; color: #8a6a28; }
+    .modal-close {
+      background: none; border: none; cursor: pointer; padding: 0.25rem;
+      color: #c49a3c; font-size: 1.4rem; line-height: 1; flex-shrink: 0;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: #1a1612; }
+    .modal-body { padding: 2rem 3rem 2.5rem; background: #f7f4ee; }
+    .modal-intro {
+      font-size: 1rem; color: #3a2e1e; line-height: 1.8;
+      margin-bottom: 2rem; padding-bottom: 2rem;
+      border-bottom: 1px solid #d9d0c4;
+    }
+    .modal-items { display: flex; flex-direction: column; }
+    .modal-item {
+      display: flex; gap: 1.2rem; align-items: flex-start;
+      padding: 1.4rem 0; border-bottom: 1px solid #e8e4de;
+    }
+    .modal-item:last-child { border-bottom: none; }
+    .modal-check {
+      width: 20px; height: 20px; border: 1px solid #c49a3c;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 0.25rem;
+    }
+    .modal-check svg { width: 10px; height: 10px; stroke: #8a6a28; }
+    .modal-item-title {
+      font-family: 'Jost', sans-serif; font-weight: 400; font-size: 0.78rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: #8a6a28; margin-bottom: 0.35rem;
+    }
+    .modal-item-body { font-size: 0.97rem; color: #4a3f35; line-height: 1.75; }
+    .modal-item-body strong { color: #1a1612; font-weight: 500; }
+    .modal-footer {
+      padding: 1.5rem 3rem 2rem;
+      border-top: 1px solid #d9d0c4; background: #ede8df;
+      font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.82rem;
+      letter-spacing: 0.06em; color: #3a2e1e; line-height: 1.8;
+    }
+    @media (max-width: 600px) {
+      .modal-header, .modal-body, .modal-footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+    }
   </style>
 </head>
 <body>
@@ -323,6 +408,7 @@
     <p class="hero-desc">LT Publishing is the literary imprint — work we believe in enough to publish under our name. No upfront fee. No packages. We read everything submitted, respond honestly, and only say yes when we mean it.</p>
     <div class="hero-cta">
       <a href="#submit" class="btn-gold">Submit Your Manuscript</a>
+      <button class="btn-protect" id="open-protect">How We Protect Authors</button>
     </div>
   </section>
 
@@ -517,5 +603,102 @@
     });
   </script>
 
+
+  <!-- PROTECT MODAL -->
+  <div class="modal-overlay" id="protect-modal">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <div>
+          <div class="modal-eyebrow">Author Protections</div>
+          <h2 class="modal-title" id="modal-title">How We <em>Protect</em> Authors</h2>
+        </div>
+        <button class="modal-close" id="close-protect" aria-label="Close">&#x2715;</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-intro">We do not take your copyright, your royalties, your KDP account, your files, or your passwords. These are the terms of every engagement — stated plainly before any work begins.</p>
+        <div class="modal-items">
+          <div class="modal-item">
+            <div class="modal-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <div class="modal-item-title">No Password Access Required</div>
+              <p class="modal-item-body">For most KDP file problems, you send us the rejection message, trim size, page count, and files. <strong>You never give us your login credentials.</strong> Temporary upload access, if needed, is revoked the moment your project is complete.</p>
+            </div>
+          </div>
+          <div class="modal-item">
+            <div class="modal-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <div class="modal-item-title">No Fix, No Fee on Diagnostics</div>
+              <p class="modal-item-body">If we cannot identify or correct a file issue within the agreed scope, <strong>there is no charge.</strong> We tell you what's wrong and what it costs before we touch anything.</p>
+            </div>
+          </div>
+          <div class="modal-item">
+            <div class="modal-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <div class="modal-item-title">Clear Scope Before Work Begins</div>
+              <p class="modal-item-body">You will know what is included, what is not, and what the fee is <strong>before any work starts.</strong> No hourly guesswork. No surprise invoices.</p>
+            </div>
+          </div>
+          <div class="modal-item">
+            <div class="modal-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <div class="modal-item-title">You Receive Every File</div>
+              <p class="modal-item-body">All deliverables are returned to you for your own account. <strong>You remain the publisher of record.</strong> We retain nothing.</p>
+            </div>
+          </div>
+          <div class="modal-item">
+            <div class="modal-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <div class="modal-item-title">Your Copyright — Always</div>
+              <p class="modal-item-body">We never claim ownership of your work. <strong>Copyright remains yours</strong> in every arrangement LT Publishing offers.</p>
+            </div>
+          </div>
+          <div class="modal-item">
+            <div class="modal-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <div class="modal-item-title">Honest Terms in Writing</div>
+              <p class="modal-item-body">Every arrangement — publishing agreement or production contract — is <strong>in plain English, in writing, before anything begins.</strong> No verbal commitments, no ambiguity.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        Questions before you decide? Reach us through the submission form — or just describe what you need. No commitment until you say so.
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    (function() {
+      var modal = document.getElementById('protect-modal');
+      var btnOpen = document.getElementById('open-protect');
+      var btnClose = document.getElementById('close-protect');
+      var btnMobile = document.getElementById('mobile-protect');
+      var mobileMenu = document.getElementById('mobile-menu');
+
+      function openModal() {
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeModal() {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      if (btnOpen)   btnOpen.addEventListener('click', openModal);
+      if (btnClose)  btnClose.addEventListener('click', closeModal);
+      if (btnMobile) btnMobile.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (mobileMenu) mobileMenu.classList.remove('open');
+        openModal();
+      });
+      if (modal) modal.addEventListener('click', function(e) {
+        if (e.target === modal) closeModal();
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeModal();
+      });
+    })();
+  </script>
 </body>
 </html>
