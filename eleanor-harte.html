@@ -11,7 +11,7 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Authors — LT Publishing</title>
+  <title>Eleanor Harte — LT Publishing</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
@@ -19,10 +19,10 @@
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
-      --bg:#0c110e;--surface:#111a14;--surface-2:#172019;
+      --bg:#0c110e;--surface:#111a14;--surface-2:#172019;--surface-3:#1e2d22;
       --green:#2d6649;--green-light:#4a9970;--gold:#c49a3c;--gold-pale:#e8d5a8;
       --text:#dde8e0;--text-muted:#c2d8c8;--rule:#1e3026;--rule-light:#2e4a38;
-      --cream:#f7f4ee;--select:#1a2f3a;--select-acc:#3a7a9c;
+      --cream:#f7f4ee;--select:#1a2f3a;--select-acc:#3a7a9c;--select-light:#5aaace;
     }
     html{scroll-behavior:smooth}
     body{background:var(--bg);color:var(--text);font-family:"EB Garamond",Georgia,serif;font-size:19px;line-height:1.7;overflow-x:hidden}
@@ -46,34 +46,36 @@
     .mobile-menu a:last-child{border-bottom:none}
     .mobile-menu .mob-cta{color:var(--gold)!important}
 
-    .page-hero{min-height:40vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:9rem 2rem 4rem}
-    .hero-ornament{font-family:"EB Garamond",serif;font-size:1.1rem;color:var(--gold);letter-spacing:.6em;margin-bottom:2rem;opacity:0;animation:fadeUp 1s ease .2s forwards}
-    .hero-title{font-family:"Playfair Display",serif;font-weight:400;font-size:clamp(3rem,7vw,5.5rem);line-height:1;color:var(--text);margin-bottom:1rem;opacity:0;animation:fadeUp 1s ease .4s forwards}
-    .hero-title em{font-style:italic;color:var(--gold)}
-    .hero-rule{width:50px;height:1px;background:var(--gold);margin:0 auto 1.5rem;opacity:0;animation:fadeUp 1s ease .55s forwards}
-    .hero-sub{font-family:"Jost",sans-serif;font-weight:300;font-size:.82rem;letter-spacing:.35em;text-transform:uppercase;color:var(--text-muted);opacity:0;animation:fadeUp 1s ease .65s forwards}
+    .author-hero{min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10rem 2rem 5rem;position:relative;background:linear-gradient(to bottom,var(--bg),var(--select) 60%,var(--bg))}
+    .author-ornament{font-family:"EB Garamond",serif;font-size:1.1rem;color:var(--select-acc);letter-spacing:.6em;margin-bottom:2rem;opacity:0;animation:fadeUp 1s ease .2s forwards}
+    .author-name{font-family:"Playfair Display",serif;font-weight:400;font-size:clamp(2.5rem,6vw,5rem);line-height:1;color:var(--text);margin-bottom:1rem;opacity:0;animation:fadeUp 1s ease .4s forwards}
+    .author-name em{font-style:italic;color:var(--select-acc)}
+    .author-rule{width:50px;height:1px;background:var(--select-acc);margin:0 auto 1.5rem;opacity:0;animation:fadeUp 1s ease .55s forwards}
+    .author-tagline{font-family:"Jost",sans-serif;font-weight:300;font-size:.82rem;letter-spacing:.35em;text-transform:uppercase;color:var(--text-muted);opacity:0;animation:fadeUp 1s ease .65s forwards}
 
     .divider{display:flex;align-items:center;gap:1.5rem;padding:0 5rem;margin:1rem 0}
     .divider-line{flex:1;height:1px;background:var(--rule-light)}
     .divider-mark{font-family:"EB Garamond",serif;font-size:1.2rem;color:var(--rule-light)}
 
-    .authors-section{padding:6rem 5rem}
-    .authors-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;max-width:1000px;margin:0 auto}
+    .bio-section{padding:6rem 5rem;max-width:900px;margin:0 auto}
+    .bio-label{font-family:"Jost",sans-serif;font-weight:300;font-size:.78rem;letter-spacing:.4em;text-transform:uppercase;color:var(--select-acc);display:flex;align-items:center;gap:1rem;margin-bottom:2rem}
+    .bio-label::before{content:"";display:block;width:24px;height:1px;background:var(--select-acc)}
+    .bio-text{font-size:1.05rem;color:var(--text-muted);line-height:1.9}
+    .bio-text p+p{margin-top:1.5rem}
+    .bio-text em{color:var(--select-light);font-style:italic}
 
-    .author-card{padding:3.5rem;background:var(--surface-2);border-top:3px solid var(--gold);text-decoration:none;display:block;transition:background .3s}
-    .author-card:hover{background:var(--surface)}
-    .author-card.select-author{border-top-color:var(--select-acc);background:var(--select)}
-    .author-card.select-author:hover{background:#1f3a4a}
-
-    .author-card-tag{font-family:"Jost",sans-serif;font-weight:300;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;margin-bottom:1rem;display:block;color:var(--gold)}
-    .author-card.select-author .author-card-tag{color:var(--select-acc)}
-    .author-card-name{font-family:"Playfair Display",serif;font-size:2rem;font-weight:500;color:var(--text);margin-bottom:1rem;line-height:1.1}
-    .author-card-name em{font-style:italic;font-weight:400}
-    .author-card-desc{font-size:1rem;color:var(--text-muted);line-height:1.75;margin-bottom:2rem}
-    .author-card-link{font-family:"Jost",sans-serif;font-weight:300;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:.5rem}
-    .author-card.select-author .author-card-link{color:var(--select-acc)}
-    .author-card-link::after{content:"→";transition:transform .2s}
-    .author-card:hover .author-card-link::after{transform:translateX(4px)}
+    .books-section{padding:4rem 5rem 6rem;background:var(--surface)}
+    .books-label{font-family:"Jost",sans-serif;font-weight:300;font-size:.78rem;letter-spacing:.4em;text-transform:uppercase;color:var(--select-acc);display:flex;align-items:center;gap:1rem;margin-bottom:3rem}
+    .books-label::before{content:"";display:block;width:24px;height:1px;background:var(--select-acc)}
+    .books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:2rem;max-width:600px}
+    .book-card{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+    .book-card.visible{opacity:1;transform:translateY(0)}
+    .book-cover{width:100%;aspect-ratio:2/3;overflow:hidden;border-top:3px solid var(--select-acc);position:relative;transition:transform .4s ease,box-shadow .4s ease}
+    .book-card:hover .book-cover{transform:translateY(-5px);box-shadow:0 20px 40px rgba(0,0,0,.4)}
+    .book-cover img{width:100%;height:100%;object-fit:cover}
+    .book-cover-placeholder{width:100%;height:100%;background:var(--select);display:flex;align-items:center;justify-content:center;padding:1.5rem;text-align:center;font-family:"Playfair Display",serif;color:var(--text-muted);font-size:.9rem}
+    .book-title-small{font-family:"Playfair Display",serif;font-size:1rem;font-weight:500;color:var(--text);margin-top:.75rem;line-height:1.2}
+    .book-status-small{font-family:"Jost",sans-serif;font-weight:300;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--select-acc);margin-top:.3rem}
 
     footer{padding:3.5rem 5rem;border-top:1px solid var(--rule-light);display:flex;justify-content:space-between;align-items:center;background:var(--bg)}
     .footer-brand-main{font-family:"Playfair Display",serif;font-size:1rem;font-weight:500;color:var(--text);display:block}
@@ -85,8 +87,9 @@
 
     @media(max-width:900px){
       nav{padding:1rem 1.5rem}.nav-links{display:none}.nav-hamburger{display:flex}
-      .authors-section{padding:4rem 1.5rem}
-      .authors-grid{grid-template-columns:1fr}
+      .author-hero{padding:8rem 1.5rem 4rem}
+      .bio-section{padding:4rem 1.5rem}
+      .books-section{padding:3rem 1.5rem 4rem}
       .divider{padding:0 1.5rem}
       footer{padding:2.5rem 1.5rem;flex-direction:column;gap:1.5rem;text-align:center}
       .footer-right{text-align:center}
@@ -119,40 +122,36 @@
   <a href="services.html" class="mob-cta">LT Media Services →</a>
 </div>
 
-<section class="page-hero">
-  <div class="hero-ornament">❧ &nbsp; ❧ &nbsp; ❧</div>
-  <h1 class="hero-title">The <em>Authors</em></h1>
-  <div class="hero-rule"></div>
-  <p class="hero-sub">LT Publishing &nbsp;·&nbsp; LT Select</p>
+<section class="author-hero">
+  <div class="author-ornament">❖ &nbsp; ❖ &nbsp; ❖</div>
+  <h1 class="author-name">Eleanor <em>Harte</em></h1>
+  <div class="author-rule"></div>
+  <p class="author-tagline">Romance &nbsp;·&nbsp; LT Select &nbsp;·&nbsp; Chicago, Illinois</p>
 </section>
 
-<div class="divider"><div class="divider-line"></div><div class="divider-mark">❧</div><div class="divider-line"></div></div>
+<div class="divider"><div class="divider-line"></div><div class="divider-mark">❖</div><div class="divider-line"></div></div>
 
-<section class="authors-section">
-  <div class="authors-grid">
+<section class="bio-section">
+  <div class="bio-label">About the Author</div>
+  <div class="bio-text">
+    <p>Eleanor Harte is a Chicago-based romance writer and Northwestern University graduate whose novels explore love, power, family secrets, and the complicated choices women make when society gives them too few acceptable options.</p>
+    <p>Her debut novel, <em>The Willowbrook Bargain</em>, is available now through LT Select.</p>
+    <p>She shares her home with two schnauzers, a growing stack of research books, and an unreasonable amount of Cubs optimism. On writing breaks, she loves nothing more than an afternoon at Wrigley Field watching the Cubs play live.</p>
+  </div>
+</section>
 
-    <a href="j-lemethompson.html" class="author-card">
-      <span class="author-card-tag">LT Publishing</span>
-      <div class="author-card-name">J <em>LemeThompson</em></div>
-      <p class="author-card-desc">Literary novelist and nonfiction author. Arkansas upbringing, Lisbon life. Power dynamics, institutional complicity, and the slow erosion of trust in richly evoked Southern landscapes.</p>
-      <span class="author-card-link">View Author Page</span>
-    </a>
+<div class="divider"><div class="divider-line"></div><div class="divider-mark">❖</div><div class="divider-line"></div></div>
 
-    <a href="august-rowan.html" class="author-card select-author">
-      <span class="author-card-tag">LT Select</span>
-      <div class="author-card-name">August <em>Rowan</em></div>
-      <p class="author-card-desc">Character-driven thrillers where loyalty is unstable, power hides in plain sight, and every answer exposes a deeper question. Author of the Ethan Hayes series.</p>
-      <span class="author-card-link">View Author Page</span>
-    </a>
-
-
-    <a href="eleanor-harte.html" class="author-card select-author">
-      <span class="author-card-tag">LT Select</span>
-      <div class="author-card-name">Eleanor <em>Harte</em></div>
-      <p class="author-card-desc">Romance fiction exploring love, power, and the complicated choices women make. Chicago-based, Northwestern-educated, debut author of <em>The Willowbrook Bargain</em>.</p>
-      <span class="author-card-link">View Author Page</span>
-    </a>
-
+<section class="books-section">
+  <div class="books-label">Works</div>
+  <div class="books-grid">
+    <div class="book-card">
+      <div class="book-cover">
+        <img src="https://raw.githubusercontent.com/jdthompsonjr1961/ltpublsihing-website/main/TWB.png" alt="The Willowbrook Bargain" onerror="this.parentElement.innerHTML='<div class=book-cover-placeholder>The Willowbrook Bargain</div>'" />
+      </div>
+      <div class="book-title-small">The Willowbrook Bargain</div>
+      <div class="book-status-small">Available Now</div>
+    </div>
   </div>
 </section>
 
@@ -171,6 +170,11 @@
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
   hamburger.addEventListener('click', () => { mobileMenu.classList.toggle('open'); });
+  const cards = document.querySelectorAll('.book-card');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  cards.forEach(c => obs.observe(c));
 </script>
 </body>
 </html>
