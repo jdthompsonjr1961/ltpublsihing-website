@@ -310,14 +310,57 @@
 
     /* MODAL PANEL — cream/parchment */
     .modal-panel {
-      background: #f7f4ee; color: #1a1612;
+      background: #f7f4ee !important; color: #1a1612 !important;
       max-width: 680px; width: 100%; max-height: 90vh;
       overflow-y: auto; position: relative;
       opacity: 0; transform: translateY(16px);
       transition: opacity 0.25s ease, transform 0.25s ease;
+      font-family: 'EB Garamond', Georgia, serif;
     }
     .modal-overlay.open .modal-panel {
       opacity: 1; transform: translateY(0);
+    }
+    .modal-panel, .modal-panel * {
+      box-sizing: border-box;
+    }
+    .modal-panel .modal-header,
+    .modal-panel .modal-body,
+    .modal-panel .modal-items,
+    .modal-panel .modal-item,
+    .modal-panel .modal-intro {
+      background: #f7f4ee !important;
+      color: #1a1612 !important;
+    }
+    .modal-panel .modal-footer {
+      background: #ede8df !important;
+      color: #7a6a52 !important;
+    }
+    .modal-panel .modal-item-body {
+      color: #4a3f35 !important;
+    }
+    .modal-panel .modal-item-body strong {
+      color: #1a1612 !important;
+    }
+    .modal-panel .modal-intro {
+      color: #4a3f35 !important;
+    }
+    .modal-panel .modal-item-title {
+      color: #7a5c3a !important;
+    }
+    .modal-panel .modal-eyebrow {
+      color: #8a7a60 !important;
+    }
+    .modal-panel .modal-title {
+      color: #1a1612 !important;
+    }
+    .modal-panel .modal-title em {
+      color: #7a5c3a !important;
+    }
+    .modal-panel .modal-close {
+      color: #a0906e !important;
+    }
+    .modal-panel .modal-close:hover {
+      color: #1a1612 !important;
     }
     .modal-header {
       padding: 2.5rem 3rem 1.5rem;
