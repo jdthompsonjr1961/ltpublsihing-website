@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CEG094HHNR"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CEG094HHNR');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advance Reader Application — Billy and the Kid</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0c110e;
+      --surface:     #111a14;
+      --surface-2:   #172019;
+      --surface-3:   #1e2d22;
+      --green:       #2d6649;
+      --green-light: #4a9970;
+      --gold:        #c49a3c;
+      --gold-pale:   #e8d5a8;
+      --text:        #dde8e0;
+      --text-muted:  #c2d8c8;
+      --rule:        #1e3026;
+      --rule-light:  #2e4a38;
+      --cream:       #f7f4ee;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 19px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 5rem;
+      background: rgba(12,17,14,0.96);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    nav.scrolled { border-bottom-color: var(--rule-light); }
+    .nav-brand { display: flex; flex-direction: column; line-height: 1; text-decoration: none; }
+    .nav-brand-main { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; color: var(--text); }
+    .nav-brand-sub { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.72rem; letter-spacing: 0.3em; color: var(--text-muted); text-transform: uppercase; margin-top: 3px; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { color: var(--bg) !important; background: var(--gold); padding: 0.55rem 1.4rem; transition: background 0.25s !important; }
+    .nav-cta:hover { background: var(--green-light) !important; color: var(--cream) !important; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 0.5rem; }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--text-muted); }
+    .mobile-menu { display: none; position: fixed; top: 61px; left: 0; right: 0; background: rgba(12,17,14,.98); backdrop-filter: blur(10px); border-bottom: 1px solid var(--rule-light); padding: 1.5rem; z-index: 499; flex-direction: column; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.9rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; padding: 1rem 0; border-bottom: 1px solid var(--rule); transition: color 0.2s; }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu .mob-cta { color: var(--gold) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 70vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 10rem 5rem 5rem;
+      position: relative;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 60%, rgba(196,154,60,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-ornament {
+      font-family: 'EB Garamond', serif; font-size: 1.1rem;
+      color: var(--gold); letter-spacing: 0.6em;
+      margin-bottom: 2rem;
+      opacity: 0; animation: fadeUp 1s ease 0.2s forwards;
+    }
+    .hero-eyebrow {
+      font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.78rem;
+      letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1.5rem;
+      opacity: 0; animation: fadeUp 1s ease 0.3s forwards;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif; font-weight: 400;
+      font-size: clamp(3rem, 6vw, 5.5rem); line-height: 1.05;
+      color: var(--text); margin-bottom: 1rem;
+      opacity: 0; animation: fadeUp 1s ease 0.45s forwards;
+    }
+    .hero-title em { font-style: italic; color: var(--gold); }
+    .hero-rule {
+      width: 50px; height: 1px; background: var(--gold);
+      margin: 0 auto 1.5rem;
+      opacity: 0; animation: fadeUp 1s ease 0.6s forwards;
+    }
+    .hero-sub {
+      font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.78rem;
+      letter-spacing: 0.35em; text-transform: uppercase; color: var(--text-muted);
+      opacity: 0; animation: fadeUp 1s ease 0.7s forwards;
+    }
+
+    /* ── DIVIDER ── */
+    .divider { display: flex; align-items: center; gap: 1.5rem; padding: 0 5rem; margin: 1rem 0; }
+    .divider-line { flex: 1; height: 1px; background: var(--rule-light); }
+    .divider-mark { font-family: 'EB Garamond', serif; font-size: 1.2rem; color: var(--rule-light); }
+
+    /* ── ABOUT THE BOOK ── */
+    .about {
+      padding: 6rem 5rem;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: start;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .about-label { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.78rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+    .about-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+    .about-h2 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: clamp(1.8rem, 2.5vw, 2.4rem); line-height: 1.2; color: var(--text); margin-bottom: 1.5rem; }
+    .about-h2 em { font-style: italic; font-weight: 400; color: var(--gold-pale); }
+    .about-text { font-size: 1.05rem; color: var(--text-muted); line-height: 1.9; }
+    .about-text p + p { margin-top: 1.2rem; }
+    .about-text em { color: var(--gold-pale); font-style: italic; }
+    .about-details { display: flex; flex-direction: column; gap: 1rem; }
+    .detail-item { border-left: 2px solid var(--green); padding: 0.9rem 1.4rem; background: var(--surface-2); }
+    .detail-item:hover { border-color: var(--gold); }
+    .detail-label { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.3rem; }
+    .detail-value { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 500; color: var(--text); line-height: 1.2; }
+
+    /* ── WHAT WE ASK ── */
+    .ask { background: var(--surface); padding: 5rem; }
+    .ask-inner { max-width: 700px; margin: 0 auto; }
+    .ask-label { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.78rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+    .ask-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+    .ask-h2 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: clamp(1.6rem, 2.5vw, 2.2rem); line-height: 1.2; color: var(--text); margin-bottom: 1rem; }
+    .ask-h2 em { font-style: italic; font-weight: 400; color: var(--gold-pale); }
+    .ask-text { font-size: 1.05rem; color: var(--text-muted); line-height: 1.85; }
+    .ask-list { list-style: none; margin-top: 1.5rem; }
+    .ask-list li { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.88rem; letter-spacing: 0.06em; color: var(--text); padding: 0.7rem 0; border-bottom: 1px solid var(--rule); display: flex; gap: 0.75rem; align-items: flex-start; line-height: 1.6; }
+    .ask-list li::before { content: '—'; color: var(--gold); flex-shrink: 0; }
+
+    /* ── FORM ── */
+    .form-section { background: var(--surface-3); border-top: 1px solid var(--green); padding: 7rem 5rem; }
+    .form-inner { max-width: 680px; margin: 0 auto; }
+    .form-label { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.82rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1.5rem; }
+    .form-label::before, .form-label::after { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+    .form-h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 500; line-height: 1.15; margin-bottom: 1rem; color: var(--text); text-align: center; }
+    .form-h2 em { font-style: italic; font-weight: 400; color: var(--gold-pale); }
+    .form-body { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 3.5rem; line-height: 1.85; text-align: center; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; text-align: left; }
+    .form-field { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-field.full { grid-column: 1 / -1; }
+    label { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.78rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); }
+    input, select, textarea {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--rule-light);
+      color: var(--text); font-family: 'EB Garamond', serif; font-size: 1rem;
+      padding: 0.8rem 1rem; outline: none; width: 100%; transition: border-color 0.2s;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--gold); }
+    select option { background: var(--surface); }
+    textarea { resize: vertical; min-height: 130px; }
+    .form-note { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.78rem; letter-spacing: 0.1em; color: var(--text-muted); opacity: 0.7; text-align: left; margin-bottom: 2rem; line-height: 1.6; }
+    .form-submit { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.88rem; letter-spacing: 0.25em; text-transform: uppercase; background: var(--gold); color: var(--bg); border: none; padding: 1.1rem 3rem; cursor: pointer; width: 100%; transition: background 0.25s, color 0.25s; }
+    .form-submit:hover { background: var(--green-light); color: var(--cream); }
+
+    /* ── THANK YOU ── */
+    #thank-you { display: none; margin-top: 2.5rem; padding: 2.5rem; border: 1px solid var(--green); background: rgba(45,102,73,0.15); text-align: center; }
+    .ty-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 500; color: var(--text); margin-bottom: 0.75rem; }
+    .ty-title em { font-style: italic; font-weight: 400; color: var(--gold-pale); }
+    .ty-body { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.88rem; letter-spacing: 0.1em; color: var(--text-muted); line-height: 1.8; }
+
+    /* ── FOOTER ── */
+    footer { padding: 3.5rem 5rem; border-top: 1px solid var(--rule-light); display: flex; justify-content: space-between; align-items: center; background: var(--bg); }
+    .footer-brand-main { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 500; color: var(--text); display: block; }
+    .footer-brand-sub { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--text-muted); margin-top: 3px; display: block; }
+    .footer-center { font-family: 'EB Garamond', serif; font-style: italic; font-size: 1rem; color: var(--text-muted); }
+    .footer-right { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); text-align: right; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .hero { padding: 8rem 1.5rem 4rem; }
+      .about { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 3rem; }
+      .ask { padding: 4rem 1.5rem; }
+      .form-section { padding: 5rem 1.5rem; }
+      .form-grid { grid-template-columns: 1fr; }
+      .divider { padding: 0 1.5rem; }
+      footer { padding: 2.5rem 1.5rem; flex-direction: column; gap: 1.5rem; text-align: center; }
+      .footer-right { text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <a href="index.html" class="nav-brand">
+    <span class="nav-brand-main">LT Publishing</span>
+    <span class="nav-brand-sub">Lisbon, Portugal</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="ltpublishing.html">LT Publishing</a></li>
+    <li><a href="select.html">LT Select</a></li>
+    <li><a href="authors.html">Authors</a></li>
+    <li><a href="services.html" class="nav-cta">LT Media Services</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html">Home</a>
+  <a href="ltpublishing.html">LT Publishing</a>
+  <a href="select.html">LT Select</a>
+  <a href="authors.html">Authors</a>
+  <a href="services.html" class="mob-cta">LT Media Services →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-ornament">❧ &nbsp; ❧ &nbsp; ❧</div>
+  <div class="hero-eyebrow">Advance Reader Program</div>
+  <h1 class="hero-title"><em>Billy</em> and the Kid</h1>
+  <div class="hero-rule"></div>
+  <p class="hero-sub">J LemeThompson &nbsp;·&nbsp; LT Publishing &nbsp;·&nbsp; Literary Fiction</p>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-mark">❧</div><div class="divider-line"></div></div>
+
+<!-- ABOUT THE BOOK -->
+<section class="about">
+  <div>
+    <div class="about-label">About the Book</div>
+    <h2 class="about-h2">A friendship that ends<br><em>the only way impossible things can.</em></h2>
+    <div class="about-text">
+      <p>When a 312-year-old leprechaun arrives in suburban Alabama — exiled from his clan and entirely unprepared for central air conditioning — he is taken in by nine-year-old John Dale Greene, who keeps two notebooks: one for things that happen, one for things that shouldn't be able to.</p>
+      <p>What follows is a summer of pancakes sneaked upstairs, wheelchair rides past murdered crepe myrtles, a wish gone wrong in Clay County, and a friendship between two people who are both, in their own way, trying to figure out where they belong.</p>
+      <p><em>Billy and the Kid</em> is the kind of story that feels like a fable while it's happening and like a grief once it's done. It ends the only way it can — and the only way it should.</p>
+    </div>
+  </div>
+  <div class="about-details">
+    <div class="detail-item">
+      <div class="detail-label">Genre</div>
+      <div class="detail-value">Literary Fiction</div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-label">Tone</div>
+      <div class="detail-value">It's a Wonderful Life meets Thor (2011) — with a Pet Sematary moment in the middle</div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-label">Format</div>
+      <div class="detail-value">PDF delivered by email upon approval</div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-label">Review Window</div>
+      <div class="detail-value">4 weeks from receipt</div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-label">Publisher</div>
+      <div class="detail-value">LT Publishing · Lisbon, Portugal</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-mark">❖</div><div class="divider-line"></div></div>
+
+<!-- WHAT WE ASK -->
+<section class="ask">
+  <div class="ask-inner">
+    <div class="ask-label">What We Ask</div>
+    <h2 class="ask-h2">This is a real book.<br><em>We ask for a real read.</em></h2>
+    <p class="ask-text">Advance readers are not obligated to love the book — but they are asked to finish it and leave an honest review. We select readers carefully, keep the group small, and send the manuscript only to people who asked for it specifically.</p>
+    <ul class="ask-list">
+      <li>Read the full manuscript within four weeks of receiving it</li>
+      <li>Leave an honest review on Amazon, Goodreads, or both — a sentence or two is enough</li>
+      <li>Keep the manuscript private — please do not share or distribute</li>
+      <li>No obligation to be positive — honest is what matters</li>
+    </ul>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div><div class="divider-mark">❧</div><div class="divider-line"></div></div>
+
+<!-- APPLICATION FORM -->
+<section class="form-section" id="apply">
+  <div class="form-inner">
+    <div class="form-label">Apply to Read</div>
+    <h2 class="form-h2">Tell us about<br><em>yourself.</em></h2>
+    <p class="form-body">We read every application personally. Acceptance is not guaranteed — we keep the group small so we can follow up with everyone who reads. We'll respond within a week.</p>
+
+    <div class="form-grid">
+      <div class="form-field">
+        <label>Your Name</label>
+        <input type="text" id="f-name" placeholder="Full name" />
+      </div>
+      <div class="form-field">
+        <label>Email Address</label>
+        <input type="email" id="f-email" placeholder="your@email.com" />
+      </div>
+      <div class="form-field full">
+        <label>What do you read? Tell us your usual genres or a few authors you love.</label>
+        <textarea id="f-reading" placeholder="e.g. I read mostly literary fiction — Steinbeck, Celeste Ng, Ron Rash. Sometimes I'll reach for something that doesn't fit a shelf."></textarea>
+      </div>
+      <div class="form-field full">
+        <label>Why this book specifically?</label>
+        <textarea id="f-why" placeholder="What about Billy and the Kid made you want to apply? There's no wrong answer — we're just curious what part of the description landed."></textarea>
+      </div>
+      <div class="form-field">
+        <label>Where will you post your review?</label>
+        <select id="f-review">
+          <option value="" disabled selected>Select one</option>
+          <option>Amazon only</option>
+          <option>Goodreads only</option>
+          <option>Both Amazon and Goodreads</option>
+          <option>Blog or other platform</option>
+          <option>I'll decide after reading</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>Do you have a BookTok, Bookstagram, or book blog?</label>
+        <input type="text" id="f-platform" placeholder="Handle or URL, or leave blank" />
+      </div>
+      <div class="form-field full">
+        <label>Anything else you'd like us to know?</label>
+        <textarea id="f-other" placeholder="Optional — but welcome." style="min-height:90px;"></textarea>
+      </div>
+    </div>
+
+    <p class="form-note">Submitting this form is an application, not a guarantee of acceptance. We'll follow up by email either way. Your information stays with LT Publishing and is never shared with third parties.</p>
+    <button class="form-submit" id="submit-btn">Submit Application →</button>
+
+    <div id="thank-you">
+      <p class="ty-title"><em>Thank you.</em></p>
+      <p class="ty-body">Your application has been received. We read every one personally and will be in touch within a week — whether that's an acceptance with the manuscript attached, or an honest note that the timing didn't work out. We appreciate you wanting to read Billy's story.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <span class="footer-brand-main">LT Publishing</span>
+    <span class="footer-brand-sub">Lisbon, Portugal</span>
+  </div>
+  <div class="footer-center"><em>Literary fiction &amp; selected works since 2025</em></div>
+  <div class="footer-right">© 2026 LT Publishing<br>All rights reserved</div>
+</footer>
+
+<script>
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (hamburger) hamburger.addEventListener('click', () => { mobileMenu.classList.toggle('open'); });
+
+  const btn = document.getElementById('submit-btn');
+  btn.addEventListener('click', async () => {
+    const name     = document.getElementById('f-name').value.trim();
+    const email    = document.getElementById('f-email').value.trim();
+    const reading  = document.getElementById('f-reading').value.trim();
+    const why      = document.getElementById('f-why').value.trim();
+    const review   = document.getElementById('f-review').value;
+    const platform = document.getElementById('f-platform').value.trim();
+    const other    = document.getElementById('f-other').value.trim();
+
+    if (!name || !email || !reading || !why || !review) {
+      btn.textContent = 'Please fill in all required fields';
+      setTimeout(() => { btn.textContent = 'Submit Application →'; }, 3000);
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('Name', name);
+    formData.append('Email', email);
+    formData.append('What they read', reading);
+    formData.append('Why this book', why);
+    formData.append('Review platform', review);
+    formData.append('BookTok / blog', platform || 'Not provided');
+    formData.append('Anything else', other || 'Nothing additional');
+    formData.append('_subject', `ARC Application — Billy and the Kid — ${name}`);
+
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('https://formspree.io/f/maqkpqzp', {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        btn.style.display = 'none';
+        document.getElementById('thank-you').style.display = 'block';
+      } else {
+        btn.textContent = 'Something went wrong — please try again';
+        btn.disabled = false;
+      }
+    } catch(e) {
+      btn.textContent = 'Something went wrong — please try again';
+      btn.disabled = false;
+    }
+  });
+</script>
+
+</body>
+</html>
