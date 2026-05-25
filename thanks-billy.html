@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application Received — LT Publishing</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #f8f4ee; --dark: #1a1612; --mid: #4a3f35;
+      --light: #c8b89a; --accent: #7a5c3a;
+    }
+    body {
+      background-color: var(--cream); color: var(--dark);
+      font-family: 'EB Garamond', Georgia, serif; font-size: 18px;
+      line-height: 1.7; min-height: 100vh; display: flex;
+      flex-direction: column; align-items: center; justify-content: center;
+      padding: 3rem 1.5rem;
+    }
+    .container {
+      max-width: 520px; width: 100%; text-align: center;
+      animation: fadeIn 1s ease forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .ornament { font-size: 1.4rem; color: var(--light); margin-bottom: 2rem; letter-spacing: 0.3em; }
+    h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300;
+      font-size: 2rem; letter-spacing: 0.06em; line-height: 1.3;
+      margin-bottom: 1.5rem; color: var(--dark);
+    }
+    h1 em { font-style: italic; }
+    .divider { width: 60px; height: 1px; background-color: var(--light); margin: 0 auto 2rem; }
+    .message { font-size: 1.1rem; color: var(--mid); margin-bottom: 1.5rem; line-height: 1.85; }
+    .message em { font-style: italic; color: var(--dark); }
+    .detail {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 0.95rem; color: var(--accent);
+      letter-spacing: 0.1em; margin-bottom: 2.5rem;
+      line-height: 1.8; font-style: italic;
+    }
+    .footer-ornament { margin-top: 3rem; font-size: 1.2rem; color: var(--light); letter-spacing: 0.3em; }
+    .publisher { margin-top: 1rem; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--light); }
+    .publisher a { color: var(--light); text-decoration: none; transition: color 0.2s ease; }
+    .publisher a:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="ornament">❧</div>
+    <h1>Your application is<br><em>in our hands.</em></h1>
+    <div class="divider"></div>
+    <p class="message">Thank you for wanting to read <em>Billy and the Kid</em>. We read every application personally and will be in touch within a week — with either the manuscript attached or an honest note about timing.</p>
+    <p class="message">Either way, we'll write back. You won't be left wondering.</p>
+    <p class="detail">PDF for computer or tablet.<br>EPUB for Kindle or e-reader.<br>Just let us know which you prefer when we write.</p>
+    <div class="divider"></div>
+    <div class="footer-ornament">❧</div>
+    <p class="publisher"><a href="https://ltpublishing.com">LT Publishing</a></p>
+  </div>
+</body>
+</html>

@@ -416,8 +416,7 @@
         headers: { 'Accept': 'application/json' }
       });
       if (res.ok) {
-        btn.style.display = 'none';
-        document.getElementById('thank-you').style.display = 'block';
+        window.location.href = '/thanks-billy';
       } else {
         btn.textContent = 'Something went wrong — please try again';
         btn.disabled = false;
