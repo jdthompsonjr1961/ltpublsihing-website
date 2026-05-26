@@ -59,7 +59,7 @@
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 500;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1.4rem 5rem;
+      padding: 1.4rem 3rem;
       background: rgba(242,236,224,0.97);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid transparent;
@@ -69,11 +69,20 @@
     .nav-brand { display: flex; flex-direction: column; line-height: 1; }
     .nav-brand-main { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; letter-spacing: 0.05em; color: var(--text); text-decoration: none; }
     .nav-brand-sub { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.6rem; letter-spacing: 0.3em; color: var(--text-muted); text-transform: uppercase; margin-top: 3px; }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
-    .nav-links a { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 1rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+    .nav-links a { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
     .nav-links a:hover { color: var(--text); }
-    .nav-cta { color: var(--bg) !important; background: var(--gold); padding: 0.55rem 1.4rem; transition: background 0.25s !important; }
+    .nav-cta { color: var(--bg) !important; background: var(--gold); padding: 0.55rem 1rem; transition: background 0.25s !important; }
     .nav-cta:hover { background: var(--tan-dark) !important; color: var(--cream) !important; }
+    .nav-kdp {
+      font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.8rem;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--gold); background: transparent;
+      padding: 0.55rem 1rem; border: 1px solid var(--gold);
+      cursor: pointer; transition: background 0.25s, color 0.25s;
+      white-space: nowrap;
+    }
+    .nav-kdp:hover { background: var(--gold); color: var(--bg); }
 
     /* HERO */
     .hero {
@@ -313,7 +322,7 @@
 
     /* MODAL OVERLAY */
     .modal-overlay {
-      display: none; position: fixed; inset: 0; z-index: 800;
+      display: none; position: fixed; inset: 0; z-index: 10000;
       background: rgba(8, 12, 10, 0.75); backdrop-filter: blur(4px);
       align-items: center; justify-content: center; padding: 2rem;
     }
@@ -465,6 +474,7 @@
       <li><a href="select.html">LT Select</a></li>
       <li><a href="#packages">Packages</a></li>
       <li><a href="#submit" class="nav-cta">Submit Your Manuscript</a></li>
+      <li><button class="nav-kdp" id="open-kdp">KDP File Fix / Free Diagnosis</button></li>
     </ul>
     <button class="nav-hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -476,6 +486,7 @@
     <a href="select.html">LT Select</a>
     <a href="#packages">Packages</a>
     <a href="#" id="mobile-protect">How We Protect Authors</a>
+    <a href="#" id="mobile-kdp">KDP File Fix / Free Diagnosis</a>
     <a href="#submit" class="mob-cta">Submit Your Manuscript →</a>
   </div>
 
@@ -486,9 +497,6 @@
       <p class="hero-body">LT Media handles everything between a finished manuscript and a book on Amazon — editing, cover design, ISBN assignment, and KDP upload — at a flat fee, with no agents, no gatekeepers, and no royalty cuts.</p>
       <div class="hero-actions">
         <a href="#submit" class="btn-primary">Submit Your Manuscript</a>
-        <button class="btn-kdp" id="open-kdp">KDP File Fix / Free Diagnosis</button>
-      </div>
-      <div style="margin-top:1.2rem; opacity:0; animation: fadeUp 0.9s ease 0.9s forwards;">
         <a href="#paths" class="btn-secondary">See how it works</a>
       </div>
     </div>
@@ -824,7 +832,7 @@
         if (e.target === modal) closeModal();
       });
       document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closeModal();
+        if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
       });
     })();
   </script>
@@ -887,14 +895,21 @@
       var modal = document.getElementById('kdp-modal');
       var btnOpen = document.getElementById('open-kdp');
       var btnClose = document.getElementById('close-kdp');
+      var btnMobile = document.getElementById('mobile-kdp');
+      var mobileMenu = document.getElementById('mobile-menu');
 
       function openModal() { modal.classList.add('open'); document.body.style.overflow = 'hidden'; }
       function closeModal() { modal.classList.remove('open'); document.body.style.overflow = ''; }
 
-      if (btnOpen)  btnOpen.addEventListener('click', openModal);
-      if (btnClose) btnClose.addEventListener('click', closeModal);
+      if (btnOpen)   btnOpen.addEventListener('click', openModal);
+      if (btnClose)  btnClose.addEventListener('click', closeModal);
+      if (btnMobile) btnMobile.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (mobileMenu) mobileMenu.classList.remove('open');
+        openModal();
+      });
       modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
-      document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+      document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
 
       document.getElementById('kdp-submit-btn').addEventListener('click', async function() {
         var btn = document.getElementById('kdp-submit-btn');
