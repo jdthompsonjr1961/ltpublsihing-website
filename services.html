@@ -117,6 +117,15 @@
     .btn-secondary::after { content: '→'; transition: transform 0.2s; }
     .btn-secondary:hover { color: var(--gold); }
     .btn-secondary:hover::after { transform: translateX(4px); }
+    .btn-kdp {
+      font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.85rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); background: transparent;
+      padding: 0.75rem 1.5rem; border: 1px solid var(--gold);
+      cursor: pointer; transition: background 0.25s, color 0.25s;
+      white-space: nowrap;
+    }
+    .btn-kdp:hover { background: var(--gold); color: var(--bg); }
     .hero-right { display: flex; flex-direction: column; gap: 1rem; padding-top: 7rem; opacity: 0; animation: fadeUp 0.9s ease 0.9s forwards; padding-left: 2.5rem; padding-right: 2.5rem; padding-bottom: 3rem; background: var(--hero-right); }
     .hero-stat { border-left: 2px solid var(--gold-pale); padding: 1rem 1.5rem; background: rgba(255,255,255,0.05); transition: border-color 0.3s; }
     .hero-stat:hover { border-color: var(--gold-pale); }
@@ -417,8 +426,30 @@
       letter-spacing: 0.06em; color: #3a2e1e; line-height: 1.8;
     }
 
+    /* KDP MODAL FORM */
+    .kdp-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .kdp-form-field { display: flex; flex-direction: column; gap: 0.4rem; }
+    .kdp-form-field.full { grid-column: 1 / -1; }
+    .kdp-label { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: #8a7a60; }
+    .kdp-input, .kdp-textarea, .kdp-select {
+      background: #f0ebe2; border: 1px solid #d9d0c4; color: #1a1612;
+      font-family: 'EB Garamond', serif; font-size: 1rem; padding: 0.75rem 1rem;
+      outline: none; width: 100%; transition: border-color 0.2s;
+    }
+    .kdp-input:focus, .kdp-textarea:focus, .kdp-select:focus { border-color: #b8882a; }
+    .kdp-textarea { resize: vertical; min-height: 100px; }
+    .kdp-note { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.78rem; letter-spacing: 0.06em; color: #8a7a60; line-height: 1.6; margin-bottom: 1.5rem; }
+    .kdp-submit {
+      font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.8rem;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      background: #b8882a; color: #f7f4ee; border: none;
+      padding: 1rem 2rem; cursor: pointer; width: 100%;
+      transition: background 0.25s;
+    }
+    .kdp-submit:hover { background: #8a7a60; }
+    .kdp-submit:disabled { opacity: 0.6; cursor: default; }
     @media (max-width: 600px) {
-      .modal-header, .modal-body, .modal-footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .kdp-form-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -455,6 +486,9 @@
       <p class="hero-body">LT Media handles everything between a finished manuscript and a book on Amazon — editing, cover design, ISBN assignment, and KDP upload — at a flat fee, with no agents, no gatekeepers, and no royalty cuts.</p>
       <div class="hero-actions">
         <a href="#submit" class="btn-primary">Submit Your Manuscript</a>
+        <button class="btn-kdp" id="open-kdp">KDP File Fix / Free Diagnosis</button>
+      </div>
+      <div style="margin-top:1.2rem; opacity:0; animation: fadeUp 0.9s ease 0.9s forwards;">
         <a href="#paths" class="btn-secondary">See how it works</a>
       </div>
     </div>
@@ -794,5 +828,107 @@
       });
     })();
   </script>
+  <!-- KDP FILE FIX MODAL -->
+  <div class="modal-overlay" id="kdp-modal">
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="kdp-modal-title">
+      <div class="modal-header">
+        <div>
+          <div class="modal-eyebrow">LT Media · KDP File Fix</div>
+          <h2 class="modal-title" id="kdp-modal-title">Free <em>Diagnosis</em> — No Fix, No Fee</h2>
+        </div>
+        <button class="modal-close" id="close-kdp" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-intro">Send us your rejection notice, trim size, page count, and files. We'll tell you exactly what's wrong and what it costs to fix — before we touch anything. If we can't identify the problem, you don't pay.</p>
+        <div class="kdp-form-grid">
+          <div class="kdp-form-field">
+            <label class="kdp-label" for="kdp-name">Your Name</label>
+            <input class="kdp-input" type="text" id="kdp-name" placeholder="Full name" />
+          </div>
+          <div class="kdp-form-field">
+            <label class="kdp-label" for="kdp-email">Email Address</label>
+            <input class="kdp-input" type="email" id="kdp-email" placeholder="your@email.com" />
+          </div>
+          <div class="kdp-form-field">
+            <label class="kdp-label" for="kdp-trim">Trim Size</label>
+            <input class="kdp-input" type="text" id="kdp-trim" placeholder="e.g. 6 × 9" />
+          </div>
+          <div class="kdp-form-field">
+            <label class="kdp-label" for="kdp-pages">Page Count</label>
+            <input class="kdp-input" type="text" id="kdp-pages" placeholder="e.g. 312" />
+          </div>
+          <div class="kdp-form-field full">
+            <label class="kdp-label" for="kdp-rejection">KDP Rejection Notice</label>
+            <textarea class="kdp-textarea" id="kdp-rejection" placeholder="Paste the rejection message, or describe what KDP reported."></textarea>
+            <div class="kdp-note">A screenshot is even better — include it in the file link below or email it to joe@ltpublishing.com after submitting.</div>
+          </div>
+          <div class="kdp-form-field full">
+            <label class="kdp-label" for="kdp-files">File Link (optional)</label>
+            <input class="kdp-input" type="text" id="kdp-files" placeholder="Google Drive, Dropbox, WeTransfer — set sharing to 'anyone with the link'" />
+            <div class="kdp-note">Include your manuscript PDF/DOCX and cover file. No account required on our end.</div>
+          </div>
+          <div class="kdp-form-field full">
+            <label class="kdp-label" for="kdp-notes">Anything else we should know?</label>
+            <textarea class="kdp-textarea" id="kdp-notes" style="min-height:80px;" placeholder="Optional — file formats, prior attempts, anything relevant."></textarea>
+          </div>
+        </div>
+        <p class="kdp-note" style="margin-bottom:1.5rem;">Submitting this form does not obligate you to purchase anything. We'll respond within two business days with what we found and a flat-fee quote if work is needed.</p>
+        <button class="kdp-submit" id="kdp-submit-btn">Send for Free Diagnosis →</button>
+        <div id="kdp-thank-you" style="display:none; margin-top:1.5rem; padding:1.5rem; border:1px solid #b8882a; background:rgba(184,136,42,0.08);">
+          <p style="font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:500; color:#1a1612; margin-bottom:0.5rem;"><em>Thank you.</em></p>
+          <p style="font-family:'Jost',sans-serif; font-weight:300; font-size:0.82rem; letter-spacing:0.08em; color:#4a3f35; line-height:1.8;">Your KDP rejection details have been received. We'll take a look and get back to you within two business days — with what we found and, if there's work to be done, a flat-fee quote. No commitment required.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      var modal = document.getElementById('kdp-modal');
+      var btnOpen = document.getElementById('open-kdp');
+      var btnClose = document.getElementById('close-kdp');
+
+      function openModal() { modal.classList.add('open'); document.body.style.overflow = 'hidden'; }
+      function closeModal() { modal.classList.remove('open'); document.body.style.overflow = ''; }
+
+      if (btnOpen)  btnOpen.addEventListener('click', openModal);
+      if (btnClose) btnClose.addEventListener('click', closeModal);
+      modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+
+      document.getElementById('kdp-submit-btn').addEventListener('click', async function() {
+        var btn = document.getElementById('kdp-submit-btn');
+        var formData = new FormData();
+        formData.append('_form_type', 'KDP File Fix');
+        formData.append('Name',           document.getElementById('kdp-name').value);
+        formData.append('Email',          document.getElementById('kdp-email').value);
+        formData.append('Trim Size',      document.getElementById('kdp-trim').value);
+        formData.append('Page Count',     document.getElementById('kdp-pages').value);
+        formData.append('Rejection Notice', document.getElementById('kdp-rejection').value);
+        formData.append('File Link',      document.getElementById('kdp-files').value);
+        formData.append('Notes',          document.getElementById('kdp-notes').value);
+
+        btn.textContent = 'Sending…';
+        btn.disabled = true;
+
+        try {
+          var res = await fetch('https://formspree.io/f/mkoyndwz', {
+            method: 'POST', body: formData, headers: { 'Accept': 'application/json' }
+          });
+          if (res.ok) {
+            btn.style.display = 'none';
+            document.getElementById('kdp-thank-you').style.display = 'block';
+          } else {
+            btn.textContent = 'Something went wrong — please try again';
+            btn.disabled = false;
+          }
+        } catch(e) {
+          btn.textContent = 'Something went wrong — please try again';
+          btn.disabled = false;
+        }
+      });
+    })();
+  </script>
+
 </body>
 </html>
