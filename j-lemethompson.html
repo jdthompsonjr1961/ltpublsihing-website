@@ -16,77 +16,43 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{
-      --bg:#0c110e;--surface:#111a14;--surface-2:#172019;--surface-3:#1e2d22;
-      --green:#2d6649;--green-light:#4a9970;--gold:#c49a3c;--gold-pale:#e8d5a8;
-      --text:#dde8e0;--text-muted:#c2d8c8;--rule:#1e3026;--rule-light:#2e4a38;
-      --cream:#f7f4ee;
-    }
-    html{scroll-behavior:smooth}
-    body{background:var(--bg);color:var(--text);font-family:"EB Garamond",Georgia,serif;font-size:19px;line-height:1.7;overflow-x:hidden}
-    body::after{content:"";position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
-
-    nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1.4rem 5rem;background:rgba(12,17,14,.96);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .3s}
-    nav.scrolled{border-bottom-color:var(--rule-light)}
-    .nav-brand{display:flex;flex-direction:column;line-height:1;text-decoration:none}
-    .nav-brand-main{font-family:"Playfair Display",serif;font-size:1.1rem;font-weight:700;letter-spacing:.05em;color:var(--text)}
-    .nav-brand-sub{font-family:"Jost",sans-serif;font-weight:300;font-size:.72rem;letter-spacing:.3em;color:var(--text-muted);text-transform:uppercase;margin-top:3px}
-    .nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
-    .nav-links a{font-family:"Jost",sans-serif;font-weight:300;font-size:.82rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;transition:color .2s}
-    .nav-links a:hover{color:var(--text)}
-    .nav-cta{color:var(--bg)!important;background:var(--gold);padding:.55rem 1.4rem;transition:background .25s!important}
-    .nav-cta:hover{background:var(--green-light)!important;color:var(--cream)!important}
-    .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:.5rem}
-    .nav-hamburger span{display:block;width:24px;height:2px;background:var(--text-muted)}
-    .mobile-menu{display:none;position:fixed;top:61px;left:0;right:0;background:rgba(12,17,14,.98);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule-light);padding:1.5rem;z-index:499;flex-direction:column}
-    .mobile-menu.open{display:flex}
-    .mobile-menu a{font-family:"Jost",sans-serif;font-weight:300;font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;padding:1rem 0;border-bottom:1px solid var(--rule);transition:color .2s}
-    .mobile-menu a:last-child{border-bottom:none}
-    .mobile-menu .mob-cta{color:var(--gold)!important}
-
-    .author-hero{min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10rem 2rem 5rem;position:relative}
-    .author-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,rgba(196,154,60,.07) 0%,transparent 70%);pointer-events:none}
-    .author-ornament{font-family:"EB Garamond",serif;font-size:1.1rem;color:var(--gold);letter-spacing:.6em;margin-bottom:2rem;opacity:0;animation:fadeUp 1s ease .2s forwards}
-    .author-name{font-family:"Playfair Display",serif;font-weight:400;font-size:clamp(2.5rem,6vw,5rem);line-height:1;color:var(--text);margin-bottom:1rem;opacity:0;animation:fadeUp 1s ease .4s forwards}
-    .author-name em{font-style:italic;color:var(--gold)}
-    .author-rule{width:50px;height:1px;background:var(--gold);margin:0 auto 1.5rem;opacity:0;animation:fadeUp 1s ease .55s forwards}
-    .author-tagline{font-family:"Jost",sans-serif;font-weight:300;font-size:.82rem;letter-spacing:.35em;text-transform:uppercase;color:var(--text-muted);opacity:0;animation:fadeUp 1s ease .65s forwards}
-
-    .divider{display:flex;align-items:center;gap:1.5rem;padding:0 5rem;margin:1rem 0}
-    .divider-line{flex:1;height:1px;background:var(--rule-light)}
-    .divider-mark{font-family:"EB Garamond",serif;font-size:1.2rem;color:var(--rule-light)}
-
-    .bio-section{padding:6rem 5rem;max-width:900px;margin:0 auto}
-    .bio-label{font-family:"Jost",sans-serif;font-weight:300;font-size:.78rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:1rem;margin-bottom:2rem}
-    .bio-label::before{content:"";display:block;width:24px;height:1px;background:var(--gold)}
-    .bio-text{font-size:1.05rem;color:var(--text-muted);line-height:1.9}
-    .bio-text p+p{margin-top:1.5rem}
-    .bio-text em{color:var(--gold-pale);font-style:italic}
-
-    .books-section{padding:4rem 5rem 6rem;background:var(--surface)}
-    .books-label{font-family:"Jost",sans-serif;font-weight:300;font-size:.78rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:1rem;margin-bottom:3rem}
-    .books-label::before{content:"";display:block;width:24px;height:1px;background:var(--gold)}
-    .books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:2rem;max-width:900px}
-    .book-card{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
-    .book-card.visible{opacity:1;transform:translateY(0)}
-    .book-cover{width:100%;aspect-ratio:2/3;overflow:hidden;border-top:3px solid var(--gold);position:relative;transition:transform .4s ease,box-shadow .4s ease}
-    .book-card:hover .book-cover{transform:translateY(-5px);box-shadow:0 20px 40px rgba(0,0,0,.4)}
-    .book-cover img{width:100%;height:100%;object-fit:cover}
-    .book-cover-placeholder{width:100%;height:100%;background:var(--surface-2);display:flex;align-items:center;justify-content:center;padding:1.5rem;text-align:center}
-    .book-title-small{font-family:"Playfair Display",serif;font-size:1rem;font-weight:500;color:var(--text);margin-top:.75rem;line-height:1.2}
-    .book-status-small{font-family:"Jost",sans-serif;font-weight:300;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);margin-top:.3rem}
-
-    footer{padding:3.5rem 5rem;border-top:1px solid var(--rule-light);display:flex;justify-content:space-between;align-items:center;background:var(--bg)}
-    .footer-brand-main{font-family:"Playfair Display",serif;font-size:1rem;font-weight:500;color:var(--text);display:block}
-    .footer-brand-sub{font-family:"Jost",sans-serif;font-weight:300;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--text-muted);margin-top:3px;display:block}
-    .footer-center{font-family:"EB Garamond",serif;font-style:italic;font-size:1rem;color:var(--text-muted)}
-    .footer-right{font-family:"Jost",sans-serif;font-weight:300;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted);text-align:right}
-
-    @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-
-    @media(max-width:900px){
+  <link rel="stylesheet" href="styles.css" />
+<style>
+.nav-links a{font-family:"Jost",sans-serif;font-weight:300;font-size:.82rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{color:var(--bg)!important;background:var(--gold);padding:.55rem 1.4rem;transition:background .25s!important}
+.nav-cta:hover{background:var(--green-light)!important;color:var(--cream)!important}
+.nav-hamburger span{display:block;width:24px;height:2px;background:var(--text-muted)}
+.mobile-menu a{font-family:"Jost",sans-serif;font-weight:300;font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);text-decoration:none;padding:1rem 0;border-bottom:1px solid var(--rule);transition:color .2s}
+.mobile-menu a:last-child{border-bottom:none}
+.mobile-menu .mob-cta{color:var(--gold)!important}
+.author-hero{min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10rem 2rem 5rem;position:relative}
+.author-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,rgba(196,154,60,.07) 0%,transparent 70%);pointer-events:none}
+.author-ornament{font-family:"EB Garamond",serif;font-size:1.1rem;color:var(--gold);letter-spacing:.6em;margin-bottom:2rem;opacity:0;animation:fadeUp 1s ease .2s forwards}
+.author-name{font-family:"Playfair Display",serif;font-weight:400;font-size:clamp(2.5rem,6vw,5rem);line-height:1;color:var(--text);margin-bottom:1rem;opacity:0;animation:fadeUp 1s ease .4s forwards}
+.author-name em{font-style:italic;color:var(--gold)}
+.author-rule{width:50px;height:1px;background:var(--gold);margin:0 auto 1.5rem;opacity:0;animation:fadeUp 1s ease .55s forwards}
+.author-tagline{font-family:"Jost",sans-serif;font-weight:300;font-size:.82rem;letter-spacing:.35em;text-transform:uppercase;color:var(--text-muted);opacity:0;animation:fadeUp 1s ease .65s forwards}
+.bio-section{padding:6rem 5rem;max-width:900px;margin:0 auto}
+.bio-label{font-family:"Jost",sans-serif;font-weight:300;font-size:.78rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:1rem;margin-bottom:2rem}
+.bio-label::before{content:"";display:block;width:24px;height:1px;background:var(--gold)}
+.bio-text{font-size:1.05rem;color:var(--text-muted);line-height:1.9}
+.bio-text p+p{margin-top:1.5rem}
+.bio-text em{color:var(--gold-pale);font-style:italic}
+.books-section{padding:4rem 5rem 6rem;background:var(--surface)}
+.books-label{font-family:"Jost",sans-serif;font-weight:300;font-size:.78rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:1rem;margin-bottom:3rem}
+.books-label::before{content:"";display:block;width:24px;height:1px;background:var(--gold)}
+.books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:2rem;max-width:900px}
+.book-card{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.book-card.visible{opacity:1;transform:translateY(0)}
+.book-cover{width:100%;aspect-ratio:2/3;overflow:hidden;border-top:3px solid var(--gold);position:relative;transition:transform .4s ease,box-shadow .4s ease}
+.book-card:hover .book-cover{transform:translateY(-5px);box-shadow:0 20px 40px rgba(0,0,0,.4)}
+.book-cover img{width:100%;height:100%;object-fit:cover}
+.book-cover-placeholder{width:100%;height:100%;background:var(--surface-2);display:flex;align-items:center;justify-content:center;padding:1.5rem;text-align:center}
+.book-title-small{font-family:"Playfair Display",serif;font-size:1rem;font-weight:500;color:var(--text);margin-top:.75rem;line-height:1.2}
+.book-status-small{font-family:"Jost",sans-serif;font-weight:300;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);margin-top:.3rem}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:900px){
       nav{padding:1rem 1.5rem}.nav-links{display:none}.nav-hamburger{display:flex}
       .author-hero{padding:8rem 1.5rem 4rem}
       .bio-section{padding:4rem 1.5rem}
@@ -95,9 +61,9 @@
       footer{padding:2.5rem 1.5rem;flex-direction:column;gap:1.5rem;text-align:center}
       .footer-right{text-align:center}
     }
-  </style>
+</style>
 </head>
-<body>
+<body class="theme-core">
 
 <nav id="main-nav">
   <a href="index.html" class="nav-brand">
