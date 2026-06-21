@@ -35,9 +35,8 @@
   width: 1px; height: 80px;
   background: linear-gradient(to bottom, var(--rule-light), transparent);
 }
-.hero-ornament {
-  font-family: 'EB Garamond', serif; font-size: 1.1rem;
-  color: var(--gold); letter-spacing: 0.6em; margin-bottom: 2.5rem;
+.hero-colophon {
+  width: 130px; margin-bottom: 1.5rem;
   opacity: 0; animation: fadeUp 1s ease 0.2s forwards;
 }
 .hero-title {
@@ -66,14 +65,9 @@
 .featured-cover {
   aspect-ratio: 3/4; background: var(--surface-2);
   border: 1px solid var(--rule-light); border-top: 3px solid var(--gold);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  padding: 2.5rem; text-align: center; position: relative;
+  position: relative; overflow: hidden;
 }
-.featured-cover::before { content: ''; position: absolute; inset: 14px; border: 1px solid rgba(181,101,29,0.18); pointer-events: none; }
-.featured-cover-tag { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.74rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.6rem; }
-.featured-cover-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 500; color: var(--text); line-height: 1.2; margin-bottom: 0.8rem; }
-.featured-cover-deco { color: var(--rule-light); font-size: 1rem; margin: 1rem 0; }
-.featured-cover-author { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+.featured-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .featured-status { display: inline-block; font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.3rem 0.9rem; border: 1px solid rgba(181,101,29,0.4); background: rgba(181,101,29,0.1); color: var(--gold); margin-top: 1.5rem; }
 
 .featured-body-title { font-family: 'Playfair Display', serif; font-weight: 500; font-size: clamp(1.8rem,3vw,2.6rem); color: var(--text); margin-bottom: 1.2rem; line-height: 1.2; }
@@ -121,7 +115,7 @@
 </div>
 
 <section class="hero">
-  <div class="hero-ornament">❧ &nbsp; ❧ &nbsp; ❧</div>
+  <img src="belle-colophon.png" alt="Belle Époque Editions colophon" class="hero-colophon">
   <h1 class="hero-title">Belle<br><em>Époque</em><br>Editions</h1>
   <div class="hero-rule"></div>
   <p class="hero-sub">Art History &nbsp;·&nbsp; Coffee Table Editions &nbsp;·&nbsp; Lisbon</p>
@@ -132,24 +126,21 @@
 
 <section class="featured">
   <div class="label">The Debut Volume</div>
-  <h2 class="section-h2" style="margin-bottom:3.5rem;">Golden Age <em>Poster Art</em></h2>
+  <h2 class="section-h2" style="margin-bottom:3.5rem;">The Golden Age <em>of the Poster</em></h2>
   <div class="featured-grid">
     <div>
       <div class="featured-cover">
-        <div class="featured-cover-tag">Belle Époque Editions</div>
-        <div class="featured-cover-title">Golden Age<br>Poster Art</div>
-        <div class="featured-cover-deco">❖</div>
-        <div class="featured-cover-author">Henric Andelson</div>
+        <img src="belle-cover.jpg" alt="The Golden Age of the Poster — Belle Époque Editions, edited by Henric Andelson" />
       </div>
       <div style="text-align:center;"><span class="featured-status">In Production</span></div>
     </div>
     <div>
-      <h3 class="featured-body-title">A collector's volume,<br><em>built like one.</em></h3>
+      <h3 class="featured-body-title">Art Nouveau, advertising,<br><em>and the birth of modern design.</em></h3>
       <div class="featured-body-text">
         <p>The debut Belle Époque title gathers the poster art of the Golden Age — travel, entertainment, and commercial design from the era that invented the modern poster as an art form. Each plate is reproduced from high-resolution source material, sequenced and paired with context for a coffee table that wants to be picked up, not just admired.</p>
         <p>Printed as a hardcover with the dust jacket the format deserves, sized for a shelf, not a drawer.</p>
       </div>
-      <div class="featured-credit">Credited to <strong>Henric Andelson</strong> &nbsp;·&nbsp; Art history collaboration by Alex</div>
+      <div class="featured-credit">Selected and edited by <strong>Henric Andelson</strong> &nbsp;·&nbsp; Art history collaboration by Alex</div>
     </div>
   </div>
 </section>

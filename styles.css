@@ -16,18 +16,18 @@
 /* ── THEME TOKENS ────────────────────────────────────────────────────── */
 
 body.theme-core {
-  --bg:           #E3EAD6;
-  --surface:      #C7D4B8;
-  --surface-2:    #B6C6A3;
-  --surface-3:    #A3B68C;
-  --green:        #5D7350;
-  --green-light:  #4A5F3E;
+  --bg:           #DDE3D0;
+  --surface:      #BFCDA8;
+  --surface-2:    #A9BC8C;
+  --surface-3:    #94AB78;
+  --green:        #518955;
+  --green-light:  #3F6E43;
   --gold:         #C9A227;
   --gold-pale:    #B8902A;
   --text:         #2C2A1E;
   --text-muted:   #5C5840;
-  --rule:         #CFDAC0;
-  --rule-light:   #BFCDAA;
+  --rule:         #CBD3B8;
+  --rule-light:   #BBC5A2;
   --cream:        #FFFCF5;
   --select:       #9FB3C7;
   --select-2:     #8AA3BA;
@@ -36,8 +36,8 @@ body.theme-core {
   --select-light: #7C9DB8;
   --danger:       #9C3F3F;
   --danger-light: #C45C5C;
-  --nav-bg:           rgba(227,234,214,0.96);
-  --mobile-menu-bg:   rgba(227,234,214,0.98);
+  --nav-bg:           rgba(221,227,208,0.96);
+  --mobile-menu-bg:   rgba(221,227,208,0.98);
 }
 
 body.theme-select {
@@ -45,8 +45,8 @@ body.theme-select {
   --surface:      #C3D3DE;
   --surface-2:    #AFC3D2;
   --surface-3:    #9BB3C6;
-  --green:        #5D7350;
-  --green-light:  #4A5F3E;
+  --green:        #518955;
+  --green-light:  #3F6E43;
   --gold:         #C9A227;
   --gold-pale:    #B8902A;
   --text:         #2C2A1E;
@@ -220,7 +220,7 @@ footer { padding: 3.5rem 5rem; border-top: 1px solid var(--rule-light); display:
 }
 .modal-overlay.open { display: flex; }
 .modal-panel {
-  background: #FFFCF5; color: #1a1612;
+  background: var(--bg); color: var(--text);
   max-width: 680px; width: 100%; max-height: 90vh;
   overflow-y: auto; position: relative;
   opacity: 0; transform: translateY(16px);
@@ -228,23 +228,23 @@ footer { padding: 3.5rem 5rem; border-top: 1px solid var(--rule-light); display:
   font-family: 'EB Garamond', Georgia, serif;
 }
 .modal-overlay.open .modal-panel { opacity: 1; transform: translateY(0); }
-.modal-header { padding: 2.5rem 3rem 1.5rem; border-bottom: 1px solid #d9d0c4; display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
-.modal-eyebrow { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.7rem; letter-spacing: 0.35em; text-transform: uppercase; color: #8a6a28; margin-bottom: 0.6rem; }
-.modal-title { font-family: 'Playfair Display', serif; font-weight: 500; font-size: 1.7rem; line-height: 1.15; color: #1a1612; }
-.modal-title em { font-style: italic; font-weight: 400; color: #8a6a28; }
-.modal-close { background: none; border: none; cursor: pointer; padding: 0.25rem; color: #a0906e; font-size: 1.4rem; line-height: 1; flex-shrink: 0; transition: color 0.2s; }
-.modal-close:hover { color: #1a1612; }
-.modal-body { padding: 2rem 3rem 2.5rem; background: #FFFCF5; }
-.modal-intro { font-size: 1rem; color: #4a3f35; line-height: 1.8; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid #d9d0c4; }
+.modal-header { padding: 2.5rem 3rem 1.5rem; border-bottom: 1px solid var(--rule-light); display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+.modal-eyebrow { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.7rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
+.modal-title { font-family: 'Playfair Display', serif; font-weight: 500; font-size: 1.7rem; line-height: 1.15; color: var(--text); }
+.modal-title em { font-style: italic; font-weight: 400; color: var(--gold-pale); }
+.modal-close { background: none; border: none; cursor: pointer; padding: 0.25rem; color: var(--text-muted); font-size: 1.4rem; line-height: 1; flex-shrink: 0; transition: color 0.2s; }
+.modal-close:hover { color: var(--text); }
+.modal-body { padding: 2rem 3rem 2.5rem; background: var(--bg); }
+.modal-intro { font-size: 1rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--rule-light); }
 .modal-items { display: flex; flex-direction: column; }
-.modal-item { display: flex; gap: 1.2rem; align-items: flex-start; padding: 1.4rem 0; border-bottom: 1px solid #e8e0d4; }
+.modal-item { display: flex; gap: 1.2rem; align-items: flex-start; padding: 1.4rem 0; border-bottom: 1px solid var(--rule); }
 .modal-item:last-child { border-bottom: none; }
-.modal-check { width: 20px; height: 20px; border: 1px solid #c49a3c; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.25rem; }
-.modal-check svg { width: 10px; height: 10px; stroke: #8a6a28; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-.modal-item-title { font-family: 'Jost', sans-serif; font-weight: 400; font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: #8a6a28; margin-bottom: 0.35rem; }
-.modal-item-body { font-size: 0.97rem; color: #4a3f35; line-height: 1.75; }
-.modal-item-body strong { color: #1a1612; font-weight: 500; }
-.modal-footer { padding: 1.5rem 3rem 2rem; border-top: 1px solid #d9d0c4; background: #ede4d4; font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.82rem; letter-spacing: 0.06em; color: #3a2e1e; line-height: 1.8; }
+.modal-check { width: 20px; height: 20px; border: 1px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.25rem; }
+.modal-check svg { width: 10px; height: 10px; stroke: var(--gold-pale); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.modal-item-title { font-family: 'Jost', sans-serif; font-weight: 400; font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-pale); margin-bottom: 0.35rem; }
+.modal-item-body { font-size: 0.97rem; color: var(--text-muted); line-height: 1.75; }
+.modal-item-body strong { color: var(--text); font-weight: 500; }
+.modal-footer { padding: 1.5rem 3rem 2rem; border-top: 1px solid var(--rule-light); background: var(--surface); font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.82rem; letter-spacing: 0.06em; color: var(--text-muted); line-height: 1.8; }
 
 /* ── ANIMATIONS ───────────────────────────────────────────────────────── */
 
