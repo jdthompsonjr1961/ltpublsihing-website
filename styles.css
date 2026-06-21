@@ -16,18 +16,18 @@
 /* ── THEME TOKENS ────────────────────────────────────────────────────── */
 
 body.theme-core {
-  --bg:           #DDE3D0;
-  --surface:      #BFCDA8;
-  --surface-2:    #A9BC8C;
-  --surface-3:    #94AB78;
+  --bg:           #D7DCC2;
+  --surface:      #B9C49C;
+  --surface-2:    #9DAD7C;
+  --surface-3:    #84985F;
   --green:        #518955;
   --green-light:  #3F6E43;
   --gold:         #C9A227;
   --gold-pale:    #B8902A;
   --text:         #2C2A1E;
   --text-muted:   #5C5840;
-  --rule:         #CBD3B8;
-  --rule-light:   #BBC5A2;
+  --rule:         #C7CDAE;
+  --rule-light:   #B7C098;
   --cream:        #FFFCF5;
   --select:       #9FB3C7;
   --select-2:     #8AA3BA;
@@ -36,8 +36,8 @@ body.theme-core {
   --select-light: #7C9DB8;
   --danger:       #9C3F3F;
   --danger-light: #C45C5C;
-  --nav-bg:           rgba(221,227,208,0.96);
-  --mobile-menu-bg:   rgba(221,227,208,0.98);
+  --nav-bg:           rgba(215,220,194,0.96);
+  --mobile-menu-bg:   rgba(215,220,194,0.98);
 }
 
 body.theme-select {
@@ -205,13 +205,13 @@ footer { padding: 3.5rem 5rem; border-top: 1px solid var(--rule-light); display:
 .btn-protect {
   font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.82rem;
   letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--text-muted); background: rgba(0,0,0,0.035);
+  color: var(--text); background: var(--bg);
   border: 1px solid var(--text-muted);
   padding: 0.75rem 2.2rem; cursor: pointer; display: inline-block;
   transition: border-color 0.2s, color 0.2s, background 0.2s; margin-top: 1rem;
   text-align: center;
 }
-.btn-protect:hover { border-color: var(--gold); color: var(--text); background: rgba(0,0,0,0.06); }
+.btn-protect:hover { border-color: var(--gold); color: var(--text); background: var(--surface); }
 
 .modal-overlay {
   display: none; position: fixed; inset: 0; z-index: 800;
