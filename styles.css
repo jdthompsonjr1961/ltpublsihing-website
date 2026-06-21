@@ -16,7 +16,7 @@
 /* ── THEME TOKENS ────────────────────────────────────────────────────── */
 
 body.theme-core {
-  --bg:           #F6F1E6;
+  --bg:           #E3EAD6;
   --surface:      #C7D4B8;
   --surface-2:    #B6C6A3;
   --surface-3:    #A3B68C;
@@ -26,8 +26,8 @@ body.theme-core {
   --gold-pale:    #B8902A;
   --text:         #2C2A1E;
   --text-muted:   #5C5840;
-  --rule:         #DCD0AE;
-  --rule-light:   #CBBB8E;
+  --rule:         #CFDAC0;
+  --rule-light:   #BFCDAA;
   --cream:        #FFFCF5;
   --select:       #9FB3C7;
   --select-2:     #8AA3BA;
@@ -36,12 +36,37 @@ body.theme-core {
   --select-light: #7C9DB8;
   --danger:       #9C3F3F;
   --danger-light: #C45C5C;
-  --nav-bg:           rgba(246,241,230,0.96);
-  --mobile-menu-bg:   rgba(246,241,230,0.98);
+  --nav-bg:           rgba(227,234,214,0.96);
+  --mobile-menu-bg:   rgba(227,234,214,0.98);
+}
+
+body.theme-select {
+  --bg:           #D9E2EA;
+  --surface:      #C3D3DE;
+  --surface-2:    #AFC3D2;
+  --surface-3:    #9BB3C6;
+  --green:        #5D7350;
+  --green-light:  #4A5F3E;
+  --gold:         #C9A227;
+  --gold-pale:    #B8902A;
+  --text:         #2C2A1E;
+  --text-muted:   #5C5840;
+  --rule:         #C2D2DC;
+  --rule-light:   #B2C5D1;
+  --cream:        #FFFCF5;
+  --select:       #9FB3C7;
+  --select-2:     #8AA3BA;
+  --select-3:     #7691AD;
+  --select-acc:   #4F718F;
+  --select-light: #7C9DB8;
+  --danger:       #9C3F3F;
+  --danger-light: #C45C5C;
+  --nav-bg:           rgba(217,226,234,0.96);
+  --mobile-menu-bg:   rgba(217,226,234,0.98);
 }
 
 body.theme-media {
-  --bg:           #E8EFEC;
+  --bg:           #D7E6E1;
   --surface:      #C3D6D0;
   --surface-2:    #A9C4BC;
   --surface-3:    #8FAFA6;
@@ -52,18 +77,18 @@ body.theme-media {
   --gold:         #3D3D40;
   --gold-pale:    #6B6B6E;
   --text:         #2A2218;
-  --text-muted:   #4A5552;
-  --rule:         #C9D8D2;
-  --rule-light:   #DCE8E3;
+  --text-muted:   #46524F;
+  --rule:         #B9CFC8;
+  --rule-light:   #C9DCD6;
   --cream:        #FBF8F1;
   --hero-right:   #34302C;
   --hero-right-2: #242120;
-  --nav-bg:           rgba(232,239,236,0.97);
-  --mobile-menu-bg:   rgba(232,239,236,0.98);
+  --nav-bg:           rgba(215,230,225,0.96);
+  --mobile-menu-bg:   rgba(215,230,225,0.98);
 }
 
 body.theme-belle {
-  --bg:           #F3E4C8;
+  --bg:           #EEDBB0;
   --surface:      #E8CFA0;
   --surface-2:    #DABB85;
   --surface-3:    #C9A468;
@@ -73,11 +98,11 @@ body.theme-belle {
   --gold-pale:    #8C4A15;
   --text:         #3A2E22;
   --text-muted:   #6B5B47;
-  --rule:         #E2D2AE;
-  --rule-light:   #D0BD95;
+  --rule:         #DCC698;
+  --rule-light:   #CBB281;
   --cream:        #FFFAEF;
-  --nav-bg:           rgba(243,228,200,0.96);
-  --mobile-menu-bg:   rgba(243,228,200,0.98);
+  --nav-bg:           rgba(238,219,176,0.96);
+  --mobile-menu-bg:   rgba(238,219,176,0.98);
 }
 
 /* admin pages reuse theme-core tokens; this just swaps the base font */
@@ -180,12 +205,13 @@ footer { padding: 3.5rem 5rem; border-top: 1px solid var(--rule-light); display:
 .btn-protect {
   font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.82rem;
   letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--text-muted); background: none;
-  border: 1px solid var(--rule-light);
+  color: var(--text-muted); background: rgba(0,0,0,0.035);
+  border: 1px solid var(--text-muted);
   padding: 0.75rem 2.2rem; cursor: pointer; display: inline-block;
-  transition: border-color 0.2s, color 0.2s; margin-top: 1rem; text-align: center;
+  transition: border-color 0.2s, color 0.2s, background 0.2s; margin-top: 1rem;
+  text-align: center;
 }
-.btn-protect:hover { border-color: var(--gold); color: var(--text); }
+.btn-protect:hover { border-color: var(--gold); color: var(--text); background: rgba(0,0,0,0.06); }
 
 .modal-overlay {
   display: none; position: fixed; inset: 0; z-index: 800;
