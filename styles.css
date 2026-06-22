@@ -16,6 +16,7 @@
 /* ── THEME TOKENS ────────────────────────────────────────────────────── */
 
 body.theme-core {
+  --on-gold:      var(--text);
   --bg:           #D7DCC2;
   --surface:      #B9C49C;
   --surface-2:    #9DAD7C;
@@ -25,7 +26,7 @@ body.theme-core {
   --gold:         #C9A227;
   --gold-pale:    #B8902A;
   --text:         #2C2A1E;
-  --text-muted:   #5C5840;
+  --text-muted:   #454230;
   --rule:         #C7CDAE;
   --rule-light:   #B7C098;
   --cream:        #FFFCF5;
@@ -41,6 +42,7 @@ body.theme-core {
 }
 
 body.theme-select {
+  --on-gold:      var(--text);
   --bg:           #D9E2EA;
   --surface:      #C3D3DE;
   --surface-2:    #AFC3D2;
@@ -50,7 +52,7 @@ body.theme-select {
   --gold:         #C9A227;
   --gold-pale:    #B8902A;
   --text:         #2C2A1E;
-  --text-muted:   #5C5840;
+  --text-muted:   #454230;
   --rule:         #C2D2DC;
   --rule-light:   #B2C5D1;
   --cream:        #FFFCF5;
@@ -66,6 +68,7 @@ body.theme-select {
 }
 
 body.theme-media {
+  --on-gold:      var(--cream);
   --bg:           #D7E6E1;
   --surface:      #C3D6D0;
   --surface-2:    #A9C4BC;
@@ -88,6 +91,7 @@ body.theme-media {
 }
 
 body.theme-belle {
+  --on-gold:      var(--cream);
   --bg:           #EEDBB0;
   --surface:      #E8CFA0;
   --surface-2:    #DABB85;
@@ -124,7 +128,7 @@ body {
 body::after {
   content: '';
   position: fixed; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
   pointer-events: none; z-index: 9999;
 }
 
@@ -189,7 +193,7 @@ input:focus, select:focus, textarea:focus { border-color: var(--gold); }
 select option { background: var(--surface); }
 textarea { resize: vertical; min-height: 120px; }
 .form-note { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.78rem; letter-spacing: 0.1em; color: var(--text-muted); opacity: 0.75; text-align: left; margin-bottom: 2rem; line-height: 1.6; }
-.form-submit { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.88rem; letter-spacing: 0.25em; text-transform: uppercase; background: var(--gold); color: var(--cream); border: none; padding: 1.1rem 3rem; cursor: pointer; width: 100%; transition: background 0.25s, color 0.25s; }
+.form-submit { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.88rem; letter-spacing: 0.25em; text-transform: uppercase; background: var(--gold); color: var(--on-gold); border: none; padding: 1.1rem 3rem; cursor: pointer; width: 100%; transition: background 0.25s, color 0.25s; }
 .form-submit:hover { background: var(--green-light); color: var(--cream); }
 
 /* ── FOOTER ───────────────────────────────────────────────────────────── */
