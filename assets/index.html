@@ -173,6 +173,14 @@
 
 .image-edit { display: none; padding: 0 1.1rem 1.25rem; border-top: 1px solid var(--rule-light); }
 .image-edit.open { display: block; }
+.asset-number-banner {
+  display: flex; align-items: baseline; gap: 0.75rem;
+  margin: 1rem 0 0.25rem; padding: 0.6rem 0.9rem;
+  background: var(--green-light); border-radius: 3px;
+}
+.asset-number-banner.crossref { background: var(--text-muted); }
+.asset-number-big { font-family: 'Jost', sans-serif; font-weight: 400; font-size: 1.1rem; letter-spacing: 0.04em; color: var(--cream); }
+.asset-number-sub { font-size: 0.7rem; color: var(--cream); opacity: 0.85; }
 .edit-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.85rem 1rem; margin: 1rem 0 0.75rem; }
 .edit-field.full { grid-column: 1 / -1; }
 .edit-field label { display: block; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.3rem; }
@@ -494,8 +502,8 @@
       return `
         <div class="image-card ${isCrossRef ? 'image-card-crossref' : ''}">
           <div class="image-row ${isOpen ? 'open' : ''}" onclick="toggleImage('${key}')">
-            <span class="chev">▶</span>
             <span class="accession" ${isCrossRef ? 'style="background:var(--text-muted)"' : ''}>${isCrossRef ? ('= ' + img.crossRefOf) : (img.acc || '')}</span>
+            <span class="chev">▶</span>
             <div class="thumb">
               <img src="${escapeAttr(path)}" alt=""
                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
@@ -521,14 +529,15 @@
 
     function imageEditForm(folder, img, idx) {
       const id = `f_${idx}`;
-      const accDisplay = img.crossRefOf ? `= ${img.crossRefOf} (duplicate, not a separate asset)` : (img.acc || '(assigned on save)');
+      const isCrossRef = !!img.crossRefOf;
+      const accBig = isCrossRef ? `= ${img.crossRefOf}` : (img.acc || '(assigned on save)');
+      const accSub = isCrossRef ? 'Duplicate — not a separate catalog asset' : 'Asset Number — permanent, never reassigned';
       return `
+        <div class="asset-number-banner ${isCrossRef ? 'crossref' : ''}">
+          <span class="asset-number-big">${escapeHtml(accBig)}</span>
+          <span class="asset-number-sub">${accSub}</span>
+        </div>
         <div class="edit-grid">
-          <div class="edit-field">
-            <label>Asset Number</label>
-            <input type="text" value="${escapeAttr(accDisplay)}" disabled
-                   style="opacity:0.75; font-family:'Jost',sans-serif; letter-spacing:0.05em; cursor:not-allowed;" />
-          </div>
           <div class="edit-field full">
             <label>Title</label>
             <input type="text" id="${id}_title" value="${escapeAttr(img.title)}" />
