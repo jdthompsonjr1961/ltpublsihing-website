@@ -412,7 +412,7 @@
     function imageRelPath(folder, img) {
       const sub = folder.mediaPath || folder.id;
       const file = img.file || (slugify(img.title) + '.jpg');
-      return IMAGE_BASE_PATH + sub + '/' + file;
+      return IMAGE_BASE_PATH + encodeURIComponent(sub) + '/' + encodeURIComponent(file);
     }
 
     // ─── SEARCH ───
