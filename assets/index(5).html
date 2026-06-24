@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LT Publishing — Asset Catalog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+<style>
+/* ─── LOGIN SCREEN (identical to admin.html) ─── */
+#login-screen {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg);
+  padding: 2rem;
+}
+.login-box {
+  background: var(--surface);
+  border: 1px solid var(--rule-light);
+  border-top: 3px solid var(--gold);
+  padding: 3rem;
+  width: 100%; max-width: 400px;
+  text-align: center;
+}
+.login-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; font-weight: 700;
+  color: var(--text); margin-bottom: 0.4rem;
+}
+.login-sub {
+  font-size: 0.75rem; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--text-muted);
+  margin-bottom: 2.5rem;
+}
+.login-field { margin-bottom: 1rem; text-align: left; }
+.login-field label { display: block; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.4rem; }
+.login-field input {
+  width: 100%; background: var(--surface-2);
+  border: 1px solid var(--rule-light); color: var(--text);
+  font-family: 'Jost', sans-serif; font-size: 1rem;
+  padding: 0.75rem 1rem; outline: none;
+  transition: border-color 0.2s;
+}
+.login-field input:focus { border-color: var(--gold); }
+.login-btn {
+  width: 100%; margin-top: 1.5rem;
+  background: var(--gold); color: var(--text);
+  border: none; font-family: 'Jost', sans-serif;
+  font-weight: 400; font-size: 0.85rem; letter-spacing: 0.15em;
+  text-transform: uppercase; padding: 0.85rem; cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.login-btn:hover { background: var(--green-light); color: var(--cream); }
+.login-error {
+  margin-top: 1rem; font-size: 0.82rem;
+  color: var(--danger-light); display: none;
+}
+
+/* ─── ADMIN SCREEN (structure mirrors admin.html) ─── */
+#admin-screen { display: none; min-height: 100vh; }
+.topbar {
+  background: rgba(44,42,30,0.96);
+  border-bottom: 1px solid var(--rule-light);
+  padding: 1rem 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+}
+.topbar-brand { display: flex; flex-direction: column; line-height: 1; }
+.topbar-brand-main { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--text); }
+.topbar-brand-sub { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-top: 2px; }
+.topbar-right { display: flex; gap: 1rem; align-items: center; }
+.topbar-btn {
+  font-family: 'Jost', sans-serif; font-weight: 300;
+  font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 0.5rem 1.2rem; border: 1px solid; cursor: pointer;
+  background: none; transition: background 0.2s, color 0.2s;
+  text-decoration: none; display: inline-block;
+}
+.btn-gold { color: var(--gold); border-color: var(--gold); }
+.btn-gold:hover { background: var(--gold); color: var(--text); }
+.btn-muted { color: var(--text-muted); border-color: var(--rule-light); }
+.btn-muted:hover { background: var(--surface-2); color: var(--text); }
+.btn-danger { color: var(--danger-light); border-color: var(--danger); }
+.btn-danger:hover { background: var(--danger); color: var(--cream); }
+
+.admin-body { display: grid; grid-template-columns: 300px 1fr; min-height: calc(100vh - 61px); }
+
+/* Sidebar */
+.sidebar { background: var(--surface); border-right: 1px solid var(--rule-light); padding: 1.5rem 0; display: flex; flex-direction: column; height: calc(100vh - 61px); }
+.sidebar-search { padding: 0 1.5rem 1.25rem; }
+.sidebar-search input {
+  width: 100%; background: var(--surface-2);
+  border: 1px solid var(--rule-light); color: var(--text);
+  font-family: 'Jost', sans-serif; font-size: 0.85rem;
+  padding: 0.6rem 0.85rem; outline: none;
+  transition: border-color 0.2s;
+}
+.sidebar-search input:focus { border-color: var(--gold); }
+.sidebar-label {
+  font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--text-muted); margin: 0 1.5rem 0.75rem;
+  padding-bottom: 0.5rem; border-bottom: 1px solid var(--rule);
+}
+.folder-list { flex: 1; overflow-y: auto; padding: 0 0.75rem; }
+.folder-btn {
+  display: flex; align-items: center; gap: 0.5rem; width: 100%; text-align: left;
+  background: none; border: none; cursor: pointer;
+  font-family: 'Jost', sans-serif; font-weight: 300;
+  font-size: 0.82rem; color: var(--text-muted);
+  padding: 0.55rem 0.75rem; margin-bottom: 0.15rem;
+  border-radius: 2px; border-left: 3px solid transparent;
+  transition: background 0.2s, color 0.2s;
+}
+.folder-btn:hover { background: var(--surface-2); color: var(--text); }
+.folder-btn.active { background: var(--surface-3); color: var(--text); border-left-color: var(--gold); font-weight: 400; }
+.folder-btn-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.folder-btn-count { font-family: 'Jost', sans-serif; font-size: 0.68rem; color: var(--text-muted); flex-shrink: 0; }
+.dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.dot-review { background: var(--gold); }
+.dot-complete { background: var(--green-light); }
+.sidebar-stats { padding: 1rem 1.5rem 0; border-top: 1px solid var(--rule); margin-top: 0.5rem; }
+.stat-row { display: flex; justify-content: space-between; margin-bottom: 0.45rem; }
+.stat-label { font-size: 0.74rem; color: var(--text-muted); }
+.stat-val { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--text); }
+
+/* Main content */
+.main-content { padding: 2rem 3rem 4rem; overflow-y: auto; height: calc(100vh - 61px); }
+.content-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--rule-light); }
+.content-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 500; color: var(--text); margin-bottom: 0.3rem; }
+.content-title em { font-style: italic; color: var(--gold); }
+.content-sub { font-size: 0.8rem; color: var(--text-muted); }
+
+.empty-state { text-align: center; padding: 5rem 2rem; color: var(--text-muted); font-size: 0.95rem; }
+.empty-icon { font-size: 2.5rem; margin-bottom: 1rem; opacity: 0.6; }
+
+/* Folder meta panel */
+.meta-panel { background: var(--surface); border: 1px solid var(--rule-light); border-top: 3px solid var(--gold); padding: 1.5rem 1.75rem; margin-bottom: 2rem; }
+.meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem 1.25rem; margin-bottom: 1rem; }
+.meta-field label { display: block; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.3rem; }
+.meta-field input, .meta-field select {
+  width: 100%; background: var(--surface-2); border: 1px solid var(--rule-light); color: var(--text);
+  font-family: 'Jost', sans-serif; font-size: 0.82rem; padding: 0.45rem 0.6rem; outline: none;
+}
+.meta-field input:focus, .meta-field select:focus { border-color: var(--gold); }
+.meta-notes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.meta-notes-grid label { display: block; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.3rem; }
+.meta-notes-grid textarea {
+  width: 100%; min-height: 70px; background: var(--surface-2); border: 1px solid var(--rule-light); color: var(--text);
+  font-family: 'Jost', sans-serif; font-size: 0.82rem; padding: 0.5rem 0.65rem; outline: none; resize: vertical;
+}
+.meta-notes-grid textarea:focus { border-color: var(--gold); }
+
+/* Image cards */
+.image-card { background: var(--surface); border: 1px solid var(--rule-light); margin-bottom: 0.65rem; }
+.image-card-crossref { opacity: 0.65; background: var(--surface-2); }
+.image-row { display: flex; align-items: center; gap: 0.9rem; padding: 0.75rem 1.1rem; cursor: pointer; }
+.image-row:hover { background: var(--surface-2); }
+.thumb { width: 46px; height: 46px; flex-shrink: 0; background: var(--surface-3); border: 1px solid var(--rule-light); display: flex; align-items: center; justify-content: center; overflow: hidden; cursor: zoom-in; }
+.thumb:hover { border-color: var(--gold); }
+.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.thumb-placeholder { font-size: 0.55rem; color: var(--text-muted); text-align: center; line-height: 1.2; padding: 2px; }
+.accession { font-family: 'Jost', sans-serif; font-size: 0.62rem; letter-spacing: 0.05em; color: var(--cream); background: var(--green-light); padding: 0.18rem 0.45rem; flex-shrink: 0; }
+.img-title { font-family: 'Playfair Display', serif; font-size: 0.92rem; color: var(--text); flex: 1.2; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.img-tags { display: flex; gap: 0.4rem; flex: 1.6; min-width: 0; flex-wrap: wrap; }
+.pill { font-size: 0.62rem; letter-spacing: 0.05em; padding: 0.15rem 0.55rem; border: 1px solid; white-space: nowrap; }
+.pill-simple { color: var(--gold); border-color: var(--gold); }
+.pill-complex { color: var(--text-muted); border-color: var(--rule-light); }
+.pill-mixed { color: var(--green-light); border-color: var(--green); }
+.pill-source { color: var(--select-acc); border-color: var(--select-acc); font-style: italic; }
+.chev { color: var(--text-muted); font-size: 0.8rem; flex-shrink: 0; transition: transform 0.15s; }
+.image-row.open .chev { transform: rotate(90deg); }
+
+.image-edit { display: none; padding: 0 1.1rem 1.25rem; border-top: 1px solid var(--rule-light); }
+.image-edit.open { display: block; }
+.asset-number-banner {
+  display: flex; align-items: baseline; gap: 0.75rem;
+  margin: 1rem 0 0.25rem; padding: 0.6rem 0.9rem;
+  background: var(--green-light); border-radius: 3px;
+}
+.asset-number-banner.crossref { background: var(--text-muted); }
+.asset-number-big { font-family: 'Jost', sans-serif; font-weight: 400; font-size: 1.1rem; letter-spacing: 0.04em; color: var(--cream); }
+.asset-number-sub { font-size: 0.7rem; color: var(--cream); opacity: 0.85; }
+.edit-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.85rem 1rem; margin: 1rem 0 0.75rem; }
+.edit-field.full { grid-column: 1 / -1; }
+.edit-field label { display: block; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.3rem; }
+.edit-field input, .edit-field select, .edit-field textarea {
+  width: 100%; background: var(--surface-2); border: 1px solid var(--rule-light); color: var(--text);
+  font-family: 'Jost', sans-serif; font-size: 0.82rem; padding: 0.5rem 0.65rem; outline: none;
+}
+.edit-field input:focus, .edit-field select:focus, .edit-field textarea:focus { border-color: var(--gold); }
+.edit-field textarea { min-height: 60px; resize: vertical; }
+.edit-hint { font-size: 0.68rem; color: var(--text-muted); margin-top: 0.2rem; }
+.edit-actions { display: flex; gap: 0.6rem; justify-content: flex-end; margin-top: 0.5rem; }
+.action-btn {
+  font-family: 'Jost', sans-serif; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.35rem 0.8rem; border: 1px solid; cursor: pointer; background: none;
+  transition: background 0.2s, color 0.2s;
+}
+.action-edit { color: var(--text-muted); border-color: var(--rule-light); }
+.action-edit:hover { background: var(--surface-3); color: var(--text); }
+.action-delete { color: var(--danger-light); border-color: var(--danger); }
+.action-delete:hover { background: var(--danger); color: var(--cream); }
+
+.add-image-btn {
+  width: 100%; padding: 0.7rem; border: 1.5px dashed var(--rule-light); background: none;
+  color: var(--text-muted); font-family: 'Jost', sans-serif; font-size: 0.78rem;
+  letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; margin-top: 0.5rem;
+}
+.add-image-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Toast (identical to admin.html) */
+.toast {
+  position: fixed; bottom: 2rem; right: 2rem;
+  background: var(--surface-3); border: 1px solid var(--green);
+  color: var(--text); padding: 1rem 1.5rem;
+  font-size: 0.88rem; z-index: 9999;
+  transform: translateY(100px); opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+
+/* Lightbox */
+.lightbox-overlay {
+  position: fixed; inset: 0; background: rgba(20,18,12,0.92);
+  display: none; align-items: center; justify-content: center;
+  flex-direction: column; gap: 1rem; z-index: 10000; padding: 3rem;
+  cursor: zoom-out;
+}
+.lightbox-overlay.show { display: flex; }
+.lightbox-overlay img {
+  max-width: 100%; max-height: 80vh; object-fit: contain;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5); cursor: default;
+}
+.lightbox-caption { color: var(--cream); font-family: 'Playfair Display', serif; font-size: 1rem; text-align: center; max-width: 80vw; }
+.lightbox-close {
+  position: absolute; top: 1.5rem; right: 2rem;
+  color: var(--cream); font-size: 1.8rem; cursor: pointer;
+  font-family: 'Jost', sans-serif; line-height: 1; opacity: 0.7;
+}
+.lightbox-close:hover { opacity: 1; }
+
+@media (max-width: 900px) {
+  .admin-body { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .meta-grid { grid-template-columns: 1fr 1fr; }
+  .meta-notes-grid { grid-template-columns: 1fr; }
+  .edit-grid { grid-template-columns: 1fr 1fr; }
+  .img-tags { display: none; }
+}
+</style>
+</head>
+<body class="theme-core admin-ui">
+
+  <!-- ─── LOGIN ─── -->
+  <div id="login-screen">
+    <div class="login-box">
+      <div class="login-logo">LT Publishing</div>
+      <div class="login-sub">Asset Catalog</div>
+      <div class="login-field">
+        <label>Password</label>
+        <input type="password" id="password-input" placeholder="Enter admin password" />
+      </div>
+      <button class="login-btn" onclick="attemptLogin()">Sign In →</button>
+      <p class="login-error" id="login-error">Incorrect password. Please try again.</p>
+    </div>
+  </div>
+
+  <!-- ─── ADMIN ─── -->
+  <div id="admin-screen">
+
+    <div class="topbar">
+      <div class="topbar-brand">
+        <span class="topbar-brand-main">LT Publishing</span>
+        <span class="topbar-brand-sub">Asset Catalog</span>
+      </div>
+      <div class="topbar-right">
+        <a href="../admin.html" class="topbar-btn btn-muted">Books Admin</a>
+        <button class="topbar-btn btn-muted" onclick="exportCatalog()">Export JSON</button>
+        <button class="topbar-btn btn-muted" onclick="document.getElementById('import-file').click()">Import JSON</button>
+        <input type="file" id="import-file" accept="application/json" style="display:none" onchange="importCatalog(event)" />
+        <button class="topbar-btn btn-muted" onclick="resetToSeed()">Reset to Shipped</button>
+        <button class="topbar-btn btn-danger" onclick="logout()">Sign Out</button>
+      </div>
+    </div>
+
+    <div class="admin-body">
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="sidebar-search">
+          <input type="text" id="search-input" placeholder="Search folders, titles, tags…" oninput="onSearch()" />
+        </div>
+        <div class="sidebar-label">Folders</div>
+        <div class="folder-list" id="folder-list"></div>
+        <div class="sidebar-stats">
+          <div class="stat-row"><span class="stat-label">Folders</span><span class="stat-val" id="stat-folders">0</span></div>
+          <div class="stat-row"><span class="stat-label">Images Logged</span><span class="stat-val" id="stat-images">0</span></div>
+          <div class="stat-row"><span class="stat-label">Total Catalog Count</span><span class="stat-val" id="stat-total">0</span></div>
+        </div>
+      </div>
+
+      <!-- Main -->
+      <div class="main-content" id="main-content">
+        <div class="empty-state">
+          <div class="empty-icon">🗂</div>
+          <p>Select a folder on the left to view and edit its images.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Lightbox -->
+  <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close" onclick="closeLightbox()">×</span>
+    <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" />
+    <div class="lightbox-caption" id="lightbox-caption"></div>
+  </div>
+
+  <script>
+    // ─── CONFIG ───
+    const ADMIN_PASSWORD = '1Piedpiper22!';
+    const IMAGE_BASE_PATH = '../media/'; // images live at /media/<folder mediaPath>/<file>
+    const STORAGE_KEY = 'lt_catalog';
+
+    let catalog = [];
+    let selectedFolderId = null;
+    let openImageKey = null; // "folderId::index" of currently expanded row
+    let searchQuery = '';
+
+    // ─── AUTH (mirrors admin.html) ───
+    async function attemptLogin() {
+      const val = document.getElementById('password-input').value;
+      if (val === ADMIN_PASSWORD) {
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('admin-screen').style.display = 'block';
+        document.getElementById('main-content').innerHTML = '<div class="empty-state"><div class="empty-icon">⏳</div><p>Loading catalog…</p></div>';
+        await loadFromStorage();
+        renderFolderList();
+        renderMain();
+        updateStats();
+      } else {
+        document.getElementById('login-error').style.display = 'block';
+        document.getElementById('password-input').value = '';
+        document.getElementById('password-input').focus();
+      }
+    }
+    function logout() {
+      document.getElementById('admin-screen').style.display = 'none';
+      document.getElementById('login-screen').style.display = 'flex';
+      document.getElementById('password-input').value = '';
+    }
+    document.getElementById('password-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') attemptLogin();
+    });
+
+    // ─── STORAGE ───
+    let shippedCatalogCache = null;
+    async function fetchShippedCatalog() {
+      if (shippedCatalogCache) return shippedCatalogCache;
+      const res = await fetch('./catalog-data.json', { cache: 'no-store' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      shippedCatalogCache = await res.json();
+      return shippedCatalogCache;
+    }
+    async function loadFromStorage() {
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+          catalog = JSON.parse(stored);
+        } else {
+          const shipped = await fetchShippedCatalog();
+          catalog = JSON.parse(JSON.stringify(shipped));
+        }
+      } catch (e) {
+        try {
+          const shipped = await fetchShippedCatalog();
+          catalog = JSON.parse(JSON.stringify(shipped));
+        } catch (e2) {
+          catalog = [];
+          showToast('Could not load catalog-data.json - check it is sitting next to index.html.');
+        }
+      }
+      assignAccessions();
+      saveToStorage();
+    }
+    function saveToStorage() {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(catalog)); } catch (e) {}
+    }
+    async function resetToSeed() {
+      if (!confirm('Reset the catalog back to its last shipped version (catalog-data.json)? This discards any edits made in this browser.')) return;
+      try {
+        shippedCatalogCache = null; // force a fresh fetch, in case the file was updated
+        const shipped = await fetchShippedCatalog();
+        catalog = JSON.parse(JSON.stringify(shipped));
+        assignAccessions();
+        saveToStorage();
+        selectedFolderId = null;
+        renderFolderList(); renderMain(); updateStats();
+        showToast('Catalog reset to shipped version.');
+      } catch (e) {
+        showToast('Could not reload catalog-data.json.');
+      }
+    }
+
+    // ─── ACCESSION NUMBERS ───
+    function assignAccessions() {
+      let max = 0;
+      catalog.forEach(f => f.images.forEach(img => {
+        if (img.acc) {
+          const n = parseInt(String(img.acc).replace(/[^0-9]/g, ''), 10);
+          if (!isNaN(n) && n > max) max = n;
+        }
+      }));
+      catalog.forEach(f => f.images.forEach(img => {
+        if (!img.acc && !img.crossRefOf) { max += 1; img.acc = 'LT' + String(max).padStart(5, '0'); }
+      }));
+    }
+
+    // ─── HELPERS ───
+    function slugify(s) {
+      return (s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
+    }
+    function escapeHtml(s) {
+      return (s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+    function escapeAttr(s) {
+      return escapeHtml(s).replace(/\n/g, ' ');
+    }
+    function compositionClass(comp) {
+      const c = (comp || '').toLowerCase();
+      if (c.includes('bold-simple') || c.includes('simple')) return 'pill-simple';
+      if (c.includes('mixed')) return 'pill-mixed';
+      return 'pill-complex';
+    }
+    function imageRelPath(folder, img) {
+      const sub = folder.mediaPath || folder.id;
+      const file = img.file || (slugify(img.title) + '.jpg');
+      return IMAGE_BASE_PATH + encodeURIComponent(sub) + '/' + encodeURIComponent(file);
+    }
+
+    // ─── SEARCH ───
+    function onSearch() {
+      searchQuery = document.getElementById('search-input').value.trim().toLowerCase();
+      renderFolderList();
+    }
+    function folderMatchesSearch(folder) {
+      if (!searchQuery) return true;
+      const hay = [folder.name, folder.artist, folder.collection, folder.subjects, folder.ofNote]
+        .concat(folder.images.flatMap(i => [i.title, i.subjects, i.ofNote, i.composition, i.palette]))
+        .join(' ').toLowerCase();
+      return hay.includes(searchQuery);
+    }
+
+    // ─── SIDEBAR ───
+    function renderFolderList() {
+      const el = document.getElementById('folder-list');
+      const visible = catalog.filter(folderMatchesSearch);
+      el.innerHTML = visible.map(f => {
+        const reviewDot = f.needsReview === 'Yes'
+          ? '<span class="dot dot-review" title="Needs individual review"></span>'
+          : (f.needsReview === 'Complete' ? '<span class="dot dot-complete" title="Complete"></span>' : '');
+        return `
+          <button class="folder-btn ${f.id === selectedFolderId ? 'active' : ''}" onclick="selectFolder('${f.id}')">
+            ${reviewDot}
+            <span class="folder-btn-name">${escapeHtml(f.name)}</span>
+            <span class="folder-btn-count">${f.images.length}/${f.count}</span>
+          </button>`;
+      }).join('') || '<p style="padding:1rem 1.5rem;color:var(--text-muted);font-size:0.82rem;">No folders match.</p>';
+    }
+
+    function selectFolder(id) {
+      selectedFolderId = id;
+      openImageKey = null;
+      renderFolderList();
+      renderMain();
+    }
+
+    function updateStats() {
+      document.getElementById('stat-folders').textContent = catalog.length;
+      const itemized = catalog.reduce((s, f) => s + f.images.length, 0);
+      const totalCount = catalog.reduce((s, f) => s + (parseInt(f.count, 10) || 0), 0);
+      document.getElementById('stat-images').textContent = itemized;
+      document.getElementById('stat-total').textContent = totalCount;
+    }
+
+    // ─── MAIN PANEL ───
+    function renderMain() {
+      const el = document.getElementById('main-content');
+      const folder = catalog.find(f => f.id === selectedFolderId);
+      if (!folder) {
+        el.innerHTML = `<div class="empty-state"><div class="empty-icon">🗂</div><p>Select a folder on the left to view and edit its images.</p></div>`;
+        return;
+      }
+      el.innerHTML = `
+        <div class="content-header">
+          <div>
+            <div class="content-title">${escapeHtml(folder.name)}</div>
+            <div class="content-sub">${folder.images.length} of ${escapeHtml(String(folder.count))} images logged · ${escapeHtml(folder.rights || '')}</div>
+          </div>
+        </div>
+
+        <div class="meta-panel">
+          <div class="meta-grid">
+            ${metaField(folder.id, 'artist', 'Artist', folder.artist)}
+            ${metaField(folder.id, 'collection', 'Collection', folder.collection)}
+            ${metaField(folder.id, 'mediaPath', 'Media Folder (under /media/)', folder.mediaPath || folder.id)}
+            ${metaSelect(folder.id, 'needsReview', 'Review Status', folder.needsReview, ['Yes','No','Complete'])}
+          </div>
+          <div class="meta-notes-grid">
+            <div>
+              <label>Notes</label>
+              <textarea onblur="updateFolderField('${folder.id}','notes', this.value)">${escapeHtml(folder.notes)}</textarea>
+            </div>
+            <div>
+              <label>Of Note (marketing / history)</label>
+              <textarea onblur="updateFolderField('${folder.id}','ofNote', this.value)">${escapeHtml(folder.ofNote)}</textarea>
+            </div>
+          </div>
+        </div>
+
+        <div id="image-list">${folder.images.map((img, i) => imageCard(folder, img, i)).join('')}</div>
+        <button class="add-image-btn" onclick="addImage('${folder.id}')">+ Add Image to This Folder</button>
+      `;
+    }
+
+    function metaField(folderId, key, label, value) {
+      return `<div class="meta-field"><label>${label}</label><input type="text" value="${escapeAttr(value)}" onblur="updateFolderField('${folderId}','${key}', this.value)" /></div>`;
+    }
+    function metaSelect(folderId, key, label, value, options) {
+      return `<div class="meta-field"><label>${label}</label><select onchange="updateFolderField('${folderId}','${key}', this.value)">${
+        options.map(o => `<option value="${o}" ${o === value ? 'selected' : ''}>${o}</option>`).join('')
+      }</select></div>`;
+    }
+    function updateFolderField(folderId, key, value) {
+      const folder = catalog.find(f => f.id === folderId);
+      if (!folder) return;
+      folder[key] = value;
+      saveToStorage();
+      renderFolderList();
+      showToast('Saved.');
+    }
+
+    // ─── IMAGE CARDS ───
+    function imageCard(folder, img, idx) {
+      const key = folder.id + '::' + idx;
+      const isOpen = key === openImageKey;
+      const path = imageRelPath(folder, img);
+      const isCrossRef = !!img.crossRefOf;
+      return `
+        <div class="image-card ${isCrossRef ? 'image-card-crossref' : ''}">
+          <div class="image-row ${isOpen ? 'open' : ''}" onclick="toggleImage('${key}')">
+            <span class="accession" ${isCrossRef ? 'style="background:var(--text-muted)"' : ''}>${isCrossRef ? ('= ' + img.crossRefOf) : (img.acc || '')}</span>
+            <span class="chev">▶</span>
+            <div class="thumb" onclick="event.stopPropagation(); openLightbox('${folder.id}', ${idx})">
+              <img src="${escapeAttr(path)}" alt=""
+                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                   onload="this.nextElementSibling.style.display='none';" />
+              <div class="thumb-placeholder">no file</div>
+            </div>
+            <span class="img-title">${escapeHtml(img.title)}</span>
+            <div class="img-tags">
+              ${isCrossRef ? `<span class="pill pill-flag">duplicate, see ${escapeHtml(img.crossRefOf)}</span>` : `<span class="pill ${compositionClass(img.composition)}">${escapeHtml(img.composition || '—')}</span>`}
+              ${img.source ? `<span class="pill pill-source">${escapeHtml(img.source.split('(')[0].trim())}</span>` : ''}
+            </div>
+          </div>
+          <div class="image-edit ${isOpen ? 'open' : ''}">
+            ${isOpen ? imageEditForm(folder, img, idx) : ''}
+          </div>
+        </div>`;
+    }
+
+    function toggleImage(key) {
+      openImageKey = (openImageKey === key) ? null : key;
+      renderMain();
+    }
+
+    function imageEditForm(folder, img, idx) {
+      const id = `f_${idx}`;
+      const isCrossRef = !!img.crossRefOf;
+      const accBig = isCrossRef ? `= ${img.crossRefOf}` : (img.acc || '(assigned on save)');
+      const accSub = isCrossRef ? 'Duplicate — not a separate catalog asset' : 'Asset Number — permanent, never reassigned';
+      return `
+        <div class="asset-number-banner ${isCrossRef ? 'crossref' : ''}">
+          <span class="asset-number-big">${escapeHtml(accBig)}</span>
+          <span class="asset-number-sub">${accSub}</span>
+        </div>
+        <div class="edit-grid">
+          <div class="edit-field full">
+            <label>Title</label>
+            <input type="text" id="${id}_title" value="${escapeAttr(img.title)}" />
+          </div>
+          <div class="edit-field">
+            <label>Palette</label>
+            <input type="text" id="${id}_palette" value="${escapeAttr(img.palette)}" />
+          </div>
+          <div class="edit-field">
+            <label>Composition</label>
+            <input type="text" id="${id}_composition" value="${escapeAttr(img.composition)}" placeholder="bold-simple / detailed-complex / mixed" />
+          </div>
+          <div class="edit-field">
+            <label>Rights Status</label>
+            <input type="text" id="${id}_rights" value="${escapeAttr(img.rights)}" />
+          </div>
+          <div class="edit-field full">
+            <label>Subject Tags</label>
+            <input type="text" id="${id}_subjects" value="${escapeAttr(img.subjects)}" />
+          </div>
+          <div class="edit-field full">
+            <label>Of Note (marketing / history)</label>
+            <textarea id="${id}_ofNote">${escapeHtml(img.ofNote)}</textarea>
+          </div>
+          <div class="edit-field">
+            <label>Image File (in /media/${escapeHtml(folder.mediaPath || folder.id)}/)</label>
+            <input type="text" id="${id}_file" value="${escapeAttr(img.file)}" placeholder="filename.jpg" />
+          </div>
+          <div class="edit-field">
+            <label>Listing Status</label>
+            <select id="${id}_listingStatus">
+              ${['No','Yes','Excluded - duplicate'].map(o => `<option value="${o}" ${o === img.listingStatus ? 'selected' : ''}>${o}</option>`).join('')}
+            </select>
+          </div>
+          <div class="edit-field">
+            <label>Data Source</label>
+            <input type="text" id="${id}_source" value="${escapeAttr(img.source)}" />
+          </div>
+        </div>
+        <div class="edit-hint">Folder: ${escapeHtml(folder.name)}</div>
+        <div class="edit-actions">
+          <button class="action-btn action-delete" onclick="deleteImage('${folder.id}', ${idx})">Delete</button>
+          <button class="action-btn action-edit" onclick="saveImage('${folder.id}', ${idx})">Save Image</button>
+        </div>
+      `;
+    }
+
+    function saveImage(folderId, idx) {
+      const folder = catalog.find(f => f.id === folderId);
+      if (!folder) return;
+      const id = `f_${idx}`;
+      const img = folder.images[idx];
+      img.title = document.getElementById(`${id}_title`).value.trim();
+      img.palette = document.getElementById(`${id}_palette`).value.trim();
+      img.composition = document.getElementById(`${id}_composition`).value.trim();
+      img.rights = document.getElementById(`${id}_rights`).value.trim();
+      img.subjects = document.getElementById(`${id}_subjects`).value.trim();
+      img.ofNote = document.getElementById(`${id}_ofNote`).value.trim();
+      img.file = document.getElementById(`${id}_file`).value.trim();
+      img.listingStatus = document.getElementById(`${id}_listingStatus`).value;
+      img.source = document.getElementById(`${id}_source`).value.trim();
+      saveToStorage();
+      updateStats();
+      renderMain();
+      showToast('Image saved.');
+    }
+
+    function addImage(folderId) {
+      const folder = catalog.find(f => f.id === folderId);
+      if (!folder) return;
+      folder.images.push({
+        title: 'New image', palette: '', composition: '', subjects: '',
+        ofNote: '', rights: folder.rights || '', source: 'Direct review',
+        listingStatus: 'No', file: '', acc: ''
+      });
+      assignAccessions();
+      saveToStorage();
+      openImageKey = folderId + '::' + (folder.images.length - 1);
+      updateStats();
+      renderMain();
+      renderFolderList();
+    }
+
+    function deleteImage(folderId, idx) {
+      const folder = catalog.find(f => f.id === folderId);
+      if (!folder) return;
+      if (!confirm('Delete "' + folder.images[idx].title + '" from the catalog? This cannot be undone.')) return;
+      folder.images.splice(idx, 1);
+      openImageKey = null;
+      saveToStorage();
+      updateStats();
+      renderMain();
+      renderFolderList();
+      showToast('Image deleted.');
+    }
+
+    // ─── EXPORT / IMPORT ───
+    function exportCatalog() {
+      const blob = new Blob([JSON.stringify(catalog, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'catalog-data.json';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      showToast('Exported catalog-data.json — commit this into /assets/ to ship your edits.');
+    }
+    function importCatalog(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          if (!Array.isArray(parsed)) throw new Error('not an array');
+          catalog = parsed;
+          assignAccessions();
+          saveToStorage();
+          selectedFolderId = null;
+          renderFolderList(); renderMain(); updateStats();
+          showToast('Catalog imported.');
+        } catch (err) {
+          alert('Could not read that file as catalog JSON: ' + err.message);
+        }
+      };
+      reader.readAsText(file);
+      event.target.value = '';
+    }
+
+    // ─── LIGHTBOX ───
+    function openLightbox(folderId, idx) {
+      const folder = catalog.find(f => f.id === folderId);
+      if (!folder) return;
+      const img = folder.images[idx];
+      if (!img) return;
+      document.getElementById('lightbox-img').src = imageRelPath(folder, img);
+      document.getElementById('lightbox-caption').textContent = img.title;
+      document.getElementById('lightbox').classList.add('show');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('show');
+      document.getElementById('lightbox-img').src = '';
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // ─── TOAST (mirrors admin.html) ───
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3000);
+    }
+  </script>
+
+</body>
+</html>
