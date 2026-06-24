@@ -159,7 +159,7 @@
 .image-row:hover { background: var(--surface-2); }
 .thumb { width: 46px; height: 46px; flex-shrink: 0; background: var(--surface-3); border: 1px solid var(--rule-light); display: flex; align-items: center; justify-content: center; overflow: hidden; cursor: zoom-in; }
 .thumb:hover { border-color: var(--gold); }
-.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; -webkit-user-drag: none; user-select: none; }
 .thumb-placeholder { font-size: 0.55rem; color: var(--text-muted); text-align: center; line-height: 1.2; padding: 2px; }
 .accession { font-family: 'Jost', sans-serif; font-size: 0.62rem; letter-spacing: 0.05em; color: var(--cream); background: var(--green-light); padding: 0.18rem 0.45rem; flex-shrink: 0; }
 .img-title { font-family: 'Playfair Display', serif; font-size: 0.92rem; color: var(--text); flex: 1.2; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -556,8 +556,8 @@
           <div class="image-row ${isOpen ? 'open' : ''}" onclick="toggleImage('${key}')">
             <span class="accession" ${isCrossRef ? 'style="background:var(--text-muted)"' : ''}>${isCrossRef ? ('= ' + img.crossRefOf) : (img.acc || '')}</span>
             <span class="chev">▶</span>
-            <div class="thumb" onclick="event.stopPropagation(); openLightbox('${escapeAttr(path)}', '${escapeAttr(img.title)}')">
-              <img src="${escapeAttr(path)}" alt=""
+            <div class="thumb" onclick="event.stopPropagation(); openLightbox('${folder.id}', ${idx})">
+              <img src="${escapeAttr(path)}" alt="" draggable="false"
                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
                    onload="this.nextElementSibling.style.display='none';" />
               <div class="thumb-placeholder">no file</div>
@@ -722,9 +722,13 @@
     }
 
     // ─── LIGHTBOX ───
-    function openLightbox(path, title) {
-      document.getElementById('lightbox-img').src = path;
-      document.getElementById('lightbox-caption').textContent = title;
+    function openLightbox(folderId, idx) {
+      const folder = catalog.find(f => f.id === folderId);
+      if (!folder) return;
+      const img = folder.images[idx];
+      if (!img) return;
+      document.getElementById('lightbox-img').src = imageRelPath(folder, img);
+      document.getElementById('lightbox-caption').textContent = img.title;
       document.getElementById('lightbox').classList.add('show');
     }
     function closeLightbox() {
