@@ -1,73 +1,57 @@
 backend:
   name: git-gateway
-  branch: main
+  branch: site-redesign
 
-media_folder: "images"
-public_folder: "/images"
+publish_mode: simple
+media_folder: "media/uploads"
+public_folder: "/media/uploads"
+
+site_url: "https://ltpublishing.com"
+display_url: "https://ltpublishing.com"
+logo_url: "/belle-colophon.png"
 
 collections:
-  - name: "publishing"
-    label: "LT Publishing — Literary Imprint"
-    label_singular: "LT Publishing Book"
-    folder: "_books/publishing"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Author", name: "author", widget: "string", default: "J LemeThompson" }
-      - label: "Genre"
-        name: "genre"
-        widget: "select"
-        options:
-          - Literary Fiction
-          - Southern Gothic
-          - Historical Literary Fiction
-          - Nonfiction / Memoir
-          - Wellness / Nonfiction
-          - Other Literary Work
-      - label: "Status"
-        name: "status"
-        widget: "select"
-        options:
-          - { label: "Available Now", value: "available" }
-          - { label: "Coming Soon", value: "soon" }
-          - { label: "Forthcoming", value: "progress" }
-      - { label: "Status Label (optional, e.g. Coming June 1, 2026)", name: "status_label", widget: "string", required: false }
-      - { label: "Blurb", name: "blurb", widget: "text" }
-      - { label: "Cover Image", name: "cover", widget: "image", required: false }
-      - { label: "Buy / Amazon Link (optional)", name: "link", widget: "string", required: false }
-
-  - name: "select"
-    label: "LT Select — Commercial Fiction"
-    label_singular: "LT Select Book"
-    folder: "_books/select"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Author", name: "author", widget: "string" }
-      - label: "Genre"
-        name: "genre"
-        widget: "select"
-        options:
-          - Thriller / Suspense
-          - Mystery
-          - Crime Fiction
-          - Romance
-          - Science Fiction
-          - Fantasy
-          - Horror
-          - Historical Fiction
-          - Action / Adventure
-          - Other Commercial Fiction
-      - label: "Status"
-        name: "status"
-        widget: "select"
-        options:
-          - { label: "Available Now", value: "available" }
-          - { label: "Coming Soon", value: "soon" }
-          - { label: "In Production", value: "progress" }
-      - { label: "Status Label (optional)", name: "status_label", widget: "string", required: false }
-      - { label: "Blurb", name: "blurb", widget: "text" }
-      - { label: "Cover Image", name: "cover", widget: "image", required: false }
-      - { label: "Buy / Amazon Link (optional)", name: "link", widget: "string", required: false }
+  - name: "catalogue"
+    label: "Book Catalogue"
+    files:
+      - name: "books"
+        label: "Books"
+        file: "data/books.json"
+        format: "json"
+        fields:
+          - label: "Books"
+            name: "books"
+            widget: "list"
+            summary: "{{fields.title}} — {{fields.status_label}}"
+            add_to_top: true
+            fields:
+              - { label: "ID", name: "id", widget: "string", hint: "Lowercase slug, e.g. the-glove-shop-on-market-lane" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Author", name: "author", widget: "string" }
+              - label: "Author Page"
+                name: "author_url"
+                widget: "string"
+                required: false
+                hint: "Example: eleanor-harte.html"
+              - label: "Imprint"
+                name: "imprint"
+                widget: "select"
+                options:
+                  - { label: "LT Publishing", value: "publishing" }
+                  - { label: "LT Select", value: "select" }
+                  - { label: "Belle Époque Editions", value: "belle" }
+              - { label: "Genre", name: "genre", widget: "string" }
+              - label: "Status"
+                name: "status"
+                widget: "select"
+                options:
+                  - { label: "Available", value: "available" }
+                  - { label: "Coming Soon", value: "soon" }
+                  - { label: "In Production", value: "progress" }
+                  - { label: "Archived / Hidden", value: "hidden" }
+              - { label: "Status Label", name: "status_label", widget: "string", hint: "What visitors see, e.g. Available Now or Coming Autumn 2026" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Cover", name: "cover", widget: "image", required: false }
+              - { label: "Purchase Link", name: "purchase_url", widget: "string", required: false }
+              - { label: "Featured", name: "featured", widget: "boolean", default: false }
+              - { label: "Display Order", name: "order", widget: "number", value_type: "int", min: 1, default: 50 }
