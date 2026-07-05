@@ -1,6 +1,20 @@
 {
   "books": [
     {
+      "genre": "art/photography",
+      "imprint": "belle",
+      "author": "Henric Andelson",
+      "featured": true,
+      "order": 1,
+      "author_id": "ha",
+      "purchase_url": "https://www.lulu.com/shop/henric-andelson/the-golden-age-of-the-poster/hardcover/product-7kz9zq5.html?page=1&pageSize=4",
+      "status": "available",
+      "cover": "/media/uploads/belle-cover.jpg",
+      "title": "The Golden Age of the Poster",
+      "id": "the_golden_age_of_the_poster",
+      "description": "The Golden Age of the Poster celebrates one of the most influential periods in the history of graphic design. Between the late nineteenth century and the outbreak of the First World War, artists transformed the advertising poster into an art form, filling the streets of Europe and America with bold colour, elegant typography, and unforgettable imagery."
+    },
+    {
       "genre": "Romance",
       "status_label": "Available now",
       "imprint": "select",
