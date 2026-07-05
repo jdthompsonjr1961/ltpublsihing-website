@@ -24,10 +24,10 @@ collections:
             summary: "{{fields.title}} — {{fields.status}}"
             add_to_top: true
             fields:
-              - { label: "ID", name: "id", widget: "string", hint: "Lowercase slug, e.g. the-glove-shop-on-market-lane" }
+              - { label: "ID", name: "id", widget: "string", hint: "Lowercase slug, for example: the-glove-shop-on-market-lane" }
               - { label: "Title", name: "title", widget: "string" }
-              - { label: "Author", name: "author", widget: "string" }
-              - { label: "Author Page", name: "author_url", widget: "string", required: false, hint: "Example: eleanor-harte.html" }
+              - { label: "Author", name: "author", widget: "string", hint: "Use the author name exactly as it appears in the Author Catalogue." }
+              - { label: "Author ID", name: "author_id", widget: "string", required: false, hint: "Recommended: the author's lowercase ID, such as eleanor-harte." }
               - label: "Imprint"
                 name: "imprint"
                 widget: "select"
@@ -44,9 +44,50 @@ collections:
                   - { label: "Coming Soon", value: "soon" }
                   - { label: "In Production", value: "progress" }
                   - { label: "Archived / Hidden", value: "hidden" }
-              - { label: "Custom Status Label", name: "status_label", widget: "string", required: false, hint: "Optional. Leave blank for the automatic wording." }
+              - { label: "Custom Status Label", name: "status_label", widget: "string", required: false, hint: "Optional. Leave blank for automatic wording." }
               - { label: "Description", name: "description", widget: "text" }
               - { label: "Cover", name: "cover", widget: "image", required: false }
               - { label: "Purchase Link", name: "purchase_url", widget: "string", required: false }
-              - { label: "Featured", name: "featured", widget: "boolean", default: false, hint: "For prominent homepage placement." }
-              - { label: "Display Order", name: "order", widget: "number", value_type: "int", min: 1, default: 50, hint: "Lower numbers appear first. Use gaps of 10." }
+              - { label: "Featured", name: "featured", widget: "boolean", default: false }
+              - { label: "Display Order", name: "order", widget: "number", value_type: "int", min: 1, default: 50, hint: "Lower numbers appear first within the imprint." }
+
+  - name: "authors_catalogue"
+    label: "Author Catalogue"
+    files:
+      - name: "authors"
+        label: "Authors"
+        file: "data/authors.json"
+        format: "json"
+        fields:
+          - label: "Authors"
+            name: "authors"
+            widget: "list"
+            summary: "{{fields.name}}"
+            add_to_top: true
+            fields:
+              - { label: "Author ID", name: "id", widget: "string", hint: "Lowercase slug, for example: eleanor-harte" }
+              - { label: "Author Name", name: "name", widget: "string" }
+              - { label: "Tagline", name: "tagline", widget: "string", hint: "A short description such as Historical romance." }
+              - { label: "Short Biography", name: "short_bio", widget: "text", hint: "Used on the main Authors page." }
+              - { label: "Full Biography", name: "bio", widget: "text", hint: "Used on the individual author page." }
+              - { label: "Author Photograph", name: "photo", widget: "image", required: false }
+              - label: "Genres"
+                name: "genres"
+                widget: "list"
+                required: false
+                field: { label: "Genre", name: "genre", widget: "string" }
+              - label: "Imprints"
+                name: "imprints"
+                widget: "select"
+                multiple: true
+                required: false
+                options:
+                  - { label: "LT Publishing", value: "publishing" }
+                  - { label: "LT Select", value: "select" }
+                  - { label: "Belle Époque Editions", value: "belle" }
+              - { label: "Website", name: "website", widget: "string", required: false }
+              - { label: "Instagram", name: "instagram", widget: "string", required: false }
+              - { label: "Facebook", name: "facebook", widget: "string", required: false }
+              - { label: "Featured", name: "featured", widget: "boolean", default: true }
+              - { label: "Active", name: "active", widget: "boolean", default: true, hint: "Turn off to hide the author without deleting the record." }
+              - { label: "Display Order", name: "order", widget: "number", value_type: "int", min: 1, default: 50 }
