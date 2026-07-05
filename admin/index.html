@@ -1,34 +1,194 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LT Publishing — Catalogue Manager</title>
-<link rel="stylesheet" href="/admin/preview.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>LT Publishing — Catalogue Manager</title>
 </head>
 <body>
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script src="https://unpkg.com/decap-cms@^3.8.0/dist/decap-cms.js"></script>
 <script>
-const h=window.React.createElement;
-const statusNames={available:"Available Now",soon:"Coming Soon",progress:"In Production",hidden:"Hidden"};
-const imprintNames={publishing:"LT Publishing",select:"LT Select",belle:"Belle Époque Editions"};
-const BookPreview=({entry,getAsset})=>{
- const books=entry.getIn(["data","books"]); const list=books?books.toJS():[];
- return h("main",{className:"cms-preview"},
-  h("header",{className:"cms-preview__header"},h("p",{className:"cms-preview__eyebrow"},"Catalogue preview"),h("h1",null,"Books"),h("p",null,"Compact preview for covers, ordering, status, and metadata.")),
-  h("section",{className:"cms-preview__grid"},
-   ...list.filter(b=>b&&b.status!=="hidden").sort((a,b)=>(a.order??999)-(b.order??999)).map((book,i)=>{
-    let cover=""; if(book.cover){const a=getAsset(book.cover); cover=a?a.toString():book.cover}
-    const label=book.status_label||statusNames[book.status]||"";
-    return h("article",{className:"cms-book",key:book.id||i},
-     h("div",{className:"cms-book__cover"},cover?h("img",{src:cover,alt:""}):h("span",null,"No cover")),
-     h("div",{className:"cms-book__copy"},h("p",{className:"cms-book__imprint"},imprintNames[book.imprint]||book.imprint||""),h("h2",null,book.title||"Untitled"),h("p",{className:"cms-book__author"},book.author||""),h("p",{className:"cms-book__meta"},label+(book.genre?" · "+book.genre:"")+(Number.isFinite(book.order)?" · Order "+book.order:"")))
-    )
-   })
-  )
- )
+const h = window.React.createElement;
+
+const statusNames = {
+  available: "Available Now",
+  soon: "Coming Soon",
+  progress: "In Production",
+  hidden: "Hidden"
 };
-CMS.registerPreviewTemplate("books",BookPreview);
-CMS.registerPreviewStyle("/admin/preview.css");
+
+const imprintNames = {
+  publishing: "LT Publishing",
+  select: "LT Select",
+  belle: "Belle Époque Editions"
+};
+
+const previewCSS = `
+  :root{
+    --paper:#f3f1eb;
+    --surface:#fffdf8;
+    --ink:#1d241f;
+    --muted:#626962;
+    --line:#d7d8d1;
+    --green:#304c3d;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:Arial,sans-serif;
+  }
+  .cms-preview{
+    max-width:920px;
+    margin:0 auto;
+    padding:24px;
+  }
+  .cms-preview__header{
+    margin-bottom:22px;
+  }
+  .cms-preview__eyebrow{
+    margin:0 0 5px;
+    color:var(--green);
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+  }
+  .cms-preview__header h1{
+    margin:0 0 6px;
+    font:500 38px/1 Georgia,serif;
+  }
+  .cms-preview__header p{
+    margin:0;
+    color:var(--muted);
+    font-size:13px;
+  }
+  .cms-preview__grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:12px;
+  }
+  .cms-book{
+    display:grid;
+    grid-template-columns:72px 1fr;
+    gap:14px;
+    min-height:128px;
+    padding:13px;
+    background:var(--surface);
+    border:1px solid var(--line);
+  }
+  .cms-book__cover{
+    width:72px;
+    height:108px;
+    display:grid;
+    place-items:center;
+    overflow:hidden;
+    background:#e5e5df;
+    color:var(--muted);
+    font-size:11px;
+    text-align:center;
+  }
+  .cms-book__cover img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    background:#fff;
+  }
+  .cms-book__copy{
+    align-self:center;
+    min-width:0;
+  }
+  .cms-book__imprint{
+    margin:0 0 5px;
+    color:var(--green);
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+  }
+  .cms-book h2{
+    margin:0 0 5px;
+    font:500 20px/1.05 Georgia,serif;
+  }
+  .cms-book__author,
+  .cms-book__meta{
+    margin:0;
+    color:var(--muted);
+    font-size:11px;
+  }
+  .cms-book__meta{
+    margin-top:7px;
+  }
+`;
+
+const BookPreview = ({ entry, getAsset }) => {
+  const books = entry.getIn(["data", "books"]);
+  const list = books ? books.toJS() : [];
+
+  return h(
+    "main",
+    { className: "cms-preview" },
+    h(
+      "header",
+      { className: "cms-preview__header" },
+      h("p", { className: "cms-preview__eyebrow" }, "Catalogue preview"),
+      h("h1", null, "Books"),
+      h("p", null, "Compact check of covers, order, status, and metadata.")
+    ),
+    h(
+      "section",
+      { className: "cms-preview__grid" },
+      ...list
+        .filter(book => book && book.status !== "hidden")
+        .sort((a, b) => (a.order ?? 999) - (b.order ?? 999))
+        .map((book, index) => {
+          let cover = "";
+          if (book.cover) {
+            const asset = getAsset(book.cover);
+            cover = asset ? asset.toString() : book.cover;
+          }
+
+          const label = book.status_label || statusNames[book.status] || "";
+
+          return h(
+            "article",
+            { className: "cms-book", key: book.id || index },
+            h(
+              "div",
+              { className: "cms-book__cover" },
+              cover
+                ? h("img", { src: cover, alt: "" })
+                : h("span", null, "No cover")
+            ),
+            h(
+              "div",
+              { className: "cms-book__copy" },
+              h(
+                "p",
+                { className: "cms-book__imprint" },
+                imprintNames[book.imprint] || book.imprint || ""
+              ),
+              h("h2", null, book.title || "Untitled"),
+              h("p", { className: "cms-book__author" }, book.author || ""),
+              h(
+                "p",
+                { className: "cms-book__meta" },
+                label +
+                  (book.genre ? " · " + book.genre : "") +
+                  (Number.isFinite(book.order) ? " · Order " + book.order : "")
+              )
+            )
+          );
+        })
+    )
+  );
+};
+
+/* Decap uses the collection name here, not the file name. */
+CMS.registerPreviewTemplate("catalogue", BookPreview);
+CMS.registerPreviewStyle(previewCSS, { raw: true });
 </script>
-</body></html>
+</body>
+</html>
