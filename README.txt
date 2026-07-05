@@ -1,9 +1,12 @@
-# Admin preview fix
+Replace these four files:
+- belle.html
+- thanks-belle.html
+- billy-arc.html
+- thanks-billy.html
 
-Replace only:
-
-admin/index.html
-
-This corrects the Decap preview registration from the file name `books` to the collection name `catalogue`, and embeds the compact preview CSS directly.
-
-After Netlify redeploys, hard-refresh `/admin/index.html`.
+Preserved:
+- Belle Formspree endpoint: https://formspree.io/f/xlgvddez
+- Billy Formspree endpoint: https://formspree.io/f/maqkpqzp
+- Belle PDF and EPUB download links
+- Amazon and Goodreads review links
+- thank-you redirects
