@@ -1,6 +1,6 @@
 backend:
   name: git-gateway
-  branch: main
+  branch: site-redesign
 
 publish_mode: simple
 media_folder: "media/uploads"
