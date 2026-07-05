@@ -1,12 +1,34 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LT Publishing — Content Manager</title>
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LT Publishing — Catalogue Manager</title>
+<link rel="stylesheet" href="/admin/preview.css">
 </head>
 <body>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-</body>
-</html>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="https://unpkg.com/decap-cms@^3.8.0/dist/decap-cms.js"></script>
+<script>
+const h=window.React.createElement;
+const statusNames={available:"Available Now",soon:"Coming Soon",progress:"In Production",hidden:"Hidden"};
+const imprintNames={publishing:"LT Publishing",select:"LT Select",belle:"Belle Époque Editions"};
+const BookPreview=({entry,getAsset})=>{
+ const books=entry.getIn(["data","books"]); const list=books?books.toJS():[];
+ return h("main",{className:"cms-preview"},
+  h("header",{className:"cms-preview__header"},h("p",{className:"cms-preview__eyebrow"},"Catalogue preview"),h("h1",null,"Books"),h("p",null,"Compact preview for covers, ordering, status, and metadata.")),
+  h("section",{className:"cms-preview__grid"},
+   ...list.filter(b=>b&&b.status!=="hidden").sort((a,b)=>(a.order??999)-(b.order??999)).map((book,i)=>{
+    let cover=""; if(book.cover){const a=getAsset(book.cover); cover=a?a.toString():book.cover}
+    const label=book.status_label||statusNames[book.status]||"";
+    return h("article",{className:"cms-book",key:book.id||i},
+     h("div",{className:"cms-book__cover"},cover?h("img",{src:cover,alt:""}):h("span",null,"No cover")),
+     h("div",{className:"cms-book__copy"},h("p",{className:"cms-book__imprint"},imprintNames[book.imprint]||book.imprint||""),h("h2",null,book.title||"Untitled"),h("p",{className:"cms-book__author"},book.author||""),h("p",{className:"cms-book__meta"},label+(book.genre?" · "+book.genre:"")+(Number.isFinite(book.order)?" · Order "+book.order:"")))
+    )
+   })
+  )
+ )
+};
+CMS.registerPreviewTemplate("books",BookPreview);
+CMS.registerPreviewStyle("/admin/preview.css");
+</script>
+</body></html>

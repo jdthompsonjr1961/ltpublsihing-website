@@ -1,313 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>For Belle's Fans — LT Publishing</title>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bonus Chapters — The Cotton Boll Queen</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap');
+:root{--paper:#f3f1eb;--surface:#fffdf8;--ink:#1d241f;--muted:#626962;--line:#d7d8d1;--green:#304c3d;--green-dark:#20362b;--gold:#a87d36;--serif:"Newsreader",Georgia,serif;--sans:"DM Sans",Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 var(--sans)}
+a{color:inherit}
+.site-header{display:flex;justify-content:space-between;align-items:center;padding:18px max(24px,calc((100vw - 1180px)/2));border-bottom:1px solid var(--line);background:rgba(243,241,235,.96)}
+.brand{text-decoration:none;font-weight:600}.brand span{font:600 28px/1 var(--serif);color:var(--green);margin-right:8px}
+.site-header nav{display:flex;gap:22px}.site-header nav a{text-decoration:none;color:var(--muted);font-size:14px}
+main{max-width:1180px;margin:auto;padding:72px 32px 100px}
+.eyebrow{margin:0 0 14px;color:var(--green);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:80px;align-items:end;padding:55px 0 70px;border-bottom:1px solid var(--line)}
+.hero h1{margin:0;font:500 clamp(58px,8vw,100px)/.94 var(--serif);letter-spacing:-.045em}
+.hero p{color:var(--muted);font-size:20px}
+.panel{margin-top:55px;padding:clamp(26px,5vw,52px);background:var(--surface);border:1px solid var(--line)}
+.panel h2{margin:0 0 16px;font:500 42px/1 var(--serif)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.field{display:grid;gap:7px;margin-bottom:20px}.field label{font-weight:600}.field input,.field textarea,.field select{width:100%;padding:13px 14px;border:1px solid #c8cbc3;background:#fff;font:inherit}.field textarea{min-height:130px}
+.button{display:inline-block;padding:13px 20px;border:0;background:var(--green);color:white;text-decoration:none;font:600 15px var(--sans);cursor:pointer}
+.button--ghost{background:transparent;color:var(--green);border:1px solid var(--green)}
+.note{color:var(--muted);font-size:14px}
+.download-grid,.review-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px}
+.download-card,.review-card{padding:24px;border:1px solid var(--line);background:var(--surface)}
+.download-card h3,.review-card h3{font:500 28px/1.05 var(--serif);margin:0 0 8px}
+.review-callout{margin-top:48px;padding:40px;background:var(--green-dark);color:#f5f3ed}
+.review-callout h2{font:500 46px/1 var(--serif);margin:0 0 16px}
+.review-callout p{color:#d9dfda}
+.book-points{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);margin-top:40px}
+.book-points article{background:var(--surface);padding:26px}
+.book-points h3{font:500 28px/1.05 var(--serif);margin:0 0 10px}
+.list{padding-left:20px}.list li{margin:8px 0}
+.footer{padding:34px;text-align:center;background:var(--green-dark);color:#e5eae6;font-size:14px}
+@media(max-width:760px){.hero,.form-grid,.download-grid,.review-grid,.book-points{grid-template-columns:1fr}.site-header{align-items:flex-start;gap:20px}.site-header nav{flex-wrap:wrap;justify-content:flex-end}.hero{gap:25px}main{padding-left:22px;padding-right:22px}}
+</style>
+</head><body>
+<header class="site-header">
+  <a class="brand" href="index.html"><span>LT</span>Publishing</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="authors.html">Authors</a>
+    <a href="services.html">Services</a>
+  </nav>
+</header>
 
-    :root {
-      --cream: #f8f4ee;
-      --dark: #1a1612;
-      --mid: #4a3f35;
-      --light: #c8b89a;
-      --accent: #7a5c3a;
-    }
-
-    html, body {
-      height: 100%;
-    }
-
-    body {
-      background-color: var(--cream);
-      color: var(--dark);
-      font-family: 'EB Garamond', Georgia, serif;
-      font-size: 18px;
-      line-height: 1.7;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 3rem 1.5rem;
-    }
-
-    .container {
-      max-width: 560px;
-      width: 100%;
-      text-align: center;
-    }
-
-    .ornament {
-      font-size: 1.4rem;
-      color: var(--light);
-      margin-bottom: 2rem;
-      letter-spacing: 0.3em;
-    }
-
-    h1 {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-weight: 300;
-      font-size: 2.2rem;
-      letter-spacing: 0.08em;
-      line-height: 1.3;
-      margin-bottom: 0.4rem;
-      color: var(--dark);
-    }
-
-    h1 em {
-      font-style: italic;
-      font-weight: 300;
-    }
-
-    .subtitle {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-style: italic;
-      font-size: 1rem;
-      color: var(--accent);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 2.5rem;
-    }
-
-    .divider {
-      width: 60px;
-      height: 1px;
-      background-color: var(--light);
-      margin: 0 auto 2.5rem;
-    }
-
-    .intro {
-      font-size: 1.05rem;
-      color: var(--mid);
-      margin-bottom: 1.5rem;
-      line-height: 1.8;
-    }
-
-    .chapters {
-      margin: 2rem 0;
-      text-align: left;
-      border-left: 2px solid var(--light);
-      padding-left: 1.5rem;
-    }
-
-    .chapter-item {
-      margin-bottom: 1.2rem;
-    }
-
-    .chapter-title {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-style: italic;
-      font-size: 1.1rem;
-      color: var(--dark);
-      display: block;
-      margin-bottom: 0.2rem;
-    }
-
-    .chapter-desc {
-      font-size: 0.9rem;
-      color: var(--mid);
-    }
-
-    .divider {
-      width: 60px;
-      height: 1px;
-      background-color: var(--light);
-      margin: 2rem auto;
-    }
-
-    form {
-      margin-top: 2rem;
-    }
-
-    .form-group {
-      margin-bottom: 1.2rem;
-      text-align: left;
-    }
-
-    label {
-      display: block;
-      font-size: 0.85rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.4rem;
-    }
-
-    input[type="text"],
-    input[type="email"] {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      border: 1px solid var(--light);
-      background-color: transparent;
-      color: var(--dark);
-      font-family: 'EB Garamond', Georgia, serif;
-      font-size: 1rem;
-      outline: none;
-      transition: border-color 0.2s ease;
-      border-radius: 0;
-      -webkit-appearance: none;
-    }
-
-    input[type="text"]:focus,
-    input[type="email"]:focus {
-      border-color: var(--accent);
-    }
-
-    input::placeholder {
-      color: var(--light);
-    }
-
-    button[type="submit"] {
-      width: 100%;
-      padding: 0.9rem 2rem;
-      background-color: var(--dark);
-      color: var(--cream);
-      border: none;
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 1rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background-color 0.2s ease;
-      margin-top: 0.5rem;
-    }
-
-    button[type="submit"]:hover {
-      background-color: var(--accent);
-    }
-
-    .privacy {
-      font-size: 0.82rem;
-      color: var(--light);
-      margin-top: 1rem;
-      font-style: italic;
-    }
-
-    .footer-ornament {
-      margin-top: 3rem;
-      font-size: 1.2rem;
-      color: var(--light);
-      letter-spacing: 0.3em;
-    }
-
-    .publisher {
-      margin-top: 1rem;
-      font-size: 0.8rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--light);
-    }
-
-    .publisher a {
-      color: var(--light);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .publisher a:hover {
-      color: var(--accent);
-    }
-
-    /* Success state */
-    .success-message {
-      display: none;
-      padding: 2rem;
-      border: 1px solid var(--light);
-      text-align: center;
-    }
-
-    .success-message h2 {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-weight: 300;
-      font-style: italic;
-      font-size: 1.6rem;
-      margin-bottom: 1rem;
-      color: var(--dark);
-    }
-
-    .success-message p {
-      color: var(--mid);
-      font-size: 0.95rem;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-
-    <div class="ornament">❧</div>
-
-    <h1><em>The Cotton Boll Queen</em></h1>
-    <p class="subtitle">Bonus Chapters</p>
-
-    <div class="intro">
-      Two chapters that live outside the novel's architecture — one that fills in a night the book only names, one that answers a question it never asks.
-    </div>
-
-    <div class="chapters">
-      <div class="chapter-item">
-        <span class="chapter-title">Chicago, Night One</span>
-        <span class="chapter-desc">The evening Celeste sent Annabelle to the city alone, before New York.</span>
-      </div>
-      <div class="chapter-item">
-        <span class="chapter-title">What Eudora Knew</span>
-        <span class="chapter-desc">Fifteen years in the house on County Road 7. Betsy's story, from the inside.</span>
-      </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <form action="https://formspree.io/f/xlgvddez" method="POST" id="bonus-form">
-      <div class="form-group">
-        <label for="name">Your Name</label>
-        <input type="text" id="name" name="name" placeholder="First name is fine" required>
-      </div>
-      <div class="form-group">
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" placeholder="Where to send them" required>
-      </div>
-      <input type="hidden" name="_subject" value="Bonus chapters request — The Cotton Boll Queen">
-      <input type="hidden" name="_next" value="https://ltpublishing.com/belle?thank-you">
-      <button type="submit">Send Me the Chapters</button>
-      <p class="privacy">Your email stays with LT Publishing. No lists, no noise.</p>
-    </form>
-
-    <div class="success-message" id="success">
-      <h2>On its way.</h2>
-      <p>Check your inbox — and thank you for reading Belle's story.</p>
-    </div>
-
-    <div class="footer-ornament">❧</div>
-    <p class="publisher"><a href="https://ltpublishing.com">LT Publishing</a></p>
-
-  </div>
-
-  <script>
-    const form = document.getElementById('bonus-form');
-
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const data = new FormData(form);
-      try {
-        const response = await fetch(form.action, {
-          method: 'POST',
-          body: data,
-          headers: { 'Accept': 'application/json' }
-        });
-        if (response.ok) {
-          window.location.href = '/thanks-belle';
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    });
-  </script>
-
-</body>
-</html>
+<main>
+<section class="hero"><div><p class="eyebrow">For readers of The Cotton Boll Queen</p><h1>Two chapters beyond the novel.</h1></div><div><p>One fills in a night the book only names. One answers a question the novel never asks.</p></div></section>
+<section class="book-points">
+<article><p class="eyebrow">Bonus chapter one</p><h3>Chicago, Night One</h3><p>The evening Celeste sent Annabelle to the city alone, before New York.</p></article>
+<article><p class="eyebrow">Bonus chapter two</p><h3>What Eudora Knew</h3><p>Fifteen years in the house on County Road 7. Betsy’s story, from the inside.</p></article>
+<article><p class="eyebrow">Delivery</p><h3>PDF and EPUB</h3><p>Choose the format that works best for your phone, tablet, computer, Kindle, or e-reader.</p></article>
+</section>
+<section class="panel"><p class="eyebrow">Send me the chapters</p><h2>They are ready when you are.</h2>
+<form action="https://formspree.io/f/xlgvddez" method="POST">
+<input type="hidden" name="_subject" value="Cotton Boll Queen bonus chapters">
+<input type="hidden" name="_next" value="https://ltpublishing.com/thanks-belle.html">
+<div class="form-grid"><div class="field"><label for="belle-name">Your name</label><input id="belle-name" name="Name" required></div><div class="field"><label for="belle-email">Email address</label><input id="belle-email" name="Email" type="email" required></div></div>
+<button class="button" type="submit">Send me the chapters</button>
+<p class="note">Your information stays with LT Publishing. No unrelated mailing lists, no noise.</p>
+</form></section>
+</main><footer class="footer">LT Publishing · Lisbon, Portugal · © 2026</footer></body></html>

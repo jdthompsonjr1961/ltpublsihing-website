@@ -1,185 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CEG094HHNR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-CEG094HHNR');
-</script>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Belle Époque Editions — Art History, Beautifully Made</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css" />
-<style>
-.hero {
-  min-height: 100vh;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  text-align: center; padding: 8rem 2rem 5rem;
-  position: relative;
-}
-.hero::before {
-  content: ''; position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 50% 60%, rgba(181,101,29,0.10) 0%, transparent 70%);
-  pointer-events: none;
-}
-.hero::after {
-  content: ''; position: absolute; bottom: 0; left: 50%;
-  transform: translateX(-50%);
-  width: 1px; height: 80px;
-  background: linear-gradient(to bottom, var(--rule-light), transparent);
-}
-.hero-colophon {
-  width: 130px; margin-bottom: 1.5rem;
-  opacity: 0; animation: fadeUp 1s ease 0.2s forwards;
-}
-.hero-title {
-  font-family: 'Playfair Display', serif; font-weight: 400;
-  font-size: clamp(3rem, 7vw, 6rem); line-height: 1.05;
-  color: var(--text); margin-bottom: 1.5rem;
-  opacity: 0; animation: fadeUp 1s ease 0.4s forwards;
-}
-.hero-title em { font-style: italic; color: var(--gold); display: block; font-size: 1.05em; }
-.hero-rule { width: 50px; height: 1px; background: var(--gold); margin: 0 auto 2rem; opacity: 0; animation: fadeUp 1s ease 0.55s forwards; }
-.hero-sub {
-  font-family: 'Jost', sans-serif; font-weight: 300;
-  font-size: 0.82rem; letter-spacing: 0.35em; text-transform: uppercase;
-  color: var(--text-muted); margin-bottom: 2.5rem;
-  opacity: 0; animation: fadeUp 1s ease 0.65s forwards;
-}
-.hero-desc {
-  max-width: 560px; font-size: 1.1rem;
-  color: var(--text-muted); line-height: 1.85;
-  opacity: 0; animation: fadeUp 1s ease 0.8s forwards;
-}
-
-/* ── FEATURED VOLUME ── */
-.featured { background: var(--surface); padding: 7rem 5rem; }
-.featured-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 4rem; align-items: center; }
-.featured-cover {
-  aspect-ratio: 3/4; background: var(--surface-2);
-  border: 1px solid var(--rule-light); border-top: 3px solid var(--gold);
-  position: relative; overflow: hidden;
-}
-.featured-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.featured-status { display: inline-block; font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.3rem 0.9rem; border: 1px solid rgba(181,101,29,0.4); background: rgba(181,101,29,0.1); color: var(--gold); margin-top: 1.5rem; }
-
-.featured-body-title { font-family: 'Playfair Display', serif; font-weight: 500; font-size: clamp(1.8rem,3vw,2.6rem); color: var(--text); margin-bottom: 1.2rem; line-height: 1.2; }
-.featured-body-title em { font-style: italic; color: var(--gold-pale); }
-.featured-body-text { font-size: 1.05rem; color: var(--text-muted); line-height: 1.85; }
-.featured-body-text p + p { margin-top: 1.1rem; }
-.featured-credit { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--rule-light); font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.78rem; letter-spacing: 0.12em; color: var(--text-muted); }
-.featured-credit strong { color: var(--text); font-weight: 500; letter-spacing: 0.02em; text-transform: none; }
-
-/* ── ABOUT THE IMPRINT ── */
-.about-imprint { padding: 7rem 5rem; }
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-.about-col p { font-size: 1.02rem; color: var(--text-muted); line-height: 1.85; margin-bottom: 1.1rem; }
-.about-col h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 500; color: var(--text); margin-bottom: 1.2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--rule-light); }
-.about-col h3 em { font-style: italic; color: var(--gold-pale); }
-
-@media (max-width: 900px) {
-  .featured-grid, .about-grid { grid-template-columns: 1fr; }
-  .featured { padding: 5rem 1.5rem; }
-  .about-imprint { padding: 5rem 1.5rem; }
-}
-</style>
-</head>
-<body class="theme-belle">
-
-<nav id="main-nav">
-  <a href="index.html" class="nav-brand">
-    <span class="nav-brand-main">Belle Époque Editions</span>
-    <span class="nav-brand-sub">An LT Media Imprint · Lisbon</span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="index.html">LT Publishing</a></li>
-    <li><a href="services.html">LT Media</a></li>
-    <li><a href="index.html" class="nav-cta">Back to LT Publishing</a></li>
-  </ul>
-  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-
-<div class="mobile-menu" id="mobile-menu">
-  <a href="index.html">LT Publishing</a>
-  <a href="services.html">LT Media</a>
-  <a href="index.html" class="mob-cta">Back to LT Publishing →</a>
-</div>
-
-<section class="hero">
-  <img src="belle-colophon.png" alt="Belle Époque Editions colophon" class="hero-colophon">
-  <h1 class="hero-title">Belle<br><em>Époque</em><br>Editions</h1>
-  <div class="hero-rule"></div>
-  <p class="hero-sub">Art History &nbsp;·&nbsp; Coffee Table Editions &nbsp;·&nbsp; Lisbon</p>
-  <p class="hero-desc">A new imprint devoted to art history in print — beginning with the poster art of the Golden Age. Built for collectors, designers, and anyone who reads a room by what's left open on the table.</p>
+<!doctype html><html lang="en"><head><title>Belle Époque Editions — Art History, Beautifully Made</title><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"></head><body class="theme-belle"><header class="site-header"><a class="brand" href="index.html"><span class="brand__mark">LT</span><span class="brand__name">Publishing</span></a><nav class="site-nav"><a href="index.html#books">Books</a><a href="authors.html">Authors</a><a href="imprints.html">Imprints</a><a href="services.html">Services</a><a href="submissions.html">Submit Your Work</a><a href="assets/">Image Library</a></nav></header>
+<main>
+<section class="page-intro page-intro--belle">
+  <p class="eyebrow">Belle Époque Editions</p>
+  <h1>Art history, beautifully made.</h1>
+  <p>An LT Publishing imprint devoted to public-domain visual culture, historical print, and books designed to let the artwork remain the central event.</p>
 </section>
 
-<div class="divider"><div class="divider-line"></div><div class="divider-mark">❧</div><div class="divider-line"></div></div>
-
-<section class="featured">
-  <div class="label">The Debut Volume</div>
-  <h2 class="section-h2" style="margin-bottom:3.5rem;">The Golden Age <em>of the Poster</em></h2>
-  <div class="featured-grid">
-    <div>
-      <div class="featured-cover">
-        <img src="belle-cover.jpg" alt="The Golden Age of the Poster — Belle Époque Editions, edited by Henric Andelson" />
-      </div>
-      <div style="text-align:center;"><span class="featured-status">In Production</span></div>
-    </div>
-    <div>
-      <h3 class="featured-body-title">Art Nouveau, advertising,<br><em>and the birth of modern design.</em></h3>
-      <div class="featured-body-text">
-        <p>The debut Belle Époque title gathers the poster art of the Golden Age — travel, entertainment, and commercial design from the era that invented the modern poster as an art form. Each plate is reproduced from high-resolution source material, sequenced and paired with context for a coffee table that wants to be picked up, not just admired.</p>
-        <p>Printed as a hardcover with the dust jacket the format deserves, sized for a shelf, not a drawer.</p>
-      </div>
-      <div class="featured-credit">Selected and edited by <strong>Henric Andelson</strong> &nbsp;·&nbsp; Art history collaboration by Alex</div>
-    </div>
-  </div>
+<section class="belle-feature">
+  <div class="belle-feature__image"><img src="belle-cover.jpg" alt="The Golden Age of the Poster"></div>
+  <div><p class="eyebrow">The first volume</p><h2>The Golden Age of the Poster</h2><p>A large-format survey of the artists who transformed the poster into modern visual culture—from Jules Chéret, Alphonse Mucha, and Toulouse-Lautrec to Steinlen, Penfield, Privat-Livemont, Ethel Reed, Jessie M. King, and the wider international movement.</p><p>The book treats posters as art objects and historical evidence, not as decorative filler.</p><a class="text-link" href="assets/">Browse the public-domain image library →</a></div>
 </section>
 
-<div class="divider"><div class="divider-line"></div><div class="divider-mark">❖</div><div class="divider-line"></div></div>
-
-<section class="about-imprint">
-  <div class="label">The Imprint</div>
-  <h2 class="section-h2">Built for the <em>shelf,</em><br>not the algorithm.</h2>
-  <div class="about-grid">
-    <div class="about-col">
-      <h3>What we <em>make</em></h3>
-      <p>Belle Époque Editions publishes art history in physical form — coffee table volumes built around a single period, movement, or visual tradition. The Golden Age poster volume is the first; more will follow as the catalogue grows.</p>
-      <p>Each title is sourced, sequenced, and designed with the same care given to any book carrying the LT name — just aimed at a shelf meant to be seen as much as read.</p>
-    </div>
-    <div class="about-col">
-      <h3>Who's <em>behind it</em></h3>
-      <p>Belle Époque Editions is an imprint of LT Media, edited and produced from Lisbon. Art history direction and visual curation by Alex; production and editorial by the same team behind LT Publishing and LT Select.</p>
-      <p>Interested in a future volume, a print from the collection, or press access? Reach us through <a href="services.html" style="color:var(--gold);">LT Media</a>.</p>
-    </div>
-  </div>
+<section class="split-section">
+  <div><p class="eyebrow">The archive</p><h2>More than 1,700 public-domain images.</h2></div>
+  <div><p>The Belle Époque image library brings together poster art, illustration, decorative work, and related historical material with source and rights information preserved wherever available.</p><p>The archive supports book development, research, and responsible reuse. Its catalogue data remains separate from the publishing catalogue so that the collection can continue to grow without disrupting the rest of the site.</p></div>
 </section>
 
-<footer>
-  <div>
-    <span class="footer-brand-main">Belle Époque Editions</span>
-    <span class="footer-brand-sub">An LT Media Imprint · Lisbon</span>
-  </div>
-  <div class="footer-center"><em>Art history, beautifully made</em></div>
-  <div class="footer-right">© 2026 Belle Époque Editions<br>All rights reserved</div>
-</footer>
-
-<script>
-  const nav = document.getElementById('main-nav');
-  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobile-menu');
-  hamburger.addEventListener('click', () => { mobileMenu.classList.toggle('open'); });
-</script>
-
-</body>
-</html>
+<section class="section">
+  <div class="section-heading"><div><p class="eyebrow">Catalogue</p><h2>Belle Époque Editions</h2></div><p>Current art books and works in development.</p></div>
+  <div class="catalogue catalogue--compact" data-catalogue data-imprint="belle" data-layout="compact">Loading catalogue…</div>
+</section>
+</main>
+<footer class="site-footer"><div>LT Publishing<br>Lisbon, Portugal</div><div><a href="ltpublishing.html">LT Publishing</a><a href="select.html">LT Select</a><a href="belle-epoque.html">Belle Époque</a><a href="services.html">Services</a><a href="submissions.html">Submit</a></div><div>© 2026 LT Publishing</div></footer><script src="scripts/catalog.js"></script></body></html>

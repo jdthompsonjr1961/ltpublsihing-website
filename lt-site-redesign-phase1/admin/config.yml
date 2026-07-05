@@ -1,0 +1,57 @@
+backend:
+  name: git-gateway
+  branch: site-redesign
+
+publish_mode: simple
+media_folder: "media/uploads"
+public_folder: "/media/uploads"
+
+site_url: "https://ltpublishing.com"
+display_url: "https://ltpublishing.com"
+logo_url: "/belle-colophon.png"
+
+collections:
+  - name: "catalogue"
+    label: "Book Catalogue"
+    files:
+      - name: "books"
+        label: "Books"
+        file: "data/books.json"
+        format: "json"
+        fields:
+          - label: "Books"
+            name: "books"
+            widget: "list"
+            summary: "{{fields.title}} — {{fields.status_label}}"
+            add_to_top: true
+            fields:
+              - { label: "ID", name: "id", widget: "string", hint: "Lowercase slug, e.g. the-glove-shop-on-market-lane" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Author", name: "author", widget: "string" }
+              - label: "Author Page"
+                name: "author_url"
+                widget: "string"
+                required: false
+                hint: "Example: eleanor-harte.html"
+              - label: "Imprint"
+                name: "imprint"
+                widget: "select"
+                options:
+                  - { label: "LT Publishing", value: "publishing" }
+                  - { label: "LT Select", value: "select" }
+                  - { label: "Belle Époque Editions", value: "belle" }
+              - { label: "Genre", name: "genre", widget: "string" }
+              - label: "Status"
+                name: "status"
+                widget: "select"
+                options:
+                  - { label: "Available", value: "available" }
+                  - { label: "Coming Soon", value: "soon" }
+                  - { label: "In Production", value: "progress" }
+                  - { label: "Archived / Hidden", value: "hidden" }
+              - { label: "Status Label", name: "status_label", widget: "string", hint: "What visitors see, e.g. Available Now or Coming Autumn 2026" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Cover", name: "cover", widget: "image", required: false }
+              - { label: "Purchase Link", name: "purchase_url", widget: "string", required: false }
+              - { label: "Featured", name: "featured", widget: "boolean", default: false }
+              - { label: "Display Order", name: "order", widget: "number", value_type: "int", min: 1, default: 50 }
