@@ -1,0 +1,69 @@
+{
+  "authors": [
+    {
+      "id": "j-lemethompson",
+      "name": "J LemeThompson",
+      "tagline": "Literary fiction and practical nonfiction",
+      "short_bio": "Fiction concerned with power, complicity, family, and the consequences of silence; nonfiction built for practical use.",
+      "bio": "J LemeThompson writes literary fiction and practical nonfiction shaped by an Arkansas upbringing and a life now based in Lisbon. The fiction returns to power, institutional complicity, family loyalty, and the point at which silence becomes a choice.",
+      "photo": "",
+      "genres": [
+        "Literary fiction",
+        "Historical fiction",
+        "Nonfiction"
+      ],
+      "imprints": [
+        "publishing",
+        "select"
+      ],
+      "website": "",
+      "instagram": "",
+      "facebook": "",
+      "featured": true,
+      "active": true,
+      "order": 10
+    },
+    {
+      "id": "august-rowan",
+      "name": "August Rowan",
+      "tagline": "Contemporary thrillers",
+      "short_bio": "Character-driven suspense about institutions, surveillance, unstable loyalties, and records that refuse to stay buried.",
+      "bio": "August Rowan writes contemporary thrillers where systems built to protect people become tools for watching them. The Ethan Hayes novels combine institutional suspense, digital vulnerability, and characters forced to decide which loyalties can survive scrutiny.",
+      "photo": "",
+      "genres": [
+        "Thriller",
+        "Suspense"
+      ],
+      "imprints": [
+        "select"
+      ],
+      "website": "",
+      "instagram": "",
+      "facebook": "",
+      "featured": true,
+      "active": true,
+      "order": 20
+    },
+    {
+      "id": "eleanor-harte",
+      "name": "Eleanor Harte",
+      "tagline": "Historical romance",
+      "short_bio": "Atmospheric historical romance about capable women, inherited obligations, and love earned through attention and work.",
+      "bio": "Based in Chicago, Eleanor Harte writes emotionally restrained historical romances with atmospheric settings, practical heroines, and patiently earned happy endings.",
+      "photo": "",
+      "genres": [
+        "Historical romance",
+        "Romantic mystery"
+      ],
+      "imprints": [
+        "select"
+      ],
+      "website": "",
+      "instagram": "",
+      "facebook": "",
+      "featured": true,
+      "active": true,
+      "order": 30
+    }
+  ]
+}

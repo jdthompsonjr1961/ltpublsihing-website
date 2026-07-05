@@ -1,0 +1,59 @@
+<!doctype html><html lang="en"><head><title>Submit Your Work | LT Publishing</title><meta name="description" content="Submit a manuscript, publishing-services inquiry, or KDP file-fix request to LT Publishing for review through the appropriate imprint or service path."><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"></head><body class=""><header class="site-header"><a class="brand" href="index.html"><span class="brand__mark">LT</span><span class="brand__name">Publishing</span></a><nav class="site-nav"><a href="index.html#books">Books</a><a href="authors.html">Authors</a><a href="imprints.html">Imprints</a><a href="services.html">Services</a><a href="kdp-file-fix.html">KDP File Fix</a><a href="submissions.html">Submit Your Work</a><a href="assets/">Image Library</a></nav></header>
+<main>
+<section class="page-intro">
+  <p class="eyebrow">Submissions and project enquiries</p>
+  <h1>Tell us about the book.</h1>
+  <p>No formal query letter is required. Give us the title, the essential premise, and enough information to understand both the work and the kind of relationship you are seeking.</p>
+</section>
+
+<section class="path-grid">
+  <article><p class="eyebrow">LT Publishing</p><h2>Literary imprint</h2><p>For literary fiction and related work seeking a traditional small-press partnership with no upfront production fee.</p></article>
+  <article><p class="eyebrow">LT Select</p><h2>Collaborative publishing</h2><p>For selected commercial fiction and practical nonfiction where the author takes on a greater share of the practical commitment.</p></article>
+  <article><p class="eyebrow">Publishing services</p><h2>Production help</h2><p>For editing, design, formatting, KDP or Lulu corrections, metadata, or a specific problem that needs to be fixed.</p></article>
+</section>
+
+<section class="submission-wrap">
+  <form id="submission-form" class="submission-form" action="https://formspree.io/f/mkoyndwz" method="POST">
+    <input type="hidden" name="_subject" value="New LT Publishing submission">
+    <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off">
+
+    <div class="form-field"><label for="path">What are you submitting for?</label><select id="path" name="Submission Path" required><option value="">Choose one</option><option value="LT Publishing">LT Publishing</option><option value="LT Select">LT Select</option><option value="Publishing Services">Publishing services</option><option value="Not sure">Not sure</option></select></div>
+
+    <div class="form-grid">
+      <div class="form-field"><label for="name">Your name</label><input id="name" name="Name" type="text" required></div>
+      <div class="form-field"><label for="email">Email address</label><input id="email" name="Email" type="email" required></div>
+      <div class="form-field"><label for="title">Book title</label><input id="title" name="Book Title" type="text" required></div>
+      <div class="form-field"><label for="penname">Pen name, if applicable</label><input id="penname" name="Pen Name" type="text"></div>
+      <div class="form-field"><label for="genre">Genre or category</label><input id="genre" name="Genre" type="text" required></div>
+      <div class="form-field"><label for="wordcount">Approximate word count</label><input id="wordcount" name="Word Count" type="number" min="0" step="1000"></div>
+    </div>
+
+    <div class="form-field"><label for="summary">Tell us about the book</label><textarea id="summary" name="Book Description" rows="8" required></textarea><small>A concise synopsis, premise, or explanation of the project is enough.</small></div>
+
+    <div class="form-field"><label for="authornote">A little about you</label><textarea id="authornote" name="Author Note" rows="4"></textarea></div>
+
+    <div class="form-field"><label for="link">Manuscript or file link</label><input id="link" name="Manuscript Link" type="url" placeholder="Dropbox, Google Drive, OneDrive, or another share link"><small>Set access to “anyone with the link.” A full manuscript is not required for an initial services enquiry.</small></div>
+
+    <div class="form-field"><label for="notes">Anything else we should know?</label><textarea id="notes" name="Additional Notes" rows="4"></textarea></div>
+
+    <label class="check-field"><input type="checkbox" name="Rights Confirmation" value="Confirmed" required><span>I confirm that I own or control the work I am submitting and have the authority to share it for review.</span></label>
+
+    <p class="form-note">Submitting does not guarantee acceptance, publication, or a services agreement. Your information will not be sold or shared for unrelated purposes.</p>
+    <button class="button" type="submit">Send submission</button>
+    
+  </form>
+</section>
+</main>
+
+<footer class="site-footer"><div>LT Publishing<br>Lisbon, Portugal</div><div><a href="ltpublishing.html">LT Publishing</a><a href="select.html">LT Select</a><a href="belle-epoque.html">Belle Époque</a><a href="services.html">Services</a><a href="kdp-file-fix.html">KDP File Fix</a><a href="submissions.html">Submit</a></div><div>© 2026 LT Publishing</div></footer>
+<script>
+const params = new URLSearchParams(location.search);
+const path = params.get("path");
+const select = document.getElementById("path");
+if (select) {
+  if (path === "publishing") select.value = "LT Publishing";
+  if (path === "select") select.value = "LT Select";
+  if (path === "services") select.value = "Publishing Services";
+}
+</script>
+</body></html>
