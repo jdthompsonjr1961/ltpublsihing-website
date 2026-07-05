@@ -1,9 +1,25 @@
-<!doctype html><html lang="en"><head><title>Publishing Services — LT Publishing</title><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"></head><body class=""><header class="site-header"><a class="brand" href="index.html"><span class="brand__mark">LT</span><span class="brand__name">Publishing</span></a><nav class="site-nav"><a href="index.html#books">Books</a><a href="authors.html">Authors</a><a href="imprints.html">Imprints</a><a href="services.html">Services</a><a href="submissions.html">Submit Your Work</a><a href="assets/">Image Library</a></nav></header>
+<!doctype html><html lang="en"><head><title>Publishing Services — LT Publishing</title><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css">
+<style>
+.page-intro--services{grid-template-columns:1.25fr .75fr}
+.services-intro-copy{display:grid;gap:26px;align-self:end}
+.services-intro-copy>p{margin:0;color:var(--muted);font-size:21px}
+.service-guarantee{display:grid;gap:8px;padding:18px 20px;border:1px solid var(--green);background:rgba(255,253,248,.55)}
+.service-guarantee strong{color:var(--green-dark);font-size:15px;letter-spacing:.02em}
+.service-guarantee span{color:var(--muted);font-size:14px;line-height:1.45}
+@media(max-width:800px){.page-intro--services{grid-template-columns:1fr}}
+</style>
+</head><body class=""><header class="site-header"><a class="brand" href="index.html"><span class="brand__mark">LT</span><span class="brand__name">Publishing</span></a><nav class="site-nav"><a href="index.html#books">Books</a><a href="authors.html">Authors</a><a href="imprints.html">Imprints</a><a href="services.html">Services</a><a href="submissions.html">Submit Your Work</a><a href="assets/">Image Library</a></nav></header>
 <main>
-<section class="page-intro">
+<section class="page-intro page-intro--services">
   <p class="eyebrow">Publishing services</p>
   <h1>Editorial judgment. Professional design. Practical production help.</h1>
-  <p>Support for authors and small publishers who need a manuscript assessed honestly, a book designed properly, or a production problem solved without being pushed into an inflated package.</p>
+  <div class="services-intro-copy">
+    <p>Support for authors and small publishers who need a manuscript assessed honestly, a book designed properly, or a production problem solved without being pushed into an inflated package.</p>
+    <aside class="service-guarantee">
+      <strong>Specific fix. No result, no charge.</strong>
+      <span>For clearly defined production problems, if we cannot fix the issue we agreed to address, there is no charge.</span>
+    </aside>
+  </div>
 </section>
 
 <section class="split-section">
