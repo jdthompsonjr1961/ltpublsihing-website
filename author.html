@@ -6,5 +6,25 @@
 <main data-author-page><section class="page-intro"><p>Loading author…</p></section></main>
 <footer class="site-footer"><div>LT Publishing<br>Lisbon, Portugal</div><div><a href="ltpublishing.html">LT Publishing</a><a href="select.html">LT Select</a><a href="belle-epoque.html">Belle Époque</a><a href="services.html">Services</a><a href="resources-for-authors.html">Resources for Authors</a><a href="submissions.html">Submit</a></div><div>© 2026 LT Publishing</div></footer>
 <script src="scripts/authors.js"></script>
+<script>
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  if (params.get("id") !== "j-lemethompson") return;
+
+  function showEmail() {
+    var main = document.querySelector("main[data-author-page]");
+    if (!main || document.getElementById("jlt-author-email")) return;
+
+    var p = document.createElement("p");
+    p.id = "jlt-author-email";
+    p.className = "author-email";
+    p.innerHTML = 'Author contact: <a href="mailto:joe@ltpublishing.com">joe@ltpublishing.com</a>';
+    main.appendChild(p);
+  }
+
+  window.addEventListener("load", showEmail);
+  setTimeout(showEmail, 750);
+})();
+</script>
 </body>
 </html>
