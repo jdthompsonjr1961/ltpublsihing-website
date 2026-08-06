@@ -3,6 +3,19 @@
     {
       "genre": "Literary Fiction",
       "imprint": "publishing",
+      "author": "J Leme Thompson",
+      "featured": false,
+      "order": 2,
+      "purchase_url": "https://www.amazon.com/Cotton-Boll-Queen-Southern-Contemporary-ebook/dp/B0GSWDJLTK/ref=sr_1_1?s=digital-text",
+      "status": "available",
+      "cover": "/media/uploads/tcbq.png",
+      "title": "The Cotton Boll Queen",
+      "id": "cotton-boll",
+      "description": "Before there was Belle Devereaux, there was Annabelle.\n\nNamed for a poem, Annabelle Lee Crump knows the weight of being watched.\n\nIn the cotton fields outside Yazoo City, Mississippi, she has learned to make herself invisible — hiding her beauty, intelligence, and ambition behind purple-streaked hair and chipped black polish. The land is patient. The men are possessive. And visibility, she learns early, is not a blessing. It is an invitation.\n\nWhen Celeste Voss, a woman of quiet power and exacting control, stops at the gas station where Annabelle works the night shift and asks a question no one has ever asked her — have you ever thought of leaving? — Annabelle understands the question is really an offer.\n\nShe takes it.\n\nNew York City becomes her education. As Belle Devereaux, she learns how power moves through rooms, how silence can be placement, and how a woman who controls her own visibility controls almost everything else. Under Celeste’s guidance she is translated, not transformed. The girl from Mississippi does not disappear. She is reorganized — like a violin in a Braque painting, taken apart and reassembled according to different rules.\n\nThe women she works beside are extraordinary in their own right: precise, observant, fluent in the language of rooms most people never learn to read. Together they build a world with its own rules.\n\nUntil it doesn’t hold.\n\nWhen a man of extraordinary patience and dangerous curiosity decides Belle is exactly what he has been looking for — not for desire alone, but for possession — she discovers that the most sophisticated trap is the one that looks like an opportunity.\n\nAnd Mississippi, it turns out, does not let go easily.\n\nThe Cotton Boll Queen is a novel about reinvention, survival, and the cost of becoming valuable. Moving from the cotton fields of Mississippi to the penthouses of Manhattan, it is the story of a woman who builds herself from almost nothing — and refuses to belong to anyone but herself."
+    },
+    {
+      "genre": "Literary Fiction",
+      "imprint": "publishing",
       "author": "J LemeThompson",
       "featured": false,
       "order": 1,
