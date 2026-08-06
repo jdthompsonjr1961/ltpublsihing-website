@@ -89,17 +89,17 @@
     {
       "genre": "Victorian Romance",
       "status_label": "Available Now",
-      "imprint": "select",
+      "imprint": "publishing",
       "author": "Eleanor Harte",
       "featured": true,
-      "order": 70,
-      "purchase_url": "https://www.amazon.com/",
+      "order": 4,
+      "purchase_url": "https://www.amazon.com/Willowbrook-Bargain-Eleanor-Harte-ebook/dp/B0H2RXHNC2/ref=sr_1_1?s=digital-text",
       "status": "available",
       "cover": "/TWB.png",
       "title": "The Willowbrook Bargain",
       "author_url": "eleanor-harte.html",
       "id": "the-willowbrook-bargain",
-      "description": "Love, power, and family secrets—and the choices women make when society gives them too few acceptable options."
+      "description": "At Willowbrook Manor, duty has a price.\nHenrietta Beaumont has been raised to understand what is expected of her: obedience, composure, and a suitable marriage. With her family’s Cornish estate slipping toward ruin, that suitable marriage has become urgent. Lord Alistair Finch is wealthy, well-connected, and willing to rescue Willowbrook — if Henrietta becomes his wife.\n\nBut Finch’s generosity feels less like courtship than possession.\n\nWhen Henrietta meets Julian Thorne, a disgraced bookseller with a ruined family name and a dangerous connection to Finch’s past, she begins to uncover the truth beneath Willowbrook’s polished surfaces. Old debts, altered ledgers, family silence, and buried betrayals suggest that her marriage is not merely a solution to financial trouble. It is part of a bargain arranged long before she understood the terms.\n\nAs pressure tightens around her, Henrietta must decide whether duty will bind her to a life chosen by others — or whether love, courage, and the truth can unmake the bargain made in her name.\n\nThe Willowbrook Bargain is a richly atmospheric Victorian historical romance of inheritance, scandal, coercion, and hard-won love on the windswept Cornish coast."
     }
   ]
 }
