@@ -1,19 +1,17 @@
 {
   "books": [
     {
-      "genre": "Southern Gothic",
-      "status_label": "Available Now",
+      "genre": "Literary Fiction",
       "imprint": "publishing",
       "author": "J LemeThompson",
-      "featured": true,
-      "order": 20,
-      "purchase_url": "https://www.amazon.com/Cotton-Boll-Queen-Southern-Contemporary-ebook/dp/B0GSWDJLTK/ref=sr_1_1?s=digital-text",
+      "featured": false,
+      "order": 1,
+      "purchase_url": "https://www.amazon.com/Everythings-Jake-Southern-Coming-Age-ebook/dp/B0GTW2GDCG/ref=sr_1_1",
       "status": "available",
-      "cover": "/TCBQ.png",
-      "title": "The Cotton Boll Queen",
-      "author_url": "j-lemethompson.html",
-      "id": "the-cotton-boll-queen",
-      "description": "A woman remakes herself across Oxford, New Orleans, Chicago, and New York—and learns what beauty costs."
+      "cover": "/media/uploads/everthing-s-jake-ebook-alternative-copy.jpg",
+      "title": "Everything's Jake",
+      "id": "Everythings-jake",
+      "description": "In Elmwood, Tennessee, everyone knows everyone.\n\nFaith is steady. Land is inherited. Reputations are earned slowly and kept carefully. When a man like Tom Reeves—attorney, scoutmaster, deacon, the judge's son—takes an interest in your boy, you feel grateful. You feel seen.\n\nJohn Robinson is fighting to save his family's farm. Sarah Robinson knows something is wrong with her son but cannot name it. Jake is eleven years old, eager to belong, and learning that being chosen by the right people feels like opportunity.\n\nIt isn't.\n\nEverything's Jake is a novel about the slow architecture of trust—how it is built, how it is used, and what it costs when the wrong person holds it.\n\nSet against the quiet rhythms of rural Tennessee, it examines how ordinary goodness can coexist with extraordinary harm, and how the institutions we rely on to protect us sometimes protect only themselves.\n\nIn small communities, trust moves faster than doubt. And not all guidance reveals its cost at once."
     },
     {
       "genre": "Literary Fiction",
