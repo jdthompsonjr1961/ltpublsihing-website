@@ -1,6 +1,19 @@
 {
   "books": [
     {
+      "genre": "Romance",
+      "imprint": "publishing",
+      "author": "Eleanor Harte",
+      "featured": false,
+      "order": 5,
+      "purchase_url": "https://www.amazon.com/Gloveshop-Market-Lane-Willowbrook-Novel-ebook/dp/B0H737N1JS/ref=sr_1_1?crid=3HJDNZNBYP5YT&dib=eyJ2IjoiMSJ9.fxVwj1b2o4SIzijQNNAHNA.h8q4NwSEnCY3-IWfKti4TaPoHX3Gw9tWbUq61AOLdYU&dib_tag=se&keywords=B0H737N1JS&nsdOptOutParam=true&qid=1786029506&s=digital-text&sprefix=b0h737n1js%2Cdigital-text%2C841&sr=1-1#",
+      "status": "available",
+      "cover": "/media/uploads/tghomlepub.jpg.jpg",
+      "title": "The Glove Shop on Market Lane",
+      "id": "glove-shop",
+      "description": "Mollie Tremaine has spent years building a life of her own.\n\nAfter her father's death, she takes over Tremaine & Co., the glove shop on Market Lane, determined to keep the business alive despite mounting debts, unreliable suppliers, and a town that doubts a young woman can manage such responsibilities alone.\n\nWhen a series of unpaid accounts and troubling irregularities threaten the shop's future, Mollie has little choice but to accept help from Jory Penrose, a practical, sharp-eyed shipping agent with problems of his own. What begins as a reluctant partnership soon draws them into long days of ledgers, deliveries, market negotiations, and the quiet work of saving a business that means everything to her.\n\nAs pressures mount from creditors, competitors, and secrets buried in the town's commercial past, Mollie finds herself relying on Jory more than she ever intended. Yet trust has never come easily, and surrendering her independence may be the greatest risk of all.\n\nSet along the Cornish coast, The Glove Shop on Market Lane is a warm and atmospheric historical romance filled with family obligations, small-town rivalries, hard-won trust, and a slow-burning love story built through shared work and quiet devotion.\n\nPerfect for readers who enjoy:\n\n    Historical romance\n    Slow-burn relationships\n    Independent heroines\n    Victorian Cornwall\n    Small-town secrets\n    Family businesses and inherited responsibilities\n    Gentle emotional tension with a satisfying happily-ever-after"
+    },
+    {
       "genre": "Literary Fiction",
       "imprint": "publishing",
       "author": "J Leme Thompson",
