@@ -1,34 +1,6 @@
 {
   "books": [
     {
-      "genre": "Romance",
-      "imprint": "publishing",
-      "author": "Eleanore Harte",
-      "featured": false,
-      "order": 3,
-      "purchase_url": "https://www.amazon.com/Roses-Glenmere-Eleanor-Harte-ebook/dp/B0H8TSBYS7/ref=sr_1_1?s=digital-text",
-      "status": "available",
-      "cover": "/media/uploads/chatgpt-image-jun-13-2026-05_37_04-am.png",
-      "title": "The Roses of Glenmere",
-      "id": "roses-of-glenmere",
-      "description": "When Isla Sinclair discovers a hidden letter among her late mother’s papers, it draws her north to Glenmere House—a decaying estate burdened by debt, silence, and the consequences of something that happened there years ago.\n\nCallum MacGregor is the last of his line, struggling to preserve the house his family has nearly lost. He has no reason to trust the guarded stranger who arrives at his door in the middle of a storm, already knowing his name. But Isla carries evidence connecting her family to Glenmere: a vanished servant, a disputed boundary, and an old crime concealed beneath decades of respectable lies.\n\nAs threatening notes give way to intrusion and violence, Isla and Callum uncover a trail leading through locked rooms, altered records, and the ruined rose garden Callum’s mother kept closed. Someone knows what happened at Glenmere—and intends to ensure the truth remains buried.\n\nDrawn together by danger and a growing tenderness neither expected, Isla and Callum must decide whether the past will finally destroy Glenmere or offer them both a place to begin again.\n\nThe Roses of Glenmere is an atmospheric historical romance about inherited guilt, buried truth, and two guarded people learning that some ruined things can still be restored."
-    },
-    {
-      "genre": "Literary Fiction",
-      "status_label": "Available Now",
-      "imprint": "publishing",
-      "author": "J LemeThompson",
-      "featured": true,
-      "order": 10,
-      "purchase_url": "https://www.amazon.es/",
-      "status": "available",
-      "cover": "/EJ.jpg",
-      "title": "Everything's Jake",
-      "author_url": "j-lemethompson.html",
-      "id": "everythings-jake",
-      "description": "A story of child abuse, institutional silence, and the long, imperfect work of survival."
-    },
-    {
       "genre": "Southern Gothic",
       "status_label": "Available Now",
       "imprint": "publishing",
