@@ -1,6 +1,19 @@
 {
   "books": [
     {
+      "genre": "Historic Romance",
+      "imprint": "publishing",
+      "author": "Eleanor Harte",
+      "featured": true,
+      "order": 7,
+      "purchase_url": "https://www.amazon.com/dp/B0HF8C9H35/ref=sr_1_1",
+      "status": "available",
+      "cover": "/media/uploads/cover-epub-copy.jpg",
+      "title": "The Printer's Proof",
+      "id": "printer",
+      "description": "Paris, 1833.\n\nHenri Dufour has spent years arranging other people's words while refusing to confront his own grief. Since his wife's death, the printing shop has become both his livelihood and his refuge—a place where every page can be corrected except the one life he wishes he could rewrite.\n\nMargot Beaumont arrives in his workshop seeking honest employment and a future beyond the expectations that have governed every step of her life. Intelligent, determined, and carrying burdens of her own, she finds unexpected purpose among ink, type, and the quiet rhythm of the press.\n\nAs political unrest simmers beyond the shop's walls, Henri and Margot discover that some mistakes cannot be erased, some duties cannot be avoided, and some hearts begin to heal only when they dare to print a different future.\n\nBut Paris has little patience for those who refuse the roles society has assigned them, and choosing love may cost them everything they have struggled to preserve.\n\nThe Printer's Proof is a richly atmospheric French historical romance filled with unforgettable characters, slow-burning romance, emotional depth, and meticulous historical detail. Perfect for readers who enjoy meaningful love stories where healing comes quietly, hope is earned, and every page feels immersed in another time.\n\nFans of Mimi Matthews, Julie Klassen, and Mimi Matthews' emotionally resonant historical romances will find a story of grief, duty, resilience, and the courage to begin again.\n\n\"Some impressions can never be undone.\"\n\nA French historical romance of grief, duty, and new love, The Printer's Proof is perfect for readers who love slow-burn historical romance, richly researched nineteenth-century Paris, and emotionally satisfying happily-ever-afters."
+    },
+    {
       "genre": "Romance",
       "imprint": "publishing",
       "author": "Eleanor Harte",
